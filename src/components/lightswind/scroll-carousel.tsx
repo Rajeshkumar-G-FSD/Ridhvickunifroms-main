@@ -209,8 +209,8 @@ export const ScrollCarousel = forwardRef<HTMLDivElement, ScrollCarouselProps>(
                 "https://images.pexels.com/photos/9934462/pexels-photo-9934462.jpeg"
               }
               alt={feature.title}
-              className="absolute inset-0 w-full h-full
-              object-cover z-[-1] rounded-3xl"
+              className="absolute inset-0 w-full h-full bg-brand-dark
+              object-contain z-[-1] rounded-3xl"
             />
             {/* Bottom scrim so title/description stay legible over any photo */}
             <div className="absolute inset-x-0 bottom-0 h-2/3 rounded-b-3xl bg-gradient-to-t from-black/80 via-black/30 to-transparent z-[-1]" />
