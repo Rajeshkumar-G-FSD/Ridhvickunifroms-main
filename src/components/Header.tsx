@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ShoppingCart, User, Menu, X, Mail, Phone, ChevronDown, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
@@ -20,6 +21,7 @@ const CATALOG_MENU: CatalogEntry[] = [
   { id: 'blazers', label: 'Blazers' },
   { id: 'camendo', label: 'Camendo' },
   { id: 'hoodies', label: 'Hoodies' },
+  { id: 'occasions', label: 'Occasions' },
   {
     id: 'uniform',
     label: 'Uniform',
@@ -54,6 +56,7 @@ export default function Header({
   const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
   const [mobileUniformOpen, setMobileUniformOpen] = useState(false);
   const catalogRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
 
   const navItems = [
     { id: 'daily-sports', label: 'Daily & Sports' },
@@ -105,6 +108,16 @@ export default function Header({
     setMobileCatalogOpen(false);
     setMobileUniformOpen(false);
     onNavigate(id);
+  };
+
+  // Catalog dropdown leaves open their own dedicated hero + gallery page
+  const goToCategory = (slug: string) => {
+    setMobileMenuOpen(false);
+    setCatalogOpen(false);
+    setUniformOpen(false);
+    setMobileCatalogOpen(false);
+    setMobileUniformOpen(false);
+    navigate(`/catalog/${slug}`);
   };
 
   return (
@@ -255,7 +268,7 @@ export default function Header({
                                           {entry.children.map((child) => (
                                             <button
                                               key={child.id}
-                                              onClick={() => handleNavClick(child.id)}
+                                              onClick={() => goToCategory(child.id)}
                                               className="w-full text-left px-3 py-2.5 rounded-lg text-xs font-headline font-semibold text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors cursor-pointer whitespace-nowrap"
                                             >
                                               {child.label}
@@ -269,7 +282,7 @@ export default function Header({
                               ) : (
                                 <button
                                   key={entry.id}
-                                  onClick={() => handleNavClick(entry.id)}
+                                  onClick={() => goToCategory(entry.id)}
                                   className="w-full text-left px-3 py-2.5 rounded-lg text-xs font-headline font-semibold text-brand-blue hover:bg-brand-light transition-colors cursor-pointer"
                                 >
                                   {entry.label}
@@ -444,7 +457,7 @@ export default function Header({
                                               {entry.children.map((child) => (
                                                 <button
                                                   key={child.id}
-                                                  onClick={() => handleNavClick(child.id)}
+                                                  onClick={() => goToCategory(child.id)}
                                                   className="text-left py-2 px-3 rounded-lg font-sans text-[12.5px] text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors cursor-pointer"
                                                 >
                                                   {child.label}
@@ -458,7 +471,7 @@ export default function Header({
                                   ) : (
                                     <button
                                       key={entry.id}
-                                      onClick={() => handleNavClick(entry.id)}
+                                      onClick={() => goToCategory(entry.id)}
                                       className="text-left py-2.5 px-3 rounded-lg font-headline font-medium text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors text-[13px] cursor-pointer"
                                     >
                                       {entry.label}
