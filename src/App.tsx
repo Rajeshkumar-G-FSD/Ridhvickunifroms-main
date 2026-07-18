@@ -12,7 +12,7 @@ import DailySportsShowcase from './components/DailySportsShowcase';
 import { UNIFORM_PRODUCTS } from './data/uniforms';
 import { Product, CartItem } from './types';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, CheckCircle2, ChevronRight, Mail, Phone, MapPin, Send, HelpCircle } from 'lucide-react';
+import { CheckCircle2, Mail, Phone, MapPin, Send } from 'lucide-react';
 
 const COLLECTION_IMAGES = [
   { src: '/images/ridhvick_Our_Collections_Catalog_elevate_kids.png', alt: 'Elevate Kids Collection' },
@@ -186,16 +186,16 @@ export default function App() {
         <DailySportsShowcase />
 
         {/* Uniform Index / Catalog Showcase Overview */}
-        <section className="bg-white py-16 md:py-24 border-b border-brand-border/10">
+        <section className="bg-white py-10 sm:py-16 md:py-24 border-b border-brand-border/10">
           <div className="max-w-7xl mx-auto px-4 md:px-8">
-            <div className="text-center mb-12 max-w-2xl mx-auto">
-              <span className="text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/15 px-3.5 py-1.5 rounded-full inline-block">
+            <div className="text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
+              <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/15 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block">
                 Smart Choices
               </span>
-              <h2 className="text-3xl md:text-4xl font-headline font-black text-brand-blue mt-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-3 sm:mt-4">
                 Our Collections Catalog
               </h2>
-              <p className="text-sm md:text-base text-brand-muted mt-3 font-sans leading-relaxed">
+              <p className="text-xs sm:text-sm md:text-base text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed">
                 Discover our meticulously designed uniform series tailored for school life, active sports tracks, and custom corporate academic branding.
               </p>
             </div>
@@ -213,11 +213,11 @@ export default function App() {
             baseScale={0.9}
           >
             {COLLECTION_IMAGES.map((image) => (
-              <ScrollStackItem key={image.src} itemClassName="h-[60vh] md:h-[70vh] !p-0 bg-white">
+              <ScrollStackItem key={image.src} itemClassName="h-[42vh] sm:h-[55vh] md:h-[70vh] !p-0 bg-white">
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover rounded-[40px]"
+                  className="w-full h-full object-cover rounded-2xl sm:rounded-[32px] md:rounded-[40px]"
                   loading="lazy"
                 />
               </ScrollStackItem>
@@ -232,15 +232,15 @@ export default function App() {
         />
 
         {/* Filterable Products Catalog Grid Section */}
-        <section id="catalog" className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 w-full">
-          
+        <section id="catalog" className="max-w-7xl mx-auto px-4 md:px-8 py-10 sm:py-16 md:py-24 w-full">
+
           {/* Section Introduction */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-12">
             <div>
-              <span className="text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase">
+              <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase">
                 Active Catalog
               </span>
-              <h2 className="text-2xl md:text-3xl font-headline font-black text-brand-blue mt-1">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-headline font-black text-brand-blue mt-1">
                 Explore Sizing & Fabrics
               </h2>
               <p className="text-xs md:text-sm text-brand-muted mt-1.5 font-sans">
@@ -249,7 +249,7 @@ export default function App() {
             </div>
 
             {/* Filter buttons chip lists (At least 44px touch targets on mobile) */}
-            <div className="flex flex-wrap gap-1.5 bg-white p-1.5 rounded-lg border border-brand-border/20 shadow-sm">
+            <div className="flex flex-wrap gap-1.5 bg-white p-1.5 rounded-lg border border-brand-border/20 shadow-sm overflow-x-auto">
               {[
                 { id: 'all', label: 'All Items' },
                 { id: 'primary', label: 'Primary School' },
@@ -262,7 +262,7 @@ export default function App() {
                   <button
                     key={cat.id}
                     onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-4 h-[44px] rounded font-headline font-semibold text-xs transition-all cursor-pointer ${
+                    className={`px-3 sm:px-4 h-[40px] sm:h-[44px] rounded font-headline font-semibold text-[11px] sm:text-xs transition-all cursor-pointer whitespace-nowrap ${
                       isSelected
                         ? 'bg-brand-blue text-white shadow'
                         : 'text-brand-muted hover:text-brand-blue hover:bg-brand-light'
@@ -276,7 +276,7 @@ export default function App() {
           </div>
 
           {/* Grid list of catalog items */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {filteredProducts.map((prod) => (
               <ProductCard
                 key={prod.id}
@@ -295,44 +295,44 @@ export default function App() {
         </section>
 
         {/* Manufacturing Service Highlights (All Service Under One Roof) */}
-        <section id="manufacturing" className="bg-white py-16 md:py-24 border-t border-b border-brand-border/10">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            
+        <section id="manufacturing" className="bg-white py-10 sm:py-16 md:py-24 border-t border-b border-brand-border/10">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
+
             {/* Left Column: Text qualities */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 sm:gap-6">
               <div>
-                <span className="text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase">
+                <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase">
                   Manufacturing Excellence
                 </span>
-                <h3 className="text-3xl md:text-4xl font-headline font-black text-brand-blue mt-2 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-2 leading-tight">
                   All Service Under One Roof.
                 </h3>
-                <p className="text-sm text-brand-muted mt-3 font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed">
                   We maintain full creative ownership of the uniform lifecycle—from initial thread-blend trials and custom sampling to computerized logo embroidery and regional academy distributions.
                 </p>
               </div>
 
               {/* Service list items */}
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-start gap-3.5 p-3 rounded-lg hover:bg-brand-light transition-colors">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
+              <ul className="flex flex-col gap-2 sm:gap-4">
+                <li className="flex items-start gap-3 sm:gap-3.5 p-2.5 sm:p-3 rounded-lg hover:bg-brand-light transition-colors">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-yellow shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-sm font-headline font-extrabold text-brand-blue">Product Design & Prototyping</h5>
-                    <p className="text-xs text-brand-muted mt-1 leading-relaxed">We deliver digital design previews and physically stitched fabric samples to school boards before bulk production.</p>
+                    <h5 className="text-xs sm:text-sm font-headline font-extrabold text-brand-blue">Product Design & Prototyping</h5>
+                    <p className="text-[11px] sm:text-xs text-brand-muted mt-0.5 sm:mt-1 leading-relaxed">We deliver digital design previews and physically stitched fabric samples to school boards before bulk production.</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-3.5 p-3 rounded-lg hover:bg-brand-light transition-colors">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
+                <li className="flex items-start gap-3 sm:gap-3.5 p-2.5 sm:p-3 rounded-lg hover:bg-brand-light transition-colors">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-yellow shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-sm font-headline font-extrabold text-brand-blue">Premium Knitted & Woven Fabrics</h5>
-                    <p className="text-xs text-brand-muted mt-1 leading-relaxed">High mechanical stretch poly-viscose and combed cotton counts optimized for comfort during active play hours.</p>
+                    <h5 className="text-xs sm:text-sm font-headline font-extrabold text-brand-blue">Premium Knitted & Woven Fabrics</h5>
+                    <p className="text-[11px] sm:text-xs text-brand-muted mt-0.5 sm:mt-1 leading-relaxed">High mechanical stretch poly-viscose and combed cotton counts optimized for comfort during active play hours.</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-3.5 p-3 rounded-lg hover:bg-brand-light transition-colors">
-                  <CheckCircle2 className="w-5 h-5 text-brand-yellow shrink-0 mt-0.5" />
+                <li className="flex items-start gap-3 sm:gap-3.5 p-2.5 sm:p-3 rounded-lg hover:bg-brand-light transition-colors">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-brand-yellow shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-sm font-headline font-extrabold text-brand-blue">Precision Custom Embroidery</h5>
-                    <p className="text-xs text-brand-muted mt-1 leading-relaxed">High thread-density embroidery stitchers ensure school logo crests remain crisp, colorfast, and durable.</p>
+                    <h5 className="text-xs sm:text-sm font-headline font-extrabold text-brand-blue">Precision Custom Embroidery</h5>
+                    <p className="text-[11px] sm:text-xs text-brand-muted mt-0.5 sm:mt-1 leading-relaxed">High thread-density embroidery stitchers ensure school logo crests remain crisp, colorfast, and durable.</p>
                   </div>
                 </li>
               </ul>
@@ -340,32 +340,32 @@ export default function App() {
 
             {/* Right Column: Layered stitching photo */}
             <div className="relative">
-              <div className="aspect-video rounded-xl overflow-hidden shadow-lg relative z-10 border-4 border-white bg-brand-light">
-                <img 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSes5KLVAnxOfr2GiByAxUWuxzIRcIaadcNquHGsp2QCm5lYlxmKaCH6yeBbSIFf2sg3vswpmMYpWJdByqk2WYimmParjTVvvPbpzuw5XH4uIB2nHZezw-ge9Q7kRAYC7BrSzuW7T2n5qnlXcxKjbHXA2kctKHdVg85HOkWZOriARBVszMfUIUfQFWdMfGG5Z9euisdruz0wsbRVXJ3vtmJLEEsa2wiotSu6A5kYr0husdfSa9jNYEtnANC-gna9LcEtOv84re7NMB" 
-                  alt="Ridhvick Embroidery Sewing Thread" 
+              <div className="aspect-video rounded-lg sm:rounded-xl overflow-hidden shadow-lg relative z-10 border-2 sm:border-4 border-white bg-brand-light">
+                <img
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSes5KLVAnxOfr2GiByAxUWuxzIRcIaadcNquHGsp2QCm5lYlxmKaCH6yeBbSIFf2sg3vswpmMYpWJdByqk2WYimmParjTVvvPbpzuw5XH4uIB2nHZezw-ge9Q7kRAYC7BrSzuW7T2n5qnlXcxKjbHXA2kctKHdVg85HOkWZOriARBVszMfUIUfQFWdMfGG5Z9euisdruz0wsbRVXJ3vtmJLEEsa2wiotSu6A5kYr0husdfSa9jNYEtnANC-gna9LcEtOv84re7NMB"
+                  alt="Ridhvick Embroidery Sewing Thread"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 w-full h-full bg-brand-yellow rounded-xl z-0" />
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-full h-full bg-brand-yellow rounded-lg sm:rounded-xl z-0" />
             </div>
 
           </div>
         </section>
 
         {/* Contact Information & General Inquiry Section */}
-        <section id="contact" className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            
+        <section id="contact" className="max-w-7xl mx-auto px-4 md:px-8 py-10 sm:py-16 md:py-24 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-stretch">
+
             {/* Column 1: Contact details (5 Cols) */}
-            <div className="lg:col-span-5 flex flex-col justify-between bg-brand-blue text-white rounded-2xl p-8 shadow-xl relative overflow-hidden border-b-4 border-brand-yellow">
-              <div className="relative z-10 flex flex-col gap-6">
+            <div className="lg:col-span-5 flex flex-col justify-between bg-brand-blue text-white rounded-xl sm:rounded-2xl p-5 sm:p-8 shadow-xl relative overflow-hidden border-b-4 border-brand-yellow">
+              <div className="relative z-10 flex flex-col gap-4 sm:gap-6">
                 <div>
                   <span className="text-[10px] font-headline font-bold text-brand-yellow uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full w-fit">
                     Corporate Office
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-headline font-black mt-3">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-headline font-black mt-2.5 sm:mt-3">
                     Let's Connect.
                   </h3>
                   <p className="text-xs text-white/70 mt-2 font-sans leading-relaxed">
@@ -427,9 +427,9 @@ export default function App() {
             </div>
 
             {/* Column 2: Quick email contact form (7 Cols) */}
-            <div className="lg:col-span-7 bg-white rounded-2xl p-8 border border-brand-border/20 shadow-sm">
-              <h4 className="text-lg font-headline font-black text-brand-blue mb-2">Request Catalog & Fabric Swatches</h4>
-              <p className="text-xs text-brand-muted mb-6 leading-relaxed">
+            <div className="lg:col-span-7 bg-white rounded-xl sm:rounded-2xl p-5 sm:p-8 border border-brand-border/20 shadow-sm">
+              <h4 className="text-base sm:text-lg font-headline font-black text-brand-blue mb-1.5 sm:mb-2">Request Catalog & Fabric Swatches</h4>
+              <p className="text-xs text-brand-muted mb-4 sm:mb-6 leading-relaxed">
                 Fill out the brief contact form below to receive physical uniform textile samples or details about size calibration runs at your school premises.
               </p>
 

@@ -30,14 +30,14 @@ export default function DailySportsShowcase() {
   return (
     <section
       id="daily-sports"
-      className="relative w-full h-screen min-h-[640px] overflow-hidden bg-brand-dark flex items-center justify-center"
+      className="relative w-full h-[78vh] sm:h-[85vh] md:h-screen min-h-[440px] sm:min-h-[520px] md:min-h-[640px] overflow-hidden bg-brand-dark flex items-center justify-center"
     >
       {/* Section heading overlay */}
-      <div className="absolute top-24 md:top-28 left-1/2 -translate-x-1/2 z-20 text-center px-4">
-        <span className="text-xs font-headline font-bold text-brand-yellow tracking-widest uppercase bg-white/10 px-3.5 py-1.5 rounded-full inline-block backdrop-blur-sm">
+      <div className="absolute top-16 sm:top-20 md:top-24 left-1/2 -translate-x-1/2 z-20 text-center px-4">
+        <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow tracking-widest uppercase bg-white/10 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block backdrop-blur-sm">
           Everyday & Active Wear
         </span>
-        <h2 className="text-3xl md:text-5xl font-headline font-black text-white mt-4 drop-shadow-lg">
+        <h2 className="text-2xl sm:text-3xl md:text-5xl font-headline font-black text-white mt-2.5 sm:mt-4 drop-shadow-lg">
           Daily & Sports Uniforms
         </h2>
       </div>
@@ -60,7 +60,7 @@ export default function DailySportsShowcase() {
       ))}
 
       {/* Dot indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center flex-wrap justify-center gap-2 px-4">
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 px-4">
         {dailySportsImages.map((image, index) => (
           <button
             key={image.src}

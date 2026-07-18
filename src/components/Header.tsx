@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ShoppingCart, User, Menu, X, Sparkles, HelpCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShoppingCart, User, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
 
@@ -14,17 +14,17 @@ interface HeaderProps {
 export default function Header({
   cart,
   onOpenCart,
-  onOpenAiAssistant,
   activeSection,
   onNavigate
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
-    { id: 'daily-sports', label: 'Daily & Sports Uniforms' },
+    { id: 'daily-sports', label: 'Daily & Sports' },
     { id: 'digital-catalog', label: 'Digital Spread' },
-    { id: 'catalog', label: 'Grid Catalog' },
-    { id: 'woven', label: 'Woven Uniforms' },
+    { id: 'catalog', label: 'Catalog' },
+    { id: 'woven', label: 'Woven' },
     { id: 'sports', label: 'Sports Wear' },
     { id: 'accessories', label: 'Accessories' },
     { id: 'manufacturing', label: 'Manufacturing' },
@@ -33,6 +33,13 @@ export default function Header({
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleNavClick = (id: string) => {
     setMobileMenuOpen(false);
     onNavigate(id);
@@ -40,74 +47,79 @@ export default function Header({
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-border/20 transition-all duration-300">
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-4 md:px-8 h-20">
-          
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_rgba(0,52,111,0.08)] border-b border-brand-border/10'
+            : 'bg-white/70 backdrop-blur-sm border-b border-transparent'
+        }`}
+      >
+        <div className="flex justify-between items-center max-w-7xl mx-auto px-3.5 sm:px-6 md:px-8 h-14 sm:h-16 md:h-[72px] gap-2">
+
           {/* Brand Logo */}
-          <a 
-            href="#" 
+          <a
+            href="#"
             onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}
-            className="text-xl md:text-2xl font-headline font-extrabold tracking-tight text-brand-blue flex items-center gap-2"
+            className="flex items-center gap-2 shrink-0 group"
             id="brand-logo"
           >
-            RIDHVICK UNIFORMS
+            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-brand-blue flex items-center justify-center text-brand-yellow font-headline font-black text-sm sm:text-base shadow-sm group-hover:scale-105 transition-transform">
+              R
+            </span>
+            <span className="flex flex-col leading-none">
+              <span className="text-sm sm:text-base md:text-lg font-headline font-extrabold tracking-tight text-brand-blue">
+                RIDHVICK
+              </span>
+              <span className="hidden sm:block text-[9px] md:text-[10px] font-headline font-bold tracking-[0.2em] text-brand-muted uppercase">
+                Uniforms
+              </span>
+            </span>
           </a>
 
           {/* Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex gap-6 xl:gap-8 items-center" id="desktop-nav">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 bg-brand-light/70 rounded-full p-1 border border-brand-border/10" id="desktop-nav">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`text-sm font-headline font-semibold transition-all duration-300 relative py-2 ${
-                    isActive 
-                      ? 'text-brand-blue font-bold' 
-                      : 'text-brand-muted hover:text-brand-blue-light'
+                  className={`relative text-[11px] xl:text-xs font-headline font-bold uppercase tracking-wide px-3 xl:px-3.5 py-2 rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? 'text-white'
+                      : 'text-brand-muted hover:text-brand-blue'
                   }`}
                   id={`nav-item-${item.id}`}
                 >
-                  {item.label}
                   {isActive && (
-                    <motion.div 
-                      layoutId="activeUnderline"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-yellow" 
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    <motion.span
+                      layoutId="activeNavPill"
+                      className="absolute inset-0 bg-brand-blue rounded-full -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                     />
                   )}
+                  {item.label}
                 </button>
               );
             })}
           </nav>
 
           {/* Action Icons / Tools */}
-          <div className="flex items-center gap-2 md:gap-4 text-brand-blue" id="header-actions">
-            
-            {/* AI Advisor Quick Button */}
-            <button
-              onClick={onOpenAiAssistant}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-yellow/10 text-brand-blue hover:bg-brand-yellow/20 transition-all duration-300 text-xs font-semibold cursor-pointer border border-brand-yellow/30"
-              title="Open AI Fitting & Quote Assistant"
-              id="ai-assistant-btn"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-brand-blue animate-pulse" />
-              <span className="hidden sm:inline">AI Advisor</span>
-            </button>
+          <div className="flex items-center gap-0.5 sm:gap-1.5 text-brand-blue shrink-0" id="header-actions">
 
             {/* Shopping Cart Trigger */}
-            <button 
+            <button
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 hover:scale-105 cursor-pointer"
+              className="relative p-2 sm:p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 active:scale-95 cursor-pointer"
               aria-label="View shopping cart"
               id="cart-trigger-btn"
             >
-              <ShoppingCart className="w-5 h-5 text-brand-blue" />
+              <ShoppingCart className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-brand-blue" />
               {cartCount > 0 && (
-                <motion.span 
+                <motion.span
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="absolute top-1.5 right-1.5 bg-brand-yellow text-brand-blue text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white shadow-sm"
+                  className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-brand-yellow text-brand-blue text-[9px] sm:text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white shadow-sm"
                   id="cart-count-badge"
                 >
                   {cartCount}
@@ -116,7 +128,7 @@ export default function Header({
             </button>
 
             {/* Profile Sign-in (Mock) */}
-            <button 
+            <button
               className="p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 hover:scale-105 hidden sm:inline-block cursor-pointer"
               aria-label="User Account"
               id="profile-trigger-btn"
@@ -127,11 +139,11 @@ export default function Header({
             {/* Mobile Hamburger menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 cursor-pointer"
+              className="lg:hidden p-2 sm:p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 cursor-pointer"
               aria-label="Toggle navigation menu"
               id="mobile-menu-toggle"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-[18px] h-[18px] sm:w-5 sm:h-5" /> : <Menu className="w-[18px] h-[18px] sm:w-5 sm:h-5" />}
             </button>
 
           </div>
@@ -148,7 +160,7 @@ export default function Header({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+              className="fixed inset-0 bg-brand-blue/40 backdrop-blur-[2px] z-40 lg:hidden"
             />
 
             {/* Menu container */}
@@ -156,30 +168,34 @@ export default function Header({
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 bottom-0 w-4/5 max-w-sm bg-white z-50 p-6 flex flex-col shadow-2xl lg:hidden border-l border-brand-border/10"
+              transition={{ type: 'spring', damping: 26, stiffness: 220 }}
+              className="fixed right-0 top-0 bottom-0 w-[82%] max-w-xs bg-white z-50 p-5 flex flex-col shadow-2xl lg:hidden"
               id="mobile-nav-panel"
             >
-              <div className="flex items-center justify-between mb-8">
-                <span className="font-headline font-bold text-brand-blue text-lg">Menu</span>
-                <button 
+              <div className="flex items-center justify-between mb-6">
+                <span className="flex items-center gap-2">
+                  <span className="w-7 h-7 rounded-md bg-brand-blue flex items-center justify-center text-brand-yellow font-headline font-black text-xs">R</span>
+                  <span className="font-headline font-black text-brand-blue text-sm tracking-tight">RIDHVICK</span>
+                </span>
+                <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1 rounded-full hover:bg-brand-light cursor-pointer"
+                  className="p-2 rounded-full hover:bg-brand-light cursor-pointer"
+                  aria-label="Close menu"
                 >
-                  <X className="w-5 h-5 text-brand-blue" />
+                  <X className="w-[18px] h-[18px] text-brand-blue" />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-4 flex-grow">
+              <div className="flex flex-col gap-1 flex-grow overflow-y-auto">
                 {navItems.map((item) => {
                   const isActive = activeSection === item.id;
                   return (
                     <button
                       key={item.id}
                       onClick={() => handleNavClick(item.id)}
-                      className={`text-left py-3 px-4 rounded-lg font-headline font-semibold transition-all duration-200 text-base ${
-                        isActive 
-                          ? 'bg-brand-blue/5 text-brand-blue border-l-4 border-brand-yellow pl-3' 
+                      className={`text-left py-3 px-3.5 rounded-lg font-headline font-semibold transition-all duration-200 text-sm ${
+                        isActive
+                          ? 'bg-brand-blue text-white shadow-sm'
                           : 'text-brand-muted hover:bg-brand-light hover:text-brand-blue'
                       }`}
                     >
@@ -189,23 +205,13 @@ export default function Header({
                 })}
               </div>
 
-              <div className="border-t border-brand-border/10 pt-6 mt-auto flex flex-col gap-3">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenAiAssistant();
-                  }}
-                  className="w-full py-3 bg-brand-yellow/10 text-brand-blue border border-brand-yellow/30 font-headline font-bold rounded-lg flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4 text-brand-blue" />
-                  Ask AI Size Advisor
-                </button>
+              <div className="border-t border-brand-border/10 pt-4 mt-3">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenCart();
                   }}
-                  className="w-full py-3 bg-brand-blue text-white font-headline font-bold rounded-lg flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full h-12 bg-brand-blue text-white font-headline font-bold rounded-lg flex items-center justify-center gap-2 cursor-pointer text-sm active:scale-[0.98] transition-transform"
                 >
                   <ShoppingCart className="w-4 h-4" />
                   View Cart ({cartCount})

@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen min-h-[640px] overflow-hidden bg-brand-dark"
+      className="relative w-full h-[78vh] sm:h-[85vh] md:h-screen min-h-[440px] sm:min-h-[520px] md:min-h-[640px] overflow-hidden bg-brand-dark"
     >
       {heroImages.map((src, index) => (
         <div

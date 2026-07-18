@@ -101,7 +101,7 @@ export default function AiChatAssistant({
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={onOpen}
-        className="fixed bottom-6 right-6 z-40 bg-brand-blue hover:bg-brand-blue-light text-white p-4 rounded-full shadow-2xl flex items-center justify-center cursor-pointer border-2 border-brand-yellow group"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 bg-brand-blue hover:bg-brand-blue-light text-white p-3.5 sm:p-4 rounded-full shadow-2xl flex items-center justify-center cursor-pointer border-2 border-brand-yellow group"
         aria-label="Open AI Assistant"
         id="chat-bubble-fab"
       >
@@ -129,7 +129,7 @@ export default function AiChatAssistant({
               initial={{ opacity: 0, y: 50, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.95 }}
-              className="fixed right-4 bottom-24 w-[calc(100vw-2rem)] sm:w-[420px] h-[550px] bg-white rounded-2xl shadow-3xl z-50 flex flex-col overflow-hidden border border-brand-border/20"
+              className="fixed right-3 sm:right-4 bottom-20 sm:bottom-24 w-[calc(100vw-1.5rem)] sm:w-[420px] h-[min(72vh,550px)] bg-white rounded-2xl shadow-3xl z-50 flex flex-col overflow-hidden border border-brand-border/20"
               id="chat-panel"
             >
               {/* Chat Header */}

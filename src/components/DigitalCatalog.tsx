@@ -124,24 +124,24 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
   };
 
   return (
-    <section id="digital-catalog" className="bg-[#fcfdfd] py-16 md:py-24 border-b border-brand-border/10">
+    <section id="digital-catalog" className="bg-[#fcfdfd] py-10 sm:py-16 md:py-24 border-b border-brand-border/10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        
+
         {/* Title Block */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
-          <span className="text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/15 px-3.5 py-1.5 rounded-full inline-block">
+        <div className="text-center mb-8 sm:mb-12 max-w-2xl mx-auto">
+          <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/15 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block">
             Digital Spread Layout
           </span>
-          <h2 className="text-3xl md:text-4xl font-headline font-black text-brand-blue mt-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-3 sm:mt-4">
             Interactive Catalog Book
           </h2>
-          <p className="text-sm md:text-base text-brand-muted mt-3 font-sans leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed">
             Browse through our exact uniform spreadsheets, select models, zoom in to inspect stitches, and directly add configuration mockups to your design quote.
           </p>
         </div>
 
         {/* Topic Selector Tabs (At least 44px Touch Targets) */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-6 sm:mb-10">
           {CATALOG_TOPICS.map((topic) => {
             const isSelected = selectedTopic.id === topic.id;
             return (
@@ -149,7 +149,7 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
                 key={topic.id}
                 onClick={() => handleTopicChange(topic)}
                 id={`tab-topic-${topic.id}`}
-                className={`flex items-center gap-2 px-5 py-3 rounded-lg font-headline font-bold text-xs md:text-sm transition-all cursor-pointer min-h-[44px] ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-lg font-headline font-bold text-[11px] sm:text-xs md:text-sm transition-all cursor-pointer min-h-[44px] ${
                   isSelected
                     ? 'bg-brand-blue text-white shadow-lg shadow-brand-blue/15'
                     : 'bg-white text-brand-muted hover:text-brand-blue border border-brand-border/10 hover:border-brand-blue/30 shadow-sm'
@@ -163,16 +163,16 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
         </div>
 
         {/* Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 items-start">
+
           {/* LEFT 7 COLS: The Catalogue Spread with Zoom & Navigation */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            
+          <div className="lg:col-span-7 flex flex-col gap-3 sm:gap-4">
+
             {/* Top Bar with Navigation & Zoom Controls */}
-            <div className="flex items-center justify-between bg-white p-3.5 rounded-xl border border-brand-border/15 shadow-sm">
-              
+            <div className="flex items-center justify-between bg-white p-2.5 sm:p-3.5 rounded-xl border border-brand-border/15 shadow-sm gap-1">
+
               {/* Pagination */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 sm:gap-2">
                 <button
                   onClick={() => handlePageChange(Math.max(0, activePageIndex - 1))}
                   disabled={activePageIndex === 0}
@@ -302,10 +302,10 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
           </div>
 
           {/* RIGHT 5 COLS: Topic Details, Interactive Models Index, Configurator */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-6">
             
             {/* Topic Info Card */}
-            <div className="bg-white rounded-2xl p-6 border border-brand-border/15 shadow-sm">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-brand-border/15 shadow-sm">
               <div className="flex items-start gap-3">
                 <div className="bg-brand-yellow/20 p-2.5 rounded-lg text-brand-blue mt-0.5 shrink-0">
                   <Award className="w-5 h-5 text-brand-blue" />
@@ -322,7 +322,7 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
             </div>
 
             {/* Models Sheet list shown on this Page */}
-            <div className="bg-white rounded-2xl p-6 border border-brand-border/15 shadow-sm flex flex-col gap-4">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-brand-border/15 shadow-sm flex flex-col gap-3 sm:gap-4">
               <div>
                 <h4 className="text-xs font-headline font-black text-brand-blue uppercase tracking-wider">
                   Select Model Shown on Page
@@ -376,7 +376,7 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="bg-white rounded-2xl p-6 border-b-4 border-brand-blue shadow-md flex flex-col gap-5"
+                  className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border-b-4 border-brand-blue shadow-md flex flex-col gap-4 sm:gap-5"
                 >
                   {/* Model Header */}
                   <div className="flex items-start justify-between border-b border-brand-border/10 pb-4">
@@ -492,7 +492,7 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
 
                 </motion.div>
               ) : (
-                <div className="bg-brand-light/70 rounded-2xl p-8 border border-dashed border-brand-border/20 text-center flex flex-col items-center justify-center gap-3 py-16">
+                <div className="bg-brand-light/70 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-dashed border-brand-border/20 text-center flex flex-col items-center justify-center gap-3 py-8 sm:py-16">
                   <div className="bg-brand-yellow/15 p-3 rounded-full text-brand-yellow shrink-0">
                     <Sparkles className="w-6 h-6 text-brand-blue-light" />
                   </div>

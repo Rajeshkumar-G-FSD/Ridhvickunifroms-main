@@ -94,31 +94,31 @@ export default function QuickViewModal({
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
-        className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full overflow-hidden z-10 grid grid-cols-1 md:grid-cols-12 max-h-[90vh] md:max-h-[85vh]"
+        className="relative bg-white rounded-xl shadow-2xl max-w-4xl w-full overflow-hidden z-10 grid grid-cols-1 md:grid-cols-12 max-h-[92vh] md:max-h-[85vh]"
         id="quickview-modal"
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-white/80 hover:bg-brand-yellow/20 text-brand-blue transition-all duration-300 z-20 cursor-pointer shadow-sm border border-brand-border/10"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full bg-white/80 hover:bg-brand-yellow/20 text-brand-blue transition-all duration-300 z-20 cursor-pointer shadow-sm border border-brand-border/10"
           id="close-modal-btn"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
         {/* Column 1: Image & Basic Info (4 Cols) */}
-        <div className="md:col-span-5 bg-brand-light p-6 md:p-8 flex flex-col justify-between border-r border-brand-border/10 overflow-y-auto max-h-[40vh] md:max-h-full">
+        <div className="md:col-span-5 bg-brand-light p-4 sm:p-6 md:p-8 flex flex-col justify-between border-r border-brand-border/10 overflow-y-auto max-h-[32vh] md:max-h-full">
           <div>
             <span className="text-[10px] font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/20 px-2.5 py-1 rounded-full">
               {product.categoryLabel}
             </span>
-            <h2 className="text-xl md:text-2xl font-headline font-black text-brand-blue mt-3">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-headline font-black text-brand-blue mt-2 sm:mt-3 pr-8">
               {product.name}
             </h2>
             <p className="text-xs text-brand-muted font-mono mt-1">Material: {product.material}</p>
           </div>
 
-          <div className="my-6 aspect-[4/5] rounded-lg overflow-hidden border border-brand-border/10 shadow-sm bg-white">
+          <div className="my-3 sm:my-6 aspect-[4/5] max-h-[16vh] sm:max-h-none rounded-lg overflow-hidden border border-brand-border/10 shadow-sm bg-white">
             <img 
               src={product.image} 
               alt={product.name} 
@@ -134,7 +134,7 @@ export default function QuickViewModal({
         </div>
 
         {/* Column 2: Details & AI Sizer (7 Cols) */}
-        <div className="md:col-span-7 p-6 md:p-8 overflow-y-auto max-h-[50vh] md:max-h-full flex flex-col gap-6">
+        <div className="md:col-span-7 p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[58vh] md:max-h-full flex flex-col gap-4 sm:gap-6">
           
           {/* Description */}
           <div>

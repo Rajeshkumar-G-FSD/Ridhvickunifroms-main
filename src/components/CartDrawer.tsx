@@ -80,15 +80,15 @@ export default function CartDrawer({
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-            className="fixed right-0 top-0 bottom-0 w-full sm:w-[480px] bg-white z-50 p-6 flex flex-col shadow-2xl overflow-y-auto"
+            className="fixed right-0 top-0 bottom-0 w-full sm:w-[480px] bg-white z-50 p-4 sm:p-6 flex flex-col shadow-2xl overflow-y-auto"
             id="cart-drawer-panel"
           >
             {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-brand-border/10">
+            <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-brand-border/10">
               <div>
-                <h3 className="text-lg font-headline font-black text-brand-blue flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-headline font-black text-brand-blue flex items-center gap-2 flex-wrap">
                   <span>Custom Uniform Package</span>
-                  <span className="text-xs bg-brand-yellow/20 text-brand-blue px-2.5 py-1 rounded-full font-bold">
+                  <span className="text-[10px] sm:text-xs bg-brand-yellow/20 text-brand-blue px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-bold">
                     Inquiry Desk
                   </span>
                 </h3>
@@ -140,14 +140,14 @@ export default function CartDrawer({
               </div>
             ) : (
               /* Items list & Checkout Inquiry Form */
-              <div className="flex-grow flex flex-col gap-6 mt-4">
-                
+              <div className="flex-grow flex flex-col gap-4 sm:gap-6 mt-3 sm:mt-4">
+
                 {/* Scrollable list of cart items */}
-                <div className="flex-col gap-3 flex max-h-[30vh] overflow-y-auto pr-1">
+                <div className="flex-col gap-2.5 sm:gap-3 flex max-h-[26vh] sm:max-h-[30vh] overflow-y-auto pr-1">
                   {cart.map((item, idx) => (
-                    <div 
+                    <div
                       key={`${item.product.id}-${item.selectedSize}`}
-                      className="flex items-center gap-3 p-3 bg-brand-light rounded-lg border border-brand-border/10"
+                      className="flex items-center gap-2.5 sm:gap-3 p-2.5 sm:p-3 bg-brand-light rounded-lg border border-brand-border/10"
                     >
                       {/* Image Thumbnail */}
                       <img 

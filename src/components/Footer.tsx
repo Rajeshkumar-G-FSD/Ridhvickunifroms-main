@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Sparkles, HelpCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Sparkles } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -8,10 +8,10 @@ interface FooterProps {
 export default function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-brand-blue text-white border-t border-brand-yellow/30 mt-auto w-full">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
-        
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 sm:py-12 md:py-16 grid grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
+
         {/* Brand Information column */}
-        <div className="flex flex-col gap-4 md:col-span-5 col-span-1">
+        <div className="flex flex-col gap-3 sm:gap-4 md:col-span-5 col-span-2">
           <div className="flex flex-col gap-0.5">
             <h4 className="text-lg font-headline font-black tracking-tight text-white flex items-center gap-2">
               RIDHVICK UNIFORMS
@@ -72,57 +72,57 @@ export default function Footer({ onNavigate }: FooterProps) {
         </div>
 
         {/* Company column */}
-        <div className="flex flex-col gap-2.5 md:col-span-2 col-span-1">
-          <h5 className="text-xs font-headline font-extrabold text-brand-yellow uppercase tracking-widest mb-1.5">Company</h5>
-          <button 
+        <div className="flex flex-col gap-1.5 sm:gap-2.5 md:col-span-2 col-span-1">
+          <h5 className="text-[11px] sm:text-xs font-headline font-extrabold text-brand-yellow uppercase tracking-widest mb-1 sm:mb-1.5">Company</h5>
+          <button
             onClick={() => onNavigate('hero')}
-            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-1"
+            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-0.5 sm:py-1"
           >
             About Us
           </button>
-          <button 
+          <button
             onClick={() => onNavigate('manufacturing')}
-            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-1"
+            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-0.5 sm:py-1"
           >
             Manufacturing Process
           </button>
-          <button 
+          <button
             onClick={() => onNavigate('catalog')}
-            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-1"
+            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-0.5 sm:py-1"
           >
             Product Catalog
           </button>
         </div>
 
         {/* Services column */}
-        <div className="flex flex-col gap-2.5 md:col-span-2 col-span-1">
-          <h5 className="text-xs font-headline font-extrabold text-brand-yellow uppercase tracking-widest mb-1.5">Services</h5>
-          <button 
+        <div className="flex flex-col gap-1.5 sm:gap-2.5 md:col-span-2 col-span-1">
+          <h5 className="text-[11px] sm:text-xs font-headline font-extrabold text-brand-yellow uppercase tracking-widest mb-1 sm:mb-1.5">Services</h5>
+          <button
             onClick={() => onNavigate('manufacturing')}
-            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-1 flex items-center gap-1"
+            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-0.5 sm:py-1 flex items-center gap-1"
           >
             Quality Assurance
           </button>
-          <button 
+          <button
             onClick={() => onNavigate('contact')}
-            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-1"
+            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-0.5 sm:py-1"
           >
             B2B Tailoring Portal
           </button>
-          <button 
+          <button
             onClick={() => onNavigate('contact')}
-            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-1"
+            className="text-left text-xs text-white/80 hover:text-brand-yellow transition-colors font-semibold cursor-pointer py-0.5 sm:py-1"
           >
             Custom Orders Setup
           </button>
         </div>
 
         {/* Legal and compliance column */}
-        <div className="flex flex-col gap-2.5 md:col-span-3 col-span-1">
-          <h5 className="text-xs font-headline font-extrabold text-brand-yellow uppercase tracking-widest mb-1.5">Legal & Quality</h5>
-          <span className="text-xs text-white/80 py-1">Privacy Policy</span>
-          <span className="text-xs text-white/80 py-1">Terms of Service</span>
-          <span className="text-xs text-white/80 py-1 flex items-center gap-1.5">
+        <div className="flex flex-col gap-1.5 sm:gap-2.5 col-span-2 md:col-span-3">
+          <h5 className="text-[11px] sm:text-xs font-headline font-extrabold text-brand-yellow uppercase tracking-widest mb-1 sm:mb-1.5">Legal & Quality</h5>
+          <span className="text-xs text-white/80 py-0.5 sm:py-1">Privacy Policy</span>
+          <span className="text-xs text-white/80 py-0.5 sm:py-1">Terms of Service</span>
+          <span className="text-xs text-white/80 py-0.5 sm:py-1 flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-brand-yellow" />
             ISO 9001 Standard Fabric
           </span>
