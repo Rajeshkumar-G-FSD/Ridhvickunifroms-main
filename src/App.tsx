@@ -8,6 +8,7 @@ import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
 import DigitalCatalog from './components/DigitalCatalog';
 import ScrollStack, { ScrollStackItem } from './components/ScrollStack';
+import DailySportsShowcase from './components/DailySportsShowcase';
 import { UNIFORM_PRODUCTS } from './data/uniforms';
 import { Product, CartItem } from './types';
 import { motion, AnimatePresence } from 'motion/react';
@@ -46,7 +47,7 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 120;
-      const sections = ['hero', 'digital-catalog', 'catalog', 'manufacturing', 'contact'];
+      const sections = ['hero', 'daily-sports', 'digital-catalog', 'catalog', 'manufacturing', 'contact'];
       
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -180,6 +181,9 @@ export default function App() {
         
         {/* Hero Section */}
         <Hero />
+
+        {/* Daily & Sports Uniforms Big Image Showcase */}
+        <DailySportsShowcase />
 
         {/* Uniform Index / Catalog Showcase Overview */}
         <section className="bg-white py-16 md:py-24 border-b border-brand-border/10">

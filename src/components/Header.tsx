@@ -21,6 +21,7 @@ export default function Header({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
+    { id: 'daily-sports', label: 'Daily & Sports Uniforms' },
     { id: 'digital-catalog', label: 'Digital Spread' },
     { id: 'catalog', label: 'Grid Catalog' },
     { id: 'woven', label: 'Woven Uniforms' },
