@@ -14,6 +14,21 @@ import { Product, CartItem } from './types';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Mail, Phone, MapPin, Send } from 'lucide-react';
 
+// Maps header nav / catalog dropdown ids to the product category filter they should apply
+const CATEGORY_NAV_MAP: Record<string, string> = {
+  woven: 'high',
+  sports: 'sports',
+  accessories: 'accessories',
+  blazers: 'high',
+  camendo: 'camendo',
+  hoodies: 'hoodies',
+  'uniform-kindergarten': 'kindergarten',
+  'uniform-primary-daily': 'primary',
+  'uniform-primary-sports': 'sports',
+  'uniform-secondary-daily': 'high',
+  'uniform-secondary-sports': 'sports',
+};
+
 const COLLECTION_IMAGES = [
   { src: '/images/ridhvick_Our_Collections_Catalog_elevate_kids.png', alt: 'Elevate Kids Collection' },
   { src: '/images/ridhvick_Our_Collections_Catalog_House_kids.png', alt: 'House Kids Collection' },
@@ -67,23 +82,9 @@ export default function App() {
   }, []);
 
   const handleNavigate = (sectionId: string) => {
-    // If navigating to category filters directly from header
-    if (sectionId === 'woven') {
-      setSelectedCategory('high');
-      const el = document.getElementById('catalog');
-      el?.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection('catalog');
-      return;
-    }
-    if (sectionId === 'sports') {
-      setSelectedCategory('sports');
-      const el = document.getElementById('catalog');
-      el?.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection('catalog');
-      return;
-    }
-    if (sectionId === 'accessories') {
-      setSelectedCategory('accessories');
+    // If navigating to a category filter directly from header (nav items or the Catalog dropdown)
+    if (sectionId in CATEGORY_NAV_MAP) {
+      setSelectedCategory(CATEGORY_NAV_MAP[sectionId]);
       const el = document.getElementById('catalog');
       el?.scrollIntoView({ behavior: 'smooth' });
       setActiveSection('catalog');
