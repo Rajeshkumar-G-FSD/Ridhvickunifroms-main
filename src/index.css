@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-headline: "Montserrat", sans-serif;
+
+  --color-brand-blue: #00346f;
+  --color-brand-blue-light: #004a99;
+  --color-brand-yellow: #fecb00;
+  --color-brand-yellow-hover: #f1c100;
+  --color-brand-dark: #191c1d;
+  --color-brand-muted: #424751;
+  --color-brand-light: #f8f9fa;
+  --color-brand-border: #c2c6d3;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes hero-kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate(-1%, -1%);
+  }
+}
+
+.animate-hero-kenburns {
+  animation: hero-kenburns 3800ms cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-brand-light);
+  color: var(--color-brand-dark);
+}
+

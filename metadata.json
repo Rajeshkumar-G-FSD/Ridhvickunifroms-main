@@ -1,0 +1,6 @@
+{
+  "name": "Ridhvick Uniforms",
+  "description": "Premium school uniforms designed for durability, style, and everyday comfort. Experience the Ridhvick difference.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
