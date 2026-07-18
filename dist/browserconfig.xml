@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Ridhvick Uniforms — browserconfig.xml
+  Controls the Windows Start Menu / taskbar pinned-site tile (legacy Edge/IE).
+  Low-priority in 2026 (most Windows users are on Chromium Edge, which uses
+  the standard manifest.json icons instead) but included for completeness
+  and because it costs nothing to serve. Reference the real generated tile
+  icon in images/icons/mstile-150.png.
+-->
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square150x150logo src="/images/icons/mstile-150.png"/>
+      <TileColor>#00346f</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>

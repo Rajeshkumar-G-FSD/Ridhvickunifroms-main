@@ -1,0 +1,20 @@
+/* TEAM */
+Business: Ridhvick Uniforms (Ridhvick Apparels)
+Location: Tirupur, Tamil Nadu, India
+Contact: sales@ridhvickapparels.in
+
+Site development & SEO implementation credits: add real names here.
+This file intentionally does not list individual developer/team member
+names — none were available in the project's codebase or public records
+at the time this was generated, and inventing names for a humans.txt file
+would defeat its own purpose. Replace this paragraph with real credits.
+
+/* SITE */
+Last update: 2026-07-18
+Language: English (en-IN)
+Doctype: HTML5
+Components: React 19, Vite 6, Tailwind CSS 4, Express
+Standards: WCAG 2.1 AA (target), Schema.org JSON-LD, Open Graph Protocol
+
+/* THANKS */
+Tirupur, Tamil Nadu — India's largest knitwear manufacturing hub.
