@@ -7,10 +7,22 @@ import AiChatAssistant from './components/AiChatAssistant';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
 import DigitalCatalog from './components/DigitalCatalog';
+import ScrollStack, { ScrollStackItem } from './components/ScrollStack';
 import { UNIFORM_PRODUCTS } from './data/uniforms';
 import { Product, CartItem } from './types';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, CheckCircle2, ChevronRight, Mail, Phone, MapPin, Send, HelpCircle } from 'lucide-react';
+
+const COLLECTION_IMAGES = [
+  { src: '/images/ridhvick_Our_Collections_Catalog_elevate_kids.png', alt: 'Elevate Kids Collection' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_House_kids.png', alt: 'House Kids Collection' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_kids_daily_waer_uniform_.png', alt: 'Kids Daily Wear Uniform Collection' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_kids_daily_waer_uniform.png', alt: 'Kids Daily Wear Uniform' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_kids_daily_waer.png', alt: 'Kids Daily Wear Collection' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_kids_garden.png', alt: 'Kids Garden Collection' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_kids.png', alt: 'Kids Collection' },
+  { src: '/images/ridhvick_Our_Collections_Catalog_sports_kids.png', alt: 'Sports Kids Collection' },
+];
 
 export default function App() {
   const [activeSection, setActiveSection] = useState<string>('hero');
@@ -184,25 +196,29 @@ export default function App() {
               </p>
             </div>
 
-            {/* Composite Graphic image from design mockup */}
-            <div className="relative w-full rounded-2xl overflow-hidden border border-brand-border/20 shadow-md group">
-              <img 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPSzNLTALhBxBWciOkP9dVKq0Biu9fQkpZR7EoeufJPdEXC_tvdSoXmtcePdGCGqZ8W1nqST58lTG1fZDJOopjCYA2Tk6W0RHmvPIyf2aYnoRoehwCS9sWXNf1yaZaiZJOtPL9Yk1KXHIwCunE34tfbJ72mTw3KtvL2-FjIubB7OEVCjbZ_w43sjLXftvQFLEPn48kFGGW3e5UBTi1r7N46U9PoHYScdSlxcMuBVhKAPMnuJmJ-MvfQ_tJEJ9gZCx90MR4ter2Pcnm" 
-                alt="Ridhvick Academic Catalogue" 
-                className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-500"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/60 via-transparent to-transparent flex items-end p-6 md:p-10">
-                <div className="text-left text-white max-w-lg">
-                  <p className="text-[10px] uppercase font-bold tracking-wider text-brand-yellow">Volume Customization</p>
-                  <h4 className="text-lg md:text-xl font-headline font-black mt-1">Official Academy Setup</h4>
-                  <p className="text-xs text-white/80 mt-1.5 font-sans leading-relaxed hidden sm:block">
-                    We digitize custom crest designs and create standard uniform matching packs for newly registered schools or institutional sports tracks.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
+
+          {/* Scroll-stacked collection imagery */}
+          <ScrollStack
+            useWindowScroll
+            itemDistance={120}
+            itemScale={0.02}
+            itemStackDistance={20}
+            stackPosition="22%"
+            scaleEndPosition="6%"
+            baseScale={0.9}
+          >
+            {COLLECTION_IMAGES.map((image) => (
+              <ScrollStackItem key={image.src} itemClassName="h-[60vh] md:h-[70vh] !p-0 bg-white">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover rounded-[40px]"
+                  loading="lazy"
+                />
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
         </section>
 
         {/* Interactive Digital Catalogue Spread and Book View */}
