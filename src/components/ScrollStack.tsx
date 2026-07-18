@@ -6,6 +6,10 @@ import {
   CSSProperties
 } from 'react';
 import Lenis from 'lenis';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ScrollStackItemProps {
   key?: string;
@@ -67,6 +71,7 @@ const ScrollStack = ({
   const scrollerRef = useRef<HTMLDivElement>(null);
   const stackCompletedRef = useRef(false);
   const animationFrameRef = useRef<number | null>(null);
+  const gsapTickerFnRef = useRef<((time: number) => void) | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const cardsRef = useRef<HTMLElement[]>([]);
   const lastTransformsRef = useRef<Map<number, CardTransform>>(new Map());
@@ -240,11 +245,24 @@ const ScrollStack = ({
 
       lenis.on('scroll', handleScroll);
 
-      const raf = (time: number) => {
-        lenis.raf(time);
-        animationFrameRef.current = requestAnimationFrame(raf);
+      // Other sections on this page (e.g. the scroll-pinned feature
+      // carousel) use GSAP's ScrollTrigger, which by default drives its
+      // own rAF loop and reads native scroll position independently of
+      // Lenis. Two uncoordinated scroll-hijacking loops on the same
+      // window scroll causes exactly the kind of broken/stuttering pin
+      // behavior this component depends on. The fix (GSAP's own
+      // recommended Lenis integration): drive Lenis from gsap.ticker
+      // instead of a separate requestAnimationFrame loop, and tell
+      // ScrollTrigger to recalculate on every Lenis scroll tick, so both
+      // libraries agree on a single scroll position every frame.
+      lenis.on('scroll', ScrollTrigger.update);
+
+      const tickerFn = (time: number) => {
+        lenis.raf(time * 1000);
       };
-      animationFrameRef.current = requestAnimationFrame(raf);
+      gsap.ticker.add(tickerFn);
+      gsap.ticker.lagSmoothing(0);
+      gsapTickerFnRef.current = tickerFn;
 
       lenisRef.current = lenis;
       return lenis;
@@ -311,16 +329,56 @@ const ScrollStack = ({
       endOffsetRef.current = endElement ? getElementOffset(endElement) : 0;
     };
 
+    // Re-measure + redraw together, not just re-measure — otherwise cards
+    // keep rendering the stale transform until the next scroll event fires.
+    const recapture = () => {
+      captureOffsets();
+      updateCardTransforms();
+    };
+
     captureOffsets();
     setupLenis();
     updateCardTransforms();
 
     window.addEventListener('resize', captureOffsets);
+    // Belt-and-braces for the same race described below — cheap no-op in
+    // the common case where GSAP's own refresh already covers it.
+    ScrollTrigger.addEventListener('refresh', recapture);
+
+    // The real fix: other page sections (e.g. a GSAP ScrollTrigger-pinned
+    // carousel mounted above this one) can still be finalizing their
+    // pin-spacer height — which depends on image dimensions not settled
+    // until those images finish loading — after this component's own
+    // layout effect already ran and captured now-stale card offsets.
+    // `window`'s 'load' event is not a reliable signal for this in an SPA
+    // (it typically fires before React-rendered <img> tags have finished
+    // fetching), so watch the actual document height directly instead:
+    // whenever it changes for any reason, re-measure.
+    let resizeRaf: number | null = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (resizeRaf !== null) return;
+      resizeRaf = requestAnimationFrame(() => {
+        resizeRaf = null;
+        recapture();
+      });
+    });
+    if (useWindowScroll) {
+      resizeObserver.observe(document.documentElement);
+    }
 
     return () => {
       window.removeEventListener('resize', captureOffsets);
+      ScrollTrigger.removeEventListener('refresh', recapture);
+      resizeObserver.disconnect();
+      if (resizeRaf !== null) {
+        cancelAnimationFrame(resizeRaf);
+      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
+      }
+      if (gsapTickerFnRef.current) {
+        gsap.ticker.remove(gsapTickerFnRef.current);
+        gsapTickerFnRef.current = null;
       }
       if (lenisRef.current) {
         lenisRef.current.destroy();

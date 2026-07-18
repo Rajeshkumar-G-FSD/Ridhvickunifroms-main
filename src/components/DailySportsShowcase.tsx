@@ -1,78 +1,59 @@
-import { useEffect, useState } from 'react';
+import { Sparkles, Shirt, Zap, Award } from 'lucide-react';
+import ScrollCarousel, { FeatureItem } from './lightswind/scroll-carousel';
 
-const dailySportsImages = [
-  { src: '/images/ridhvick_primary__dailykids_unifomrs_one.png', alt: 'Primary Daily Wear Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_sports_unifomrs_one.png', alt: 'Primary Sports Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_unifomrs_two.png', alt: 'Primary Daily Wear Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_sports_unifomrs_two.png', alt: 'Primary Sports Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_unifomrs_three.png', alt: 'Primary Daily Wear Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_sports_unifomrs_three.png', alt: 'Primary Sports Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_unifomrs_four.png', alt: 'Primary Daily Wear Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_sports_unifomrs_four.png', alt: 'Primary Sports Uniform' },
-  { src: '/images/ridhvick_primary__dailykids_unifomrs_five.png', alt: 'Primary Daily Wear Uniform' },
-  { src: '/images/ridhvick_secondary__dailykids_sports_unifomrs_one.png', alt: 'Secondary Sports Uniform' },
-  { src: '/images/ridhvick_secondary__dailykids_sports_unifomrs_two.png', alt: 'Secondary Sports Uniform' },
-  { src: '/images/ridhvick_secondary__dailykids_sports_unifomrs_three.png', alt: 'Secondary Sports Uniform' },
+// Titles, descriptions and topic order are pulled directly from
+// src/data/catalogPages.ts (CATALOG_TOPICS) so this showcase never drifts
+// out of sync with the real catalog copy.
+const features: FeatureItem[] = [
+  {
+    icon: Sparkles,
+    title: 'Kindergarten Series',
+    description:
+      'Playful, comfortable, and durable uniforms tailored for early learners. Featuring anti-pilling materials and easy-wear elasticated waists.',
+    image: '/images/ridhvick_Our_Collections_Catalog_kids_garden.png',
+  },
+  {
+    icon: Shirt,
+    title: 'Primary Daily Wear',
+    description:
+      'Elegant, crisp daily school wear designed to endure active playground hours and structural formal assemblies.',
+    image: '/images/ridhvick_uniforms_hero_primary_unifroms.png',
+  },
+  {
+    icon: Zap,
+    title: 'Sports & House Edition',
+    description:
+      'Aero-knit moisture-wicking tees, raglan cuts, and tracksuits optimized for physical sports tracking.',
+    image: '/images/ridhvick_uniforms_hero_girs_sports.png',
+  },
+  {
+    icon: Award,
+    title: 'Woven Academy Series',
+    description:
+      'Elite woven uniform garments, featuring double-breasted dress cuts, custom braided blazer labels, and structured trousers tailored for secondary students.',
+    image: '/images/ridhvick_Our_Collections_Catalog_House_kids.png',
+  },
 ];
 
-const SLIDE_INTERVAL_MS = 3000;
-
 export default function DailySportsShowcase() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % dailySportsImages.length);
-    }, SLIDE_INTERVAL_MS);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
-    <section
-      id="daily-sports"
-      className="relative w-full h-[78vh] sm:h-[85vh] md:h-screen min-h-[440px] sm:min-h-[520px] md:min-h-[640px] overflow-hidden bg-brand-dark flex items-center justify-center"
-    >
-      {/* Section heading overlay */}
-      <div className="absolute top-16 sm:top-28 md:top-32 left-1/2 -translate-x-1/2 z-20 text-center px-4">
+    <section id="daily-sports" className="relative w-full bg-brand-dark overflow-hidden">
+      {/* Section heading */}
+      <div className="relative z-20 text-center px-4 pt-14 sm:pt-20 md:pt-24 pb-2">
         <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow tracking-widest uppercase bg-white/10 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block backdrop-blur-sm">
           Everyday & Active Wear
         </span>
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-headline font-black text-white mt-2.5 sm:mt-4 drop-shadow-lg">
           Daily & Sports Uniforms
         </h2>
+        <p className="text-xs sm:text-sm text-white/60 mt-2.5 sm:mt-3 max-w-xl mx-auto font-sans leading-relaxed">
+          Scroll to explore each collection — from kindergarten play-wear to tailored academy blazers.
+        </p>
       </div>
 
-      {/* Full-bleed crossfading image slides */}
-      {dailySportsImages.map((image, index) => (
-        <div
-          key={image.src}
-          className={`absolute inset-0 flex items-center justify-center transition-opacity duration-[1200ms] ease-in-out ${
-            index === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          }`}
-        >
-          <img
-            src={image.src}
-            alt={image.alt}
-            className="w-full h-full object-contain"
-            loading={index === 0 ? 'eager' : 'lazy'}
-          />
-        </div>
-      ))}
-
-      {/* Dot indicators */}
-      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 px-4">
-        {dailySportsImages.map((image, index) => (
-          <button
-            key={image.src}
-            type="button"
-            onClick={() => setActiveIndex(index)}
-            aria-label={`Show ${image.alt} ${index + 1}`}
-            className={`h-2 rounded-full transition-all cursor-pointer ${
-              index === activeIndex ? 'w-6 bg-brand-yellow' : 'w-2 bg-white/40 hover:bg-white/70'
-            }`}
-          />
-        ))}
-      </div>
+      {/* Scroll-pinned feature carousel (desktop pans horizontally while
+          pinned; stacks and fades in vertically on mobile) */}
+      <ScrollCarousel features={features} className="pb-8 md:pb-0" />
     </section>
   );
 }
