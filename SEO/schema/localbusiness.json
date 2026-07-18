@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.ridhvickuniforms.com/#tirupur-office",
+      "name": "Ridhvick Uniforms — Registered Office & Factory",
+      "branchOf": {
+        "@id": "https://www.ridhvickuniforms.com/#organization"
+      },
+      "url": "https://www.ridhvickuniforms.com/contact",
+      "telephone": "+91-95001-11321",
+      "email": "sales@ridhvickapparels.in",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "No 2/278 A2, Old Koolipalayam Road, Vavipalayam Post",
+        "addressLocality": "Tirupur",
+        "postalCode": "641666",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.ridhvickuniforms.com/#chennai-office",
+      "name": "Ridhvick Uniforms — Chennai Sales Office",
+      "branchOf": {
+        "@id": "https://www.ridhvickuniforms.com/#organization"
+      },
+      "url": "https://www.ridhvickuniforms.com/contact",
+      "telephone": "+91-84387-46433",
+      "email": "customersupport@ridhvickapparels.in",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "No 7/546, Chettinadu Green Villa, Nesamani Nagar, Perumbakkam",
+        "addressLocality": "Chennai",
+        "postalCode": "600100",
+        "addressRegion": "Tamil Nadu",
+        "addressCountry": "IN"
+      }
+    }
+  ]
+}

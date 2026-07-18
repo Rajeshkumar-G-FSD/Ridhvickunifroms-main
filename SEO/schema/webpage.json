@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://www.ridhvickuniforms.com/#webpage",
+  "url": "https://www.ridhvickuniforms.com/",
+  "name": "Ridhvick Uniforms | Premium School & Sports Uniform Manufacturer",
+  "description": "Ridhvick Uniforms manufactures premium school uniforms, sports wear, woven blazers, and custom embroidery for academic institutions across India. Request catalogs, fabric swatches, and bulk quotes.",
+  "isPartOf": {
+    "@id": "https://www.ridhvickuniforms.com/#website"
+  },
+  "about": {
+    "@id": "https://www.ridhvickuniforms.com/#organization"
+  },
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_kids.png",
+    "width": 1600,
+    "height": 900
+  },
+  "inLanguage": "en-IN",
+  "datePublished": "2026-07-18",
+  "dateModified": "2026-07-18"
+}

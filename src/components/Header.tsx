@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingCart, User, Menu, X } from 'lucide-react';
+import { ShoppingCart, User, Menu, X, Mail, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
+import WhatsAppIcon from './icons/WhatsAppIcon';
+
+const WHATSAPP_LINK = 'https://wa.me/919500111321';
+const CONTACT_EMAIL = 'sales@ridhvickapparels.in';
+const CONTACT_PHONE_DISPLAY = '+91 95001 11321';
+const CONTACT_PHONE_TEL = 'tel:+919500111321';
 
 interface HeaderProps {
   cart: CartItem[];
@@ -54,6 +60,42 @@ export default function Header({
             : 'bg-white/70 backdrop-blur-sm border-b border-transparent'
         }`}
       >
+        {/* Utility Topbar: social/contact icons (desktop & tablet only) */}
+        <div className="hidden sm:block bg-brand-blue" id="header-topbar">
+          <div className="flex items-center justify-between max-w-7xl mx-auto px-6 md:px-8 h-8">
+            {/* Social / quick-contact icons — left side */}
+            <div className="flex items-center gap-1.5">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat with us on WhatsApp"
+                title="Chat on WhatsApp"
+                className="group flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-white/85 hover:bg-brand-yellow hover:text-brand-blue hover:scale-110 transition-all duration-200"
+              >
+                <WhatsAppIcon className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                aria-label="Email Ridhvick Uniforms"
+                title="Email us"
+                className="group flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-white/85 hover:bg-brand-yellow hover:text-brand-blue hover:scale-110 transition-all duration-200"
+              >
+                <Mail className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
+            {/* Quick phone reference — right side */}
+            <a
+              href={CONTACT_PHONE_TEL}
+              className="flex items-center gap-1.5 text-[11px] font-sans font-medium text-white/80 hover:text-brand-yellow transition-colors duration-200"
+            >
+              <Phone className="w-3 h-3" />
+              {CONTACT_PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+
         <div className="flex justify-between items-center max-w-7xl mx-auto px-3.5 sm:px-6 md:px-8 h-14 sm:h-16 md:h-[72px] gap-2">
 
           {/* Brand Logo */}
@@ -205,7 +247,34 @@ export default function Header({
                 })}
               </div>
 
-              <div className="border-t border-brand-border/10 pt-4 mt-3">
+              <div className="border-t border-brand-border/10 pt-4 mt-3 flex flex-col gap-3">
+                {/* Quick-contact icons (topbar is hidden on mobile, so surface them here) */}
+                <div className="flex items-center justify-center gap-3">
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat with us on WhatsApp"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-light text-brand-blue hover:bg-brand-yellow hover:scale-110 transition-all duration-200"
+                  >
+                    <WhatsAppIcon className="w-5 h-5" />
+                  </a>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    aria-label="Email Ridhvick Uniforms"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-light text-brand-blue hover:bg-brand-yellow hover:scale-110 transition-all duration-200"
+                  >
+                    <Mail className="w-[18px] h-[18px]" />
+                  </a>
+                  <a
+                    href={CONTACT_PHONE_TEL}
+                    aria-label="Call Ridhvick Uniforms"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-light text-brand-blue hover:bg-brand-yellow hover:scale-110 transition-all duration-200"
+                  >
+                    <Phone className="w-[18px] h-[18px]" />
+                  </a>
+                </div>
+
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);

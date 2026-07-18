@@ -1,0 +1,54 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.ridhvickuniforms.com/manufacturing-services#service",
+  "serviceType": "School and institutional uniform manufacturing",
+  "name": "Uniform Manufacturing & Custom Embroidery Services",
+  "description": "Full in-house uniform manufacturing service covering product design and prototyping, premium knitted and woven fabric production, and precision custom logo embroidery — from initial thread-blend trials and fabric sampling through computerized embroidery and regional academy distribution.",
+  "provider": {
+    "@id": "https://www.ridhvickuniforms.com/#organization"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "url": "https://www.ridhvickuniforms.com/manufacturing-services",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Uniform Manufacturing Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Product Design & Prototyping",
+          "description": "Digital design previews and physically stitched fabric samples delivered to school boards before bulk production."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Premium Knitted & Woven Fabric Manufacturing",
+          "description": "High mechanical-stretch poly-viscose and combed cotton fabrics optimized for comfort during active school hours."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Precision Custom Embroidery",
+          "description": "High thread-density computerized embroidery ensuring school logo crests remain crisp, colorfast, and durable."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Bulk School & Institutional Order Fulfilment",
+          "description": "End-to-end bulk order management for schools, sports academies, and corporate/institutional buyers, from quote to dispatch."
+        }
+      }
+    ]
+  }
+}

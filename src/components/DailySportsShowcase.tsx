@@ -33,7 +33,7 @@ export default function DailySportsShowcase() {
       className="relative w-full h-[78vh] sm:h-[85vh] md:h-screen min-h-[440px] sm:min-h-[520px] md:min-h-[640px] overflow-hidden bg-brand-dark flex items-center justify-center"
     >
       {/* Section heading overlay */}
-      <div className="absolute top-16 sm:top-20 md:top-24 left-1/2 -translate-x-1/2 z-20 text-center px-4">
+      <div className="absolute top-16 sm:top-28 md:top-32 left-1/2 -translate-x-1/2 z-20 text-center px-4">
         <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow tracking-widest uppercase bg-white/10 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block backdrop-blur-sm">
           Everyday & Active Wear
         </span>

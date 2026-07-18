@@ -1,0 +1,15 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://www.ridhvickuniforms.com/about#REPLACE_WITH_SLUG",
+  "name": "REPLACE_WITH_FULL_NAME",
+  "jobTitle": "REPLACE_WITH_JOB_TITLE",
+  "worksFor": {
+    "@id": "https://www.ridhvickuniforms.com/#organization"
+  },
+  "url": "https://www.ridhvickuniforms.com/about",
+  "image": "REPLACE_WITH_PHOTO_URL",
+  "sameAs": [
+    "REPLACE_WITH_LINKEDIN_URL_IF_ANY"
+  ]
+}

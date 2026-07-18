@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap');
+/* Fonts are loaded via <link rel="preconnect"/stylesheet"> in index.html
+   instead of @import here — a CSS @import is render-blocking and adds a
+   sequential network round-trip before the fallback-to-Montserrat swap can
+   happen. See SEO/technical/performance-report.md Finding #2. */
 @import "tailwindcss";
 
 @theme {

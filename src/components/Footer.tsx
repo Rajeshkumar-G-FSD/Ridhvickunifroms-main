@@ -1,5 +1,10 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Sparkles } from 'lucide-react';
+import WhatsAppIcon from './icons/WhatsAppIcon';
+
+const WHATSAPP_LINK = 'https://wa.me/919500111321';
+const CONTACT_EMAIL = 'sales@ridhvickapparels.in';
+const CONTACT_PHONE_TEL = 'tel:+919500111321';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -66,8 +71,38 @@ export default function Footer({ onNavigate }: FooterProps) {
             </div>
             <div className="flex items-center gap-1.5 pt-1">
               <span className="text-brand-yellow text-xs">🌐</span>
-              <a href="https://www.ridhvickapparels.in" target="_blank" rel="noopener noreferrer" className="hover:text-brand-yellow font-semibold transition-colors">www.ridhvickapparels.in</a>
+              <a href="https://www.ridhvickuniforms.com" target="_blank" rel="noopener noreferrer" className="hover:text-brand-yellow font-semibold transition-colors">www.ridhvickuniforms.com</a>
             </div>
+          </div>
+
+          {/* Connect / Social icons */}
+          <div className="flex items-center gap-2.5 pt-4 mt-1 border-t border-white/15">
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with us on WhatsApp"
+              title="Chat on WhatsApp"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <WhatsAppIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              aria-label="Email Ridhvick Uniforms"
+              title="Email us"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <Mail className="w-4 h-4" />
+            </a>
+            <a
+              href={CONTACT_PHONE_TEL}
+              aria-label="Call Ridhvick Uniforms"
+              title="Call us"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white hover:bg-brand-yellow hover:text-brand-blue hover:-translate-y-0.5 transition-all duration-200"
+            >
+              <Phone className="w-4 h-4" />
+            </a>
           </div>
         </div>
 

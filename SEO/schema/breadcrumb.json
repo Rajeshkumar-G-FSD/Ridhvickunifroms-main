@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": "https://www.ridhvickuniforms.com/school-uniforms/primary-school#breadcrumb",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.ridhvickuniforms.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "School Uniforms",
+      "item": "https://www.ridhvickuniforms.com/school-uniforms"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Primary School Uniforms",
+      "item": "https://www.ridhvickuniforms.com/school-uniforms/primary-school"
+    }
+  ]
+}

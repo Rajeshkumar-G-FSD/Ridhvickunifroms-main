@@ -1,0 +1,12 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.ridhvickuniforms.com/#website",
+  "url": "https://www.ridhvickuniforms.com/",
+  "name": "Ridhvick Uniforms",
+  "description": "Premium school uniform, sports wear, and custom embroidery manufacturer based in Tirupur, India.",
+  "publisher": {
+    "@id": "https://www.ridhvickuniforms.com/#organization"
+  },
+  "inLanguage": "en-IN"
+}

@@ -1,0 +1,16 @@
+# Ridhvick Uniforms — security.txt (RFC 9116)
+# Deploy at BOTH:
+#   https://www.ridhvickuniforms.com/.well-known/security.txt  (canonical location)
+#   https://www.ridhvickuniforms.com/security.txt              (legacy fallback, optional)
+#
+# NOTE: Contact below uses the real, verified customer support address
+# from this codebase (Footer.tsx / server contact info) — there is no
+# dedicated security@ mailbox on record. If you want security reports
+# routed separately from general customer support, create a
+# security@ridhvickapparels.in alias and update the line below; don't
+# leave this pointing at an unmonitored address.
+
+Contact: mailto:customersupport@ridhvickapparels.in
+Preferred-Languages: en
+Canonical: https://www.ridhvickuniforms.com/.well-known/security.txt
+Expires: 2027-07-18T00:00:00.000Z

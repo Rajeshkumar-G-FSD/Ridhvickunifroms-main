@@ -1,0 +1,30 @@
+# Ridhvick Uniforms — robots.txt
+# https://www.ridhvickuniforms.com/robots.txt
+# This is identical to the file already deployed at public/robots.txt —
+# kept here for completeness of the SEO package.
+
+User-agent: *
+Allow: /
+
+# Nothing on this site is currently gated behind auth or has thin/duplicate
+# admin paths to disallow. Revisit this file once /blog, /admin, or search
+# result pages (e.g. ?filter=) exist — disallow internal filter query strings
+# then to avoid crawl-budget waste on duplicate content, e.g.:
+# Disallow: /*?filter=*
+# Disallow: /*?category=*
+
+# --- AI / LLM crawlers -------------------------------------------------
+# Uncomment any of these if you want to opt OUT of that crawler. Left
+# enabled by default: broader AI visibility can drive brand discovery in
+# AI Overviews / ChatGPT / Perplexity answers, which is a legitimate 2026
+# acquisition channel for a B2B manufacturer. Revisit if you'd rather your
+# product photography and pricing not be used for model training.
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: Google-Extended
+# Disallow: /
+
+Sitemap: https://www.ridhvickuniforms.com/sitemap.xml
+Sitemap: https://www.ridhvickuniforms.com/image-sitemap.xml

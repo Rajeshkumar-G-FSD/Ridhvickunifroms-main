@@ -1,0 +1,55 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://www.ridhvickuniforms.com/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who manufactures Ridhvick school uniforms and where are they made?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ridhvick Uniforms is a school and sports uniform manufacturer based in Tirupur, Tamil Nadu — India's largest knitwear manufacturing hub. Ridhvick has designed, woven, and embroidered uniforms in-house at its own facility since 2009, with a second sales office in Chennai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of school uniforms does Ridhvick manufacture?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ridhvick manufactures the full range a school needs from a single vendor: kindergarten and primary daily wear (polos, tunics, pinafores, jumpers), high school woven uniforms and tailored blazers, sports and house-color athletic wear, and accessories such as ties, socks, and backpacks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Ridhvick offer custom logo embroidery for school uniforms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Ridhvick runs computerized, high thread-density embroidery in-house so school crests and logos stay crisp, colorfast, and durable through repeated washing. Digitizing setup and chest-logo placement are handled as part of the same production run as the uniform itself, with no third-party embroidery vendor involved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Ridhvick handle bulk school uniform orders for an entire institution?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — bulk institutional and school-wide orders are Ridhvick's core business. Every stage, from thread-blend trials and physical fabric sampling to cutting, stitching, embroidery, and regional distribution, is managed under one roof, which keeps bulk orders on a single predictable production timeline instead of being split across subcontractors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get a price quote or request physical fabric samples?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Add the uniforms you need to your inquiry package on the Ridhvick website and submit the request form with your school or organization name, or email sales@ridhvickapparels.in directly. The Ridhvick sales desk responds with pricing and physical fabric swatch availability within 24 business hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What fabrics are used in Ridhvick's sports uniforms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ridhvick's sports and athletic wear line uses aero-knit moisture-wicking performance polyester, breathable CoolMesh panels, and heavyweight interlock knit for track jackets — chosen specifically for ventilation and quick-dry performance during school sports periods."
+      }
+    }
+  ]
+}

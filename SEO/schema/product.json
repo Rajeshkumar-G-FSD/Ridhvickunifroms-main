@@ -1,0 +1,121 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": "https://www.ridhvickuniforms.com/school-uniforms/primary-school#p1",
+      "name": "Classic Primary Polo Shirt",
+      "description": "Crisp white breathable polo shirt with custom primary blue trim collar. Built for daily playtime and comfort, with a stain-resistant finish, double-stitch seams, and pill-resistant fabric.",
+      "sku": "p1",
+      "category": "Primary School Uniforms",
+      "material": "60% Cotton, 40% Polyester Blend",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuD4uXlCvJpW6C8MjoGkymlvixCp3_r3isQUCltPVS8EPe8Nr2BIWvUuZimVYVz50OsJK-F3poHIplOmyn8Is7Olw11swEpYlLqQzn5oYIP9jm19uAf5bxHVc_WpMeL9BuSoTSrLU2y4uAo8TKhyeOUffEdqXJhu0OVYkfhmA7Pr6fKxE4WQdGVnG9hMAzytdo3999h39eaU9UyRG7xW23yTFkJpwOrfsOx45J0hgIHU1hW61lG2QHHemvPm2u9yBDQeLXyQ2ssxhRIc",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ridhvick Uniforms"
+      },
+      "manufacturer": {
+        "@id": "https://www.ridhvickuniforms.com/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.ridhvickuniforms.com/school-uniforms/primary-school#p1",
+        "priceCurrency": "INR",
+        "price": "1499.00",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://www.ridhvickuniforms.com/#organization"
+        }
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.ridhvickuniforms.com/school-uniforms/high-school-woven#h2",
+      "name": "Tailored Academy Blazer",
+      "description": "Fully-lined formal academy blazer with gold crest button closures and deep functional pockets. Water-repellent barrier finish, internal zipper pocket, crest embroidery ready.",
+      "sku": "h2",
+      "category": "High School & Woven Uniforms",
+      "material": "70% Wool, 30% Polyester Outer",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBCARFF6Fp7p3HPt1TcgWoQQ2E7KSV_GoKwklIUd_ZgwCMUIaXnOi7fxwg4FwNyaVEaTrBLyStspm8bmKL0BRemGq8LphEVEn_76P5jKtnDIpR2nGOUp2VcKIEDZCXswxSi36W94T-TPhHXWbZLqJSefHMUi-mED9TLYNoin7s2DaPTNMm1E1Xih45Vs40DVA6PJcFQeqlb0i2iso-G-An_0NEO40lgmwkfntP_pK6FSdvivMx5xSAVf87RMxj65Y9hMqYdep87xSHp",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ridhvick Uniforms"
+      },
+      "manufacturer": {
+        "@id": "https://www.ridhvickuniforms.com/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.ridhvickuniforms.com/school-uniforms/high-school-woven#h2",
+        "priceCurrency": "INR",
+        "price": "3599.00",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://www.ridhvickuniforms.com/#organization"
+        }
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.ridhvickuniforms.com/sports-uniforms#s1",
+      "name": "Knitted Athletic Track Jacket",
+      "description": "Dynamic sports jacket with full front zip, breathable knitted panels, and side-zipped storage pockets. Quick-dry moisture wicking, thermal insulation layer, reflective safety stripes.",
+      "sku": "s1",
+      "category": "Sports Uniforms",
+      "material": "Aero-Knit Performance Polyester",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBEJAFrCzll3wIV-dKn0j3uhu71X3erOxYH1s8EprejeuwOjy1rK-MqnShBZrJKqP7AtoUhODWxVEJuOpv74afRppu9xVkp6j_PZQvBSV0R77y9JERW4qgcx5ozT3rK3aQoh6ISvEKTDzUETTP0f1eDWEk0P3zdTY3wHH5GugiFwNEM5NY6V3PpWa3fMj38wfh_lJu0lDiMZxTETnjdU4VhG2W5c-qUk6CDDXKN5UydH5m1gH196UMmfVIE2Enzxi5O6yztR_Z_SUr2",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ridhvick Uniforms"
+      },
+      "manufacturer": {
+        "@id": "https://www.ridhvickuniforms.com/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.ridhvickuniforms.com/sports-uniforms#s1",
+        "priceCurrency": "INR",
+        "price": "2599.00",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://www.ridhvickuniforms.com/#organization"
+        }
+      }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.ridhvickuniforms.com/uniform-accessories#a1",
+      "name": "Ergonomic Crest Backpack",
+      "description": "Spacious ergonomic school backpack featuring cushioned straps, a laptop sleeve, and school crest placement. Anatomical back-support padding, heavy-duty water-resistant nylon, dual mesh water bottle pockets.",
+      "sku": "a1",
+      "category": "Uniform Accessories",
+      "material": "900D Ballistic Cordura",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuD4uXlCvJpW6C8MjoGkymlvixCp3_r3isQUCltPVS8EPe8Nr2BIWvUuZimVYVz50OsJK-F3poHIplOmyn8Is7Olw11swEpYlLqQzn5oYIP9jm19uAf5bxHVc_WpMeL9BuSoTSrLU2y4uAo8TKhyeOUffEdqXJhu0OVYkfhmA7Pr6fKxE4WQdGVnG9hMAzytdo3999h39eaU9UyRG7xW23yTFkJpwOrfsOx45J0hgIHU1hW61lG2QHHemvPm2u9yBDQeLXyQ2ssxhRIc",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ridhvick Uniforms"
+      },
+      "manufacturer": {
+        "@id": "https://www.ridhvickuniforms.com/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.ridhvickuniforms.com/uniform-accessories#a1",
+        "priceCurrency": "INR",
+        "price": "2399.00",
+        "priceValidUntil": "2026-12-31",
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": {
+          "@id": "https://www.ridhvickuniforms.com/#organization"
+        }
+      }
+    }
+  ]
+}

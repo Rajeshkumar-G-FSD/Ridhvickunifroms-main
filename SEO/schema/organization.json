@@ -1,0 +1,71 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.ridhvickuniforms.com/#organization",
+  "name": "Ridhvick Uniforms",
+  "legalName": "Ridhvick Apparels",
+  "alternateName": "Ridhvick Group of Companies",
+  "url": "https://www.ridhvickuniforms.com/",
+  "logo": {
+    "@type": "ImageObject",
+    "@id": "https://www.ridhvickuniforms.com/#logo",
+    "url": "https://www.ridhvickuniforms.com/favicon.svg",
+    "caption": "Ridhvick Uniforms logo"
+  },
+  "image": "https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_kids.png",
+  "description": "Ridhvick Uniforms manufactures premium school uniforms, sports wear, woven blazers, and custom embroidery for academic institutions across India, from its own production facility in Tirupur, Tamil Nadu, since 2009.",
+  "foundingDate": "2009",
+  "slogan": "Crafting Comfort, Delivering Excellence.",
+  "email": "sales@ridhvickapparels.in",
+  "telephone": "+91-95001-11321",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "No 2/278 A2, Old Koolipalayam Road, Vavipalayam Post",
+      "addressLocality": "Tirupur",
+      "postalCode": "641666",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "No 7/546, Chettinadu Green Villa, Nesamani Nagar, Perumbakkam",
+      "addressLocality": "Chennai",
+      "postalCode": "600100",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    }
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "telephone": "+91-95001-11321",
+      "email": "sales@ridhvickapparels.in",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Tamil"]
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "telephone": "+91-84387-46433",
+      "email": "customersupport@ridhvickapparels.in",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Tamil"]
+    }
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "India"
+  },
+  "knowsAbout": [
+    "School uniform manufacturing",
+    "Sports uniform manufacturing",
+    "Custom embroidery",
+    "Woven and knitted fabric production",
+    "Bulk institutional apparel supply"
+  ],
+  "sameAs": [
+    "https://www.indiamart.com/ridhvick-apparels/"
+  ]
+}

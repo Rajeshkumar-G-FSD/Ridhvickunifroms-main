@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ridhvick Uniforms — image-sitemap.xml
+  Google folds image discovery into the regular sitemap via the
+  image: namespace (there is no separate submission type in Search
+  Console anymore) — this file uses that format and can be submitted
+  alongside sitemap.xml today.
+
+  All images are currently attached to "/" because that's the only live
+  URL. Once the recommended pages in sitemap-recommended.xml go live,
+  move each image block to the <url> of the page it actually appears on
+  (e.g. hero/daily-sports images → homepage; collection images → their
+  category hub) — see report/implementation-guide.md.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.ridhvickuniforms.com/</loc>
+
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_boys.png</image:loc>
+      <image:title>Ridhvick school uniform for boys — daily wear collection</image:title>
+      <image:caption>Boys school uniform in durable poly-cotton blend, part of Ridhvick's daily wear collection.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_digital_print.png</image:loc>
+      <image:title>Custom digital print school uniform fabric by Ridhvick</image:title>
+      <image:caption>Digitally printed uniform fabric sample showing Ridhvick's custom design capability.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_girls_top.png</image:loc>
+      <image:title>Ridhvick girls school uniform top</image:title>
+      <image:caption>Girls school uniform top with tailored fit, from Ridhvick's primary and high school range.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_girs_sports.png</image:loc>
+      <image:title>Girls sports uniform by Ridhvick Uniforms</image:title>
+      <image:caption>Girls athletic sports uniform in moisture-wicking fabric for school sports days.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_kids_uniform.png</image:loc>
+      <image:title>Kids school uniform set — Ridhvick Uniforms</image:title>
+      <image:caption>Coordinated kids school uniform set manufactured in-house by Ridhvick Uniforms, Tirupur.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_kids.png</image:loc>
+      <image:title>School children wearing Ridhvick uniforms</image:title>
+      <image:caption>Primary school children in Ridhvick's daily wear uniform collection.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_polo.png</image:loc>
+      <image:title>School polo shirt manufactured by Ridhvick Uniforms</image:title>
+      <image:caption>Pique cotton school polo shirt with custom collar trim, bulk-manufactured by Ridhvick.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_uniforms_hero_primary_unifroms.png</image:loc>
+      <image:title>Primary school uniform range by Ridhvick Uniforms</image:title>
+      <image:caption>Primary school uniform range featuring tunics, polos, and jumpers manufactured by Ridhvick.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_unifomrs_one.png</image:loc>
+      <image:title>Primary school daily wear uniform — style 1</image:title>
+      <image:caption>Primary school daily wear uniform, style 1, from Ridhvick's Primary Daily Wear catalog series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_sports_unifomrs_one.png</image:loc>
+      <image:title>Primary school sports uniform — style 1</image:title>
+      <image:caption>Primary school sports uniform, style 1, in breathable athletic fabric.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_unifomrs_two.png</image:loc>
+      <image:title>Primary school daily wear uniform — style 2</image:title>
+      <image:caption>Primary school daily wear uniform, style 2, from Ridhvick's Primary Daily Wear catalog series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_sports_unifomrs_two.png</image:loc>
+      <image:title>Primary school sports uniform — style 2</image:title>
+      <image:caption>Primary school sports uniform, style 2, in breathable athletic fabric.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_unifomrs_three.png</image:loc>
+      <image:title>Primary school daily wear uniform — style 3</image:title>
+      <image:caption>Primary school daily wear uniform, style 3, from Ridhvick's Primary Daily Wear catalog series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_sports_unifomrs_three.png</image:loc>
+      <image:title>Primary school sports uniform — style 3</image:title>
+      <image:caption>Primary school sports uniform, style 3, in breathable athletic fabric.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_unifomrs_four.png</image:loc>
+      <image:title>Primary school daily wear uniform — style 4</image:title>
+      <image:caption>Primary school daily wear uniform, style 4, from Ridhvick's Primary Daily Wear catalog series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_sports_unifomrs_four.png</image:loc>
+      <image:title>Primary school sports uniform — style 4</image:title>
+      <image:caption>Primary school sports uniform, style 4, in breathable athletic fabric.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_primary__dailykids_unifomrs_five.png</image:loc>
+      <image:title>Primary school daily wear uniform — style 5</image:title>
+      <image:caption>Primary school daily wear uniform, style 5, from Ridhvick's Primary Daily Wear catalog series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_secondary__dailykids_sports_unifomrs_one.png</image:loc>
+      <image:title>Secondary school sports uniform — style 1</image:title>
+      <image:caption>Secondary school sports uniform, style 1, from Ridhvick's Sports & House Edition series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_secondary__dailykids_sports_unifomrs_two.png</image:loc>
+      <image:title>Secondary school sports uniform — style 2</image:title>
+      <image:caption>Secondary school sports uniform, style 2, from Ridhvick's Sports & House Edition series.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_secondary__dailykids_sports_unifomrs_three.png</image:loc>
+      <image:title>Secondary school sports uniform — style 3</image:title>
+      <image:caption>Secondary school sports uniform, style 3, from Ridhvick's Sports & House Edition series.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_elevate_kids.png</image:loc>
+      <image:title>Ridhvick Elevate Kids uniform collection</image:title>
+      <image:caption>Elevate Kids collection — premium school uniform line by Ridhvick Uniforms.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_House_kids.png</image:loc>
+      <image:title>Ridhvick House Kids uniform collection</image:title>
+      <image:caption>House Kids collection — school house-color uniform line by Ridhvick Uniforms.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_kids_daily_waer_uniform_.png</image:loc>
+      <image:title>Kids daily wear uniform collection by Ridhvick</image:title>
+      <image:caption>Kids daily wear uniform collection featuring durable everyday school apparel.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_kids_daily_waer_uniform.png</image:loc>
+      <image:title>Kids daily wear school uniform — Ridhvick catalog</image:title>
+      <image:caption>Kids daily wear school uniform from Ridhvick's collections catalog.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_kids_daily_waer.png</image:loc>
+      <image:title>Kids daily wear collection — Ridhvick Uniforms</image:title>
+      <image:caption>Kids daily wear collection showcasing Ridhvick's core school uniform range.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_kids_garden.png</image:loc>
+      <image:title>Ridhvick Kids Garden (kindergarten) uniform collection</image:title>
+      <image:caption>Kids Garden collection — kindergarten uniforms designed for comfort and easy wear.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_kids.png</image:loc>
+      <image:title>Ridhvick Kids uniform collection catalog</image:title>
+      <image:caption>Kids collection — full catalog spread of Ridhvick's school uniform offering.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ridhvickuniforms.com/images/ridhvick_Our_Collections_Catalog_sports_kids.png</image:loc>
+      <image:title>Ridhvick Sports Kids uniform collection</image:title>
+      <image:caption>Sports Kids collection — athletic school uniforms for active play and sports periods.</image:caption>
+    </image:image>
+  </url>
+</urlset>

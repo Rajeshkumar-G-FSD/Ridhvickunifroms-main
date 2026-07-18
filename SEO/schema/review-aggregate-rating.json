@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "REPLACE_WITH_PRODUCT_OR_ORGANIZATION_ID_THIS_RATING_APPLIES_TO",
+  "name": "REPLACE_WITH_PRODUCT_OR_ORGANIZATION_NAME",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "REPLACE_WITH_REAL_AVERAGE — do not estimate or invent this number",
+    "reviewCount": "REPLACE_WITH_REAL_COUNT — do not estimate or invent this number",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "REPLACE — real value from an actual review",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "REPLACE — real reviewer name or verified initials, with their consent"
+      },
+      "reviewBody": "REPLACE — the real review text, quoted accurately, not paraphrased or invented",
+      "datePublished": "REPLACE — the real date that review was left"
+    }
+  ]
+}

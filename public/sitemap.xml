@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ridhvick Uniforms — sitemap.xml
+  SAFE TO SUBMIT TODAY: reflects the site as it actually exists right now
+  (single-page app, one crawlable URL). Do not add the 9-page structure
+  from content-plan.md to this file until those routes are actually built
+  and return 200 — see SEO/sitemap-recommended.xml for that version, and
+  SEO/report/implementation-guide.md for the swap-over steps.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.ridhvickuniforms.com/</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
