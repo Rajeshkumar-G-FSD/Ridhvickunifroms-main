@@ -18,7 +18,10 @@ export default function Footer({ onNavigate }: FooterProps) {
         {/* Brand Information column */}
         <div className="flex flex-col gap-3 sm:gap-4 md:col-span-5 col-span-2">
           <div className="flex flex-col gap-0.5">
-            <h4 className="text-lg font-headline font-black tracking-tight text-white flex items-center gap-2">
+            <h4 className="text-lg font-headline font-black tracking-tight text-white flex items-center gap-2.5">
+              <span className="w-9 h-9 rounded-full overflow-hidden bg-black border border-brand-yellow/30 shrink-0">
+                <img src="/images/ridhvick_logo.jpeg" alt="Ridhvick Uniforms" className="w-full h-full object-cover" />
+              </span>
               RIDHVICK UNIFORMS
             </h4>
             <span className="text-[9px] font-bold text-brand-yellow uppercase tracking-widest">Since 2009</span>

@@ -276,7 +276,7 @@ export default function HomePage() {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover rounded-2xl sm:rounded-[32px] md:rounded-[40px]"
+                  className="w-full h-full object-contain rounded-2xl sm:rounded-[32px] md:rounded-[40px]"
                   loading="lazy"
                 />
               </ScrollStackItem>

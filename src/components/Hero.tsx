@@ -57,7 +57,7 @@ export default function Hero() {
           onHover="speedUp"
           spinDuration={20}
           className="bg-brand-blue/90 backdrop-blur-md border border-white/15 shadow-lg"
-          logoSrc="/images/ridhvick-logo.png"
+          logoSrc="/images/ridhvick_logo.jpeg"
           logoAlt="Ridhvick Uniforms"
           logoClassName="w-16 h-16 sm:w-20 sm:h-20 object-contain"
         />

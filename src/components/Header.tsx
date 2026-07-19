@@ -171,8 +171,8 @@ export default function Header({
             className="flex items-center gap-2 shrink-0 group"
             id="brand-logo"
           >
-            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-brand-blue flex items-center justify-center text-brand-yellow font-headline font-black text-sm sm:text-base shadow-sm group-hover:scale-105 transition-transform">
-              R
+            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden bg-black shadow-sm group-hover:scale-105 transition-transform shrink-0">
+              <img src="/images/ridhvick_logo.jpeg" alt="Ridhvick Uniforms" className="w-full h-full object-cover" />
             </span>
             <span className="flex flex-col leading-none">
               <span className="text-sm sm:text-base md:text-lg font-headline font-extrabold tracking-tight text-brand-blue">
@@ -388,7 +388,9 @@ export default function Header({
             >
               <div className="flex items-center justify-between mb-6">
                 <span className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-md bg-brand-blue flex items-center justify-center text-brand-yellow font-headline font-black text-xs">R</span>
+                  <span className="w-7 h-7 rounded-full overflow-hidden bg-black shrink-0">
+                  <img src="/images/ridhvick_logo.jpeg" alt="Ridhvick Uniforms" className="w-full h-full object-cover" />
+                </span>
                   <span className="font-headline font-black text-brand-blue text-sm tracking-tight">RIDHVICK</span>
                 </span>
                 <button
