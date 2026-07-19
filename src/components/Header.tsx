@@ -4,6 +4,7 @@ import { ShoppingCart, User, Menu, X, Mail, Phone, ChevronDown, ChevronRight } f
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
 import WhatsAppIcon from './icons/WhatsAppIcon';
+import AdminLoginModal from './AdminLoginModal';
 
 const WHATSAPP_LINK = 'https://wa.me/919500111321';
 const CONTACT_EMAIL = 'sales@ridhvickapparels.in';
@@ -55,6 +56,7 @@ export default function Header({
   const [uniformOpen, setUniformOpen] = useState(false);
   const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
   const [mobileUniformOpen, setMobileUniformOpen] = useState(false);
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
   const catalogRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
 
@@ -341,10 +343,11 @@ export default function Header({
               )}
             </button>
 
-            {/* Profile Sign-in (Mock) */}
+            {/* Admin Login Trigger */}
             <button
+              onClick={() => setIsAdminLoginOpen(true)}
               className="p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 hover:scale-105 hidden sm:inline-block cursor-pointer"
-              aria-label="User Account"
+              aria-label="Admin Login"
               id="profile-trigger-btn"
             >
               <User className="w-5 h-5 text-brand-blue" />
@@ -544,6 +547,15 @@ export default function Header({
           </>
         )}
       </AnimatePresence>
+
+      <AdminLoginModal
+        isOpen={isAdminLoginOpen}
+        onClose={() => setIsAdminLoginOpen(false)}
+        onSuccess={() => {
+          setIsAdminLoginOpen(false);
+          navigate('/admin');
+        }}
+      />
     </>
   );
 }

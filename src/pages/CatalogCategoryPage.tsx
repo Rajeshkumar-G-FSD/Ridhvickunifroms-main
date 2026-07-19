@@ -7,17 +7,29 @@ import AiChatAssistant from '../components/AiChatAssistant';
 import CartDrawer from '../components/CartDrawer';
 import { AngledSlider } from '../components/lightswind/angled-slider';
 import { getCategoryPage } from '../data/categoryPages';
+import { CatalogItem } from '../types';
+import { subscribeToCatalogItems } from '../lib/catalogService';
 
 export default function CatalogCategoryPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const [isAiAssistantOpen, setIsAiAssistantOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [adminItems, setAdminItems] = useState<CatalogItem[]>([]);
 
   const config = slug ? getCategoryPage(slug) : undefined;
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
+  }, [slug]);
+
+  // Admin-added catalog items for this category merge live into the
+  // gallery below, alongside the static collection imagery.
+  useEffect(() => {
+    const unsubscribe = subscribeToCatalogItems((items) => {
+      setAdminItems(items.filter((item) => item.category === slug));
+    });
+    return unsubscribe;
   }, [slug]);
 
   // Section nav links only exist on the homepage — send the user there and
@@ -53,11 +65,13 @@ export default function CatalogCategoryPage() {
     );
   }
 
-  const sliderItems = config.images.map((url, index) => ({
-    id: index,
-    url,
-    alt: `${config.label} style ${index + 1}`,
-  }));
+  // Admin-added images surface first, ahead of the static collection imagery.
+  const adminSliderItems = adminItems.flatMap((item) =>
+    item.images.map((url) => ({ url, alt: item.title || item.name }))
+  );
+  const sliderItems = [...adminSliderItems, ...config.images.map((url) => ({ url, alt: `${config.label} style` }))].map(
+    (entry, index) => ({ id: index, ...entry })
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f8f9fa] selection:bg-brand-yellow selection:text-brand-blue overflow-x-hidden">

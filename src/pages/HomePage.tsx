@@ -14,6 +14,7 @@ import BlurText from '../components/BlurText';
 import TextType from '../components/TextType';
 import { UNIFORM_PRODUCTS } from '../data/uniforms';
 import { Product, CartItem } from '../types';
+import { subscribeToCatalogItems, catalogItemToProduct } from '../lib/catalogService';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Mail, Phone, MapPin, Send } from 'lucide-react';
 
@@ -75,6 +76,7 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [uniformFilterOpen, setUniformFilterOpen] = useState<boolean>(false);
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [adminProducts, setAdminProducts] = useState<Product[]>([]);
 
   // Modals & Drawers States
   const [selectedProductForModal, setSelectedProductForModal] = useState<Product | null>(null);
@@ -88,6 +90,15 @@ export default function HomePage() {
   const [contactMessage, setContactMessage] = useState<string>('');
   const [isContactSubmitting, setIsContactSubmitting] = useState<boolean>(false);
   const [contactSuccess, setContactSuccess] = useState<boolean>(false);
+
+  // Admin-managed catalog items (Firestore) merge live into the "Explore
+  // Sizing & Fabrics" product grid alongside the static catalog.
+  useEffect(() => {
+    const unsubscribe = subscribeToCatalogItems((items) => {
+      setAdminProducts(items.map(catalogItemToProduct));
+    });
+    return unsubscribe;
+  }, []);
 
   const handleNavigate = (sectionId: string) => {
     // If navigating to a category filter directly from header (nav items or the Catalog dropdown)
@@ -203,12 +214,14 @@ export default function HomePage() {
     }, 1500);
   };
 
-  // Filtered Products list
+  // Filtered Products list — admin-added catalog items surface first, ahead
+  // of the static catalog.
+  const allProducts = [...adminProducts, ...UNIFORM_PRODUCTS];
   const filteredProducts = selectedCategory === 'all'
-    ? UNIFORM_PRODUCTS
+    ? allProducts
     : selectedCategory === 'uniform'
-    ? UNIFORM_PRODUCTS.filter(p => UNIFORM_CATEGORY_IDS.includes(p.category))
-    : UNIFORM_PRODUCTS.filter(p => p.category === selectedCategory);
+    ? allProducts.filter(p => UNIFORM_CATEGORY_IDS.includes(p.category))
+    : allProducts.filter(p => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f8f9fa] selection:bg-brand-yellow selection:text-brand-blue overflow-x-hidden">

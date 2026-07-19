@@ -56,3 +56,17 @@
 
 # Prevent directory listing
 Options -Indexes
+
+# React Router SPA fallback — this app has client-side-only routes like
+# /admin, /admin/products, /showcase, /catalog/:slug. Without this, a
+# direct link or page refresh on any of those 404s, because Apache looks
+# for a matching file/directory on disk and there isn't one; only
+# index.html exists, and React Router takes over from there once loaded.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^ index.html [L]
+</IfModule>
