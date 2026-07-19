@@ -29,6 +29,8 @@ interface BlurTextProps {
   onAnimationComplete?: () => void;
   stepDuration?: number;
   as?: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'span';
+  /** Truncate to one line with an ellipsis instead of wrapping to multiple lines. */
+  singleLine?: boolean;
 }
 
 export default function BlurText({
@@ -45,6 +47,7 @@ export default function BlurText({
   onAnimationComplete,
   stepDuration = 0.35,
   as: Tag = 'p',
+  singleLine = false,
 }: BlurTextProps) {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -87,7 +90,14 @@ export default function BlurText({
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
   return (
-    <Tag ref={ref as never} className={`blur-text ${className} flex flex-wrap`}>
+    <Tag
+      ref={ref as never}
+      className={
+        singleLine
+          ? `blur-text ${className} block whitespace-nowrap overflow-hidden text-ellipsis`
+          : `blur-text ${className} flex flex-wrap`
+      }
+    >
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 

@@ -8,6 +8,10 @@ interface CircularTextProps {
   spinDuration?: number;
   onHover?: HoverEffect;
   className?: string;
+  /** Static (non-spinning) logo rendered in the center of the ring. */
+  logoSrc?: string;
+  logoAlt?: string;
+  logoClassName?: string;
 }
 
 const getRotationTransition = (duration: number, from: number, loop = true) => ({
@@ -33,6 +37,9 @@ export default function CircularText({
   spinDuration = 20,
   onHover = 'speedUp',
   className = '',
+  logoSrc,
+  logoAlt = '',
+  logoClassName = 'w-16 h-16 object-contain',
 }: CircularTextProps) {
   const letters = Array.from(text);
   const controls = useAnimation();
@@ -94,31 +101,41 @@ export default function CircularText({
   };
 
   return (
-    <motion.div
-      className={`m-0 mx-auto rounded-full w-[200px] h-[200px] relative text-white font-black text-center cursor-pointer origin-center ${className}`}
-      style={{ rotate: rotation }}
-      initial={{ rotate: 0 }}
-      animate={controls}
+    <div
+      className={`m-0 mx-auto rounded-full w-[200px] h-[200px] relative cursor-pointer ${className}`}
       onMouseEnter={handleHoverStart}
       onMouseLeave={handleHoverEnd}
     >
-      {letters.map((letter, i) => {
-        const rotationDeg = (360 / letters.length) * i;
-        const factor = Math.PI / letters.length;
-        const x = factor * i;
-        const y = factor * i;
-        const transform = `rotateZ(${rotationDeg}deg) translate3d(${x}px, ${y}px, 0)`;
+      <motion.div
+        className="absolute inset-0 text-white font-black text-center origin-center"
+        style={{ rotate: rotation }}
+        initial={{ rotate: 0 }}
+        animate={controls}
+      >
+        {letters.map((letter, i) => {
+          const rotationDeg = (360 / letters.length) * i;
+          const factor = Math.PI / letters.length;
+          const x = factor * i;
+          const y = factor * i;
+          const transform = `rotateZ(${rotationDeg}deg) translate3d(${x}px, ${y}px, 0)`;
 
-        return (
-          <span
-            key={i}
-            className="absolute inline-block inset-0 text-2xl transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
-            style={{ transform, WebkitTransform: transform }}
-          >
-            {letter}
-          </span>
-        );
-      })}
-    </motion.div>
+          return (
+            <span
+              key={i}
+              className="absolute inline-block inset-0 text-2xl transition-all duration-500 ease-[cubic-bezier(0,0,0,1)]"
+              style={{ transform, WebkitTransform: transform }}
+            >
+              {letter}
+            </span>
+          );
+        })}
+      </motion.div>
+
+      {logoSrc && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+          <img src={logoSrc} alt={logoAlt} className={logoClassName} draggable={false} />
+        </div>
+      )}
+    </div>
   );
 }

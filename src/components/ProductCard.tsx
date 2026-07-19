@@ -2,6 +2,9 @@ import React from 'react';
 import { ArrowRight, Eye, Sparkles } from 'lucide-react';
 import { Product } from '../types';
 import { motion } from 'motion/react';
+import SplitText from './SplitText';
+import BlurText from './BlurText';
+import DecryptedText from './DecryptedText';
 
 interface ProductCardProps {
   key?: string;
@@ -49,23 +52,58 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
 
       {/* Card Info Details */}
       <div className="p-2.5 sm:p-4 md:p-6 flex flex-col flex-grow gap-1.5 sm:gap-3 relative z-10 border-t-2 sm:border-t-4 border-brand-blue">
-        <div className="hidden sm:flex items-center justify-between text-xs font-headline font-semibold text-brand-blue-light uppercase tracking-widest">
-          <span>{product.categoryLabel}</span>
-          <span className="text-brand-muted">{product.material.split(',')[0]}</span>
+        <div className="flex items-center justify-between gap-2 text-[9px] sm:text-xs font-headline font-semibold text-brand-blue-light uppercase tracking-widest">
+          <SplitText
+            tag="span"
+            text={product.categoryLabel}
+            splitType="chars"
+            duration={0.5}
+            delay={15}
+            from={{ opacity: 0, y: 8 }}
+            to={{ opacity: 1, y: 0 }}
+            textAlign="left"
+            singleLine
+            className="shrink-0 max-w-[45%]"
+          />
+          <SplitText
+            tag="span"
+            text={product.material.split(',')[0]}
+            splitType="chars"
+            duration={0.5}
+            delay={10}
+            from={{ opacity: 0, y: 8 }}
+            to={{ opacity: 1, y: 0 }}
+            textAlign="right"
+            singleLine
+            className="min-w-0 max-w-[50%] text-brand-muted text-right"
+          />
         </div>
 
-        <h3 className="text-xs sm:text-base md:text-lg font-headline font-bold text-brand-blue group-hover:text-brand-blue-light transition-colors line-clamp-1">
-          {product.name}
-        </h3>
+        <BlurText
+          as="h3"
+          text={product.name}
+          animateBy="words"
+          direction="top"
+          singleLine
+          className="text-xs sm:text-base md:text-lg font-headline font-bold text-brand-blue group-hover:text-brand-blue-light transition-colors"
+        />
 
-        <p className="hidden sm:block text-sm text-brand-muted font-sans flex-grow line-clamp-2 leading-relaxed">
-          {product.description}
-        </p>
+        <DecryptedText
+          text={product.description}
+          animateOn="view"
+          sequential
+          speed={16}
+          maxIterations={10}
+          revealDirection="start"
+          className="text-brand-muted"
+          encryptedClassName="text-brand-muted/40"
+          parentClassName="block text-[10px] sm:text-sm font-sans text-brand-muted flex-grow line-clamp-2 leading-relaxed"
+        />
 
         {/* Bottom Details Section */}
         <div className="pt-1.5 sm:pt-4 border-t border-brand-border/10 flex items-center justify-between mt-auto gap-1">
           <div className="min-w-0">
-            <p className="hidden sm:block text-[10px] uppercase tracking-wider font-bold text-brand-muted">Estimate Cost</p>
+            <p className="text-[9px] sm:text-[10px] uppercase tracking-wider font-bold text-brand-muted">Estimate Cost</p>
             <p className="text-xs sm:text-lg font-headline font-black text-brand-blue truncate">{product.priceEstimate}</p>
           </div>
 
