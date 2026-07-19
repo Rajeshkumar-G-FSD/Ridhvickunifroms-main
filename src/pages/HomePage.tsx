@@ -17,19 +17,45 @@ import { Product, CartItem } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Mail, Phone, MapPin, Send } from 'lucide-react';
 
-// Maps header nav / catalog dropdown ids to the product category filter they should apply
+// Top-level catalog filter chips shown in the "Active Catalog" grid — mirrors the
+// Header's Catalog dropdown structure so both stay in sync with the same categories.
+const CATALOG_FILTERS: { id: string; label: string; children?: { id: string; label: string }[] }[] = [
+  { id: 'all', label: 'All Items' },
+  { id: 'accessories', label: 'Accessories' },
+  { id: 'blazers', label: 'Blazers' },
+  { id: 'camendo', label: 'Camendo' },
+  { id: 'hoodies', label: 'Hoodies' },
+  { id: 'occasions', label: 'Occasions' },
+  {
+    id: 'uniform',
+    label: 'Uniform',
+    children: [
+      { id: 'uniform-kindergarten', label: 'Kindergarten' },
+      { id: 'uniform-primary-daily', label: 'Primary DailyWear' },
+      { id: 'uniform-primary-sports', label: 'Primary SportsWear' },
+      { id: 'uniform-secondary-daily', label: 'Secondary DailyWear' },
+      { id: 'uniform-secondary-sports', label: 'Secondary SportsWear' },
+    ],
+  },
+];
+
+// Every product category id that lives under the "Uniform" filter group
+const UNIFORM_CATEGORY_IDS = CATALOG_FILTERS.find((f) => f.id === 'uniform')?.children?.map((c) => c.id) ?? [];
+
+// Maps header nav / catalog dropdown ids directly to product category filters —
+// the ids are identical since both the Header dropdown and this page share the
+// same screenshot-driven category set.
 const CATEGORY_NAV_MAP: Record<string, string> = {
-  woven: 'high',
-  sports: 'sports',
   accessories: 'accessories',
-  blazers: 'high',
+  blazers: 'blazers',
   camendo: 'camendo',
   hoodies: 'hoodies',
-  'uniform-kindergarten': 'kindergarten',
-  'uniform-primary-daily': 'primary',
-  'uniform-primary-sports': 'sports',
-  'uniform-secondary-daily': 'high',
-  'uniform-secondary-sports': 'sports',
+  occasions: 'occasions',
+  'uniform-kindergarten': 'uniform-kindergarten',
+  'uniform-primary-daily': 'uniform-primary-daily',
+  'uniform-primary-sports': 'uniform-primary-sports',
+  'uniform-secondary-daily': 'uniform-secondary-daily',
+  'uniform-secondary-sports': 'uniform-secondary-sports',
 };
 
 const COLLECTION_IMAGES = [
@@ -47,6 +73,7 @@ export default function HomePage() {
   const location = useLocation();
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [uniformFilterOpen, setUniformFilterOpen] = useState<boolean>(false);
   const [cart, setCart] = useState<CartItem[]>([]);
 
   // Modals & Drawers States
@@ -65,7 +92,9 @@ export default function HomePage() {
   const handleNavigate = (sectionId: string) => {
     // If navigating to a category filter directly from header (nav items or the Catalog dropdown)
     if (sectionId in CATEGORY_NAV_MAP) {
-      setSelectedCategory(CATEGORY_NAV_MAP[sectionId]);
+      const category = CATEGORY_NAV_MAP[sectionId];
+      setSelectedCategory(category);
+      setUniformFilterOpen(UNIFORM_CATEGORY_IDS.includes(category));
       const el = document.getElementById('catalog');
       el?.scrollIntoView({ behavior: 'smooth' });
       setActiveSection('catalog');
@@ -177,6 +206,8 @@ export default function HomePage() {
   // Filtered Products list
   const filteredProducts = selectedCategory === 'all'
     ? UNIFORM_PRODUCTS
+    : selectedCategory === 'uniform'
+    ? UNIFORM_PRODUCTS.filter(p => UNIFORM_CATEGORY_IDS.includes(p.category))
     : UNIFORM_PRODUCTS.filter(p => p.category === selectedCategory);
 
   return (
@@ -290,29 +321,56 @@ export default function HomePage() {
             </div>
 
             {/* Filter buttons chip lists (At least 44px touch targets on mobile) */}
-            <div className="flex flex-wrap gap-1.5 bg-white p-1.5 rounded-lg border border-brand-border/20 shadow-sm overflow-x-auto">
-              {[
-                { id: 'all', label: 'All Items' },
-                { id: 'primary', label: 'Primary School' },
-                { id: 'high', label: 'High School' },
-                { id: 'sports', label: 'Sports Wear' },
-                { id: 'accessories', label: 'Accessories' }
-              ].map((cat) => {
-                const isSelected = selectedCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className={`px-3 sm:px-4 h-[40px] sm:h-[44px] rounded font-headline font-semibold text-[11px] sm:text-xs transition-all cursor-pointer whitespace-nowrap ${
-                      isSelected
-                        ? 'bg-brand-blue text-white shadow'
-                        : 'text-brand-muted hover:text-brand-blue hover:bg-brand-light'
-                    }`}
-                  >
-                    {cat.label}
-                  </button>
-                );
-              })}
+            <div className="flex flex-col gap-1.5 items-start md:items-end">
+              <div className="flex flex-wrap gap-1.5 bg-white p-1.5 rounded-lg border border-brand-border/20 shadow-sm overflow-x-auto">
+                {CATALOG_FILTERS.map((cat) => {
+                  const isSelected = cat.children
+                    ? selectedCategory === cat.id || UNIFORM_CATEGORY_IDS.includes(selectedCategory)
+                    : selectedCategory === cat.id;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => {
+                        setSelectedCategory(cat.id);
+                        if (cat.children) {
+                          setUniformFilterOpen((open) => (selectedCategory === cat.id ? !open : true));
+                        } else {
+                          setUniformFilterOpen(false);
+                        }
+                      }}
+                      className={`px-3 sm:px-4 h-[40px] sm:h-[44px] rounded font-headline font-semibold text-[11px] sm:text-xs transition-all cursor-pointer whitespace-nowrap ${
+                        isSelected
+                          ? 'bg-brand-blue text-white shadow'
+                          : 'text-brand-muted hover:text-brand-blue hover:bg-brand-light'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Uniform sub-category chips (Kindergarten, Primary/Secondary Daily & Sports Wear) */}
+              {uniformFilterOpen && (
+                <div className="flex flex-wrap gap-1.5 bg-brand-light p-1.5 rounded-lg border border-brand-border/20 overflow-x-auto">
+                  {CATALOG_FILTERS.find((f) => f.id === 'uniform')?.children?.map((sub) => {
+                    const isSelected = selectedCategory === sub.id;
+                    return (
+                      <button
+                        key={sub.id}
+                        onClick={() => setSelectedCategory(sub.id)}
+                        className={`px-3 h-9 rounded font-headline font-semibold text-[11px] transition-all cursor-pointer whitespace-nowrap ${
+                          isSelected
+                            ? 'bg-brand-blue text-white shadow'
+                            : 'bg-white text-brand-muted hover:text-brand-blue'
+                        }`}
+                      >
+                        {sub.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
 

@@ -83,13 +83,15 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
   const handleAddCatalogProductToCart = () => {
     if (!selectedModel) return;
 
-    let appCategory: 'primary' | 'high' | 'sports' | 'accessories' = 'primary';
+    let appCategory: Product['category'] = 'uniform-primary-daily';
     let priceEst = '₹1,599.00';
 
     if (selectedTopic.id === 'sports-wear') {
-      appCategory = 'sports';
+      appCategory = 'uniform-primary-sports';
+    } else if (selectedTopic.id === 'kindergarten') {
+      appCategory = 'uniform-kindergarten';
     } else if (selectedTopic.id === 'woven-series' || selectedModel.id.startsWith('HOU_STL') || selectedModel.id.startsWith('PRIM_MDL02')) {
-      appCategory = 'high';
+      appCategory = 'blazers';
     }
 
     // Set professional dynamic pricing matching our grid catalog

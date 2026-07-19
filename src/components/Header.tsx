@@ -62,9 +62,6 @@ export default function Header({
     { id: 'daily-sports', label: 'Daily & Sports' },
     { id: 'digital-catalog', label: 'Digital Spread' },
     { id: 'catalog', label: 'Catalog' },
-    { id: 'woven', label: 'Woven' },
-    { id: 'sports', label: 'Sports Wear' },
-    { id: 'accessories', label: 'Accessories' },
     { id: 'manufacturing', label: 'Manufacturing' },
     { id: 'contact', label: 'Contact' },
   ];

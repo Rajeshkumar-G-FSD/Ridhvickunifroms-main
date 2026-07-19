@@ -1,7 +1,17 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'primary' | 'high' | 'sports' | 'accessories';
+  category:
+    | 'accessories'
+    | 'blazers'
+    | 'camendo'
+    | 'hoodies'
+    | 'occasions'
+    | 'uniform-kindergarten'
+    | 'uniform-primary-daily'
+    | 'uniform-primary-sports'
+    | 'uniform-secondary-daily'
+    | 'uniform-secondary-sports';
   categoryLabel: string;
   priceEstimate: string; // Uniform builders usually do estimates or price per item
   image: string;
