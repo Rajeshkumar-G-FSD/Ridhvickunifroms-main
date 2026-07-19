@@ -10,6 +10,8 @@ import Footer from '../components/Footer';
 import DigitalCatalog from '../components/DigitalCatalog';
 import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 import DailySportsShowcase from '../components/DailySportsShowcase';
+import BlurText from '../components/BlurText';
+import TextType from '../components/TextType';
 import { UNIFORM_PRODUCTS } from '../data/uniforms';
 import { Product, CartItem } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
@@ -205,12 +207,25 @@ export default function HomePage() {
               <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/15 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block">
                 Smart Choices
               </span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-3 sm:mt-4">
-                Our Collections Catalog
-              </h2>
-              <p className="text-xs sm:text-sm md:text-base text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed">
-                Discover our meticulously designed uniform series tailored for school life, active sports tracks, and custom corporate academic branding.
-              </p>
+              <BlurText
+                as="h2"
+                text="Our Collections Catalog"
+                animateBy="words"
+                direction="top"
+                className="justify-center text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-3 sm:mt-4"
+              />
+              <TextType
+                as="p"
+                text="Discover our meticulously designed uniform series tailored for school life, active sports tracks, and custom corporate academic branding."
+                className="text-xs sm:text-sm md:text-base text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed"
+                typingSpeed={25}
+                initialDelay={200}
+                loop={false}
+                startOnVisible
+                showCursor
+                cursorCharacter="|"
+                cursorClassName="text-brand-blue-light"
+              />
             </div>
 
           </div>
@@ -253,12 +268,25 @@ export default function HomePage() {
               <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase">
                 Active Catalog
               </span>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-headline font-black text-brand-blue mt-1">
-                Explore Sizing & Fabrics
-              </h2>
-              <p className="text-xs md:text-sm text-brand-muted mt-1.5 font-sans">
-                Filter by school age category, explore custom thread mixes, and configure quotes.
-              </p>
+              <BlurText
+                as="h2"
+                text="Explore Sizing & Fabrics"
+                animateBy="words"
+                direction="top"
+                className="text-xl sm:text-2xl md:text-3xl font-headline font-black text-brand-blue mt-1"
+              />
+              <TextType
+                as="p"
+                text="Filter by school age category, explore custom thread mixes, and configure quotes."
+                className="text-xs md:text-sm text-brand-muted mt-1.5 font-sans"
+                typingSpeed={25}
+                initialDelay={200}
+                loop={false}
+                startOnVisible
+                showCursor
+                cursorCharacter="|"
+                cursorClassName="text-brand-blue-light"
+              />
             </div>
 
             {/* Filter buttons chip lists (At least 44px touch targets on mobile) */}
@@ -317,12 +345,25 @@ export default function HomePage() {
                 <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase">
                   Manufacturing Excellence
                 </span>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-2 leading-tight">
-                  All Service Under One Roof.
-                </h3>
-                <p className="text-xs sm:text-sm text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed">
-                  We maintain full creative ownership of the uniform lifecycle—from initial thread-blend trials and custom sampling to computerized logo embroidery and regional academy distributions.
-                </p>
+                <BlurText
+                  as="h3"
+                  text="All Service Under One Roof."
+                  animateBy="words"
+                  direction="top"
+                  className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-2 leading-tight"
+                />
+                <TextType
+                  as="p"
+                  text="We maintain full creative ownership of the uniform lifecycle—from initial thread-blend trials and custom sampling to computerized logo embroidery and regional academy distributions."
+                  className="text-xs sm:text-sm text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed"
+                  typingSpeed={25}
+                  initialDelay={200}
+                  loop={false}
+                  startOnVisible
+                  showCursor
+                  cursorCharacter="|"
+                  cursorClassName="text-brand-blue-light"
+                />
               </div>
 
               {/* Service list items */}

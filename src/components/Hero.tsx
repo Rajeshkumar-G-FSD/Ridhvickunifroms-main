@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import BlurText from './BlurText';
+import CircularText from './CircularText';
 
 const heroImages = [
   '/images/ridhvick_uniforms_hero_boys.png',
@@ -50,21 +50,13 @@ export default function Hero() {
       {/* Legibility gradient behind the animated title */}
       <div className="absolute inset-0 z-20 bg-gradient-to-t from-brand-dark/70 via-brand-dark/10 to-transparent pointer-events-none" />
 
-      {/* Animated title / tagline */}
-      <div className="absolute inset-0 z-30 flex flex-col items-center justify-end text-center px-4 pb-10 sm:pb-16 md:pb-20 pointer-events-none">
-        <BlurText
-          text="RIDHVICK UNIFORMS"
-          delay={150}
-          animateBy="words"
-          direction="top"
-          className="text-3xl sm:text-5xl md:text-6xl font-headline font-black text-white tracking-tight drop-shadow-lg"
-        />
-        <BlurText
-          text="Crafting Comfort, Delivering Excellence"
-          delay={100}
-          animateBy="words"
-          direction="bottom"
-          className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg font-sans font-medium text-white/90 tracking-wide drop-shadow"
+      {/* Spinning circular brand badge, top-right */}
+      <div className="absolute -top-2 -right-2 sm:top-1 sm:right-1 md:top-4 md:right-6 z-30 scale-[0.45] sm:scale-[0.6] md:scale-[0.8] lg:scale-100 origin-top-right">
+        <CircularText
+          text="RIDHVICK*UNIFORMS*"
+          onHover="speedUp"
+          spinDuration={20}
+          className="bg-brand-blue/90 backdrop-blur-md border border-white/15 shadow-lg"
         />
       </div>
     </section>

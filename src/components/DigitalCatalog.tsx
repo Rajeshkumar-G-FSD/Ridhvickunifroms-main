@@ -16,6 +16,8 @@ import {
   Sliders,
   Award
 } from 'lucide-react';
+import BlurText from './BlurText';
+import TextType from './TextType';
 
 interface DigitalCatalogProps {
   onAddToCart: (product: Product, size: string, quantity: number) => void;
@@ -132,12 +134,25 @@ export default function DigitalCatalog({ onAddToCart, onOpenCart }: DigitalCatal
           <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-blue-light tracking-widest uppercase bg-brand-yellow/15 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block">
             Digital Spread Layout
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-3 sm:mt-4">
-            Interactive Catalog Book
-          </h2>
-          <p className="text-xs sm:text-sm md:text-base text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed">
-            Browse through our exact uniform spreadsheets, select models, zoom in to inspect stitches, and directly add configuration mockups to your design quote.
-          </p>
+          <BlurText
+            as="h2"
+            text="Interactive Catalog Book"
+            animateBy="words"
+            direction="top"
+            className="justify-center text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-3 sm:mt-4"
+          />
+          <TextType
+            as="p"
+            text="Browse through our exact uniform spreadsheets, select models, zoom in to inspect stitches, and directly add configuration mockups to your design quote."
+            className="text-xs sm:text-sm md:text-base text-brand-muted mt-2.5 sm:mt-3 font-sans leading-relaxed"
+            typingSpeed={25}
+            initialDelay={200}
+            loop={false}
+            startOnVisible
+            showCursor
+            cursorCharacter="|"
+            cursorClassName="text-brand-blue-light"
+          />
         </div>
 
         {/* Topic Selector Tabs (At least 44px Touch Targets) */}

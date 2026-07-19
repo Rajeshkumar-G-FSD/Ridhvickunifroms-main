@@ -1,5 +1,6 @@
 import { Sparkles, Shirt, Zap, Award } from 'lucide-react';
 import ScrollCarousel, { FeatureItem } from './lightswind/scroll-carousel';
+import BlurText from './BlurText';
 
 // Titles, descriptions and topic order are pulled directly from
 // src/data/catalogPages.ts (CATALOG_TOPICS) so this showcase never drifts
@@ -43,12 +44,21 @@ export default function DailySportsShowcase() {
         <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow tracking-widest uppercase bg-white/10 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full inline-block backdrop-blur-sm">
           Everyday & Active Wear
         </span>
-        <h2 className="text-2xl sm:text-3xl md:text-5xl font-headline font-black text-white mt-2.5 sm:mt-4 drop-shadow-lg">
-          Daily & Sports Uniforms
-        </h2>
-        <p className="text-xs sm:text-sm text-white/60 mt-2.5 sm:mt-3 max-w-xl mx-auto font-sans leading-relaxed">
-          Scroll to explore each collection — from kindergarten play-wear to tailored academy blazers.
-        </p>
+        <BlurText
+          as="h2"
+          text="Daily & Sports Uniforms"
+          animateBy="words"
+          direction="top"
+          className="justify-center text-2xl sm:text-3xl md:text-5xl font-headline font-black text-white mt-2.5 sm:mt-4 drop-shadow-lg"
+        />
+        <BlurText
+          as="p"
+          text="Scroll to explore each collection — from kindergarten play-wear to tailored academy blazers."
+          delay={20}
+          animateBy="words"
+          direction="bottom"
+          className="justify-center text-xs sm:text-sm text-white/60 mt-2.5 sm:mt-3 max-w-xl mx-auto font-sans leading-relaxed"
+        />
       </div>
 
       {/* Scroll-pinned feature carousel (desktop pans horizontally while
