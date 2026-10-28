@@ -17,18 +17,16 @@ export const HOME_SECTIONS: HomeSection[] = [
     id: 'manufacturing',
     slug: 'from-fabric-to-finished-uniform',
     title: 'From Fabric to Finished Uniform',
-    aliases: ['manufacturing-process'],
   },
   {
     id: 'contact',
     slug: 'planning-uniforms-for-your-school',
     title: 'Planning Uniforms for Your School?',
-    aliases: ['contact-us'],
   },
-  { id: 'daily-sports', slug: 'uniform-categories', title: 'Uniform Categories', aliases: ['school-uniforms'] },
-  { id: 'about', slug: 'about-us', title: 'About Us' },
+  { id: 'daily-sports', slug: 'uniform-categories', title: 'Uniform Categories' },
+  { id: 'about', slug: 'company-overview', title: 'About Ridhvick Uniforms' },
   { id: 'catalog', slug: 'featured-collections', title: 'Featured Collections' },
-  { id: 'digital-catalog', slug: 'digital-catalog', title: 'Digital Catalog' },
+  { id: 'digital-catalog', slug: 'catalog-preview', title: 'Digital Catalog' },
 ];
 
 /** All URL paths (without leading slash) that open a homepage section. */

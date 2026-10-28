@@ -10,10 +10,10 @@ export interface NavLink {
 
 export const SITE_NAV: NavLink[] = [
   { label: 'Home', section: 'hero', to: '/' },
-  { label: 'About Us', section: 'about' },
+  { label: 'About Us', to: '/about-us' },
   {
     label: 'School Uniforms',
-    section: 'daily-sports',
+    to: '/school-uniforms',
     children: [
       { label: 'Kindergarten', to: '/catalog/uniform-kindergarten' },
       { label: 'Primary Daily Wear', to: '/catalog/uniform-primary-daily' },
@@ -28,7 +28,7 @@ export const SITE_NAV: NavLink[] = [
   { label: 'Corporate & Industrial Uniforms', to: '/corporate-industrial-uniforms' },
   {
     label: 'Sports Wear & T-Shirts',
-    to: '/catalog/uniform-primary-sports',
+    to: '/sports-wear-t-shirts',
     children: [
       { label: 'Primary Sports Wear', to: '/catalog/uniform-primary-sports' },
       { label: 'Secondary Sports Wear', to: '/catalog/uniform-secondary-sports' },
@@ -36,6 +36,6 @@ export const SITE_NAV: NavLink[] = [
     ],
   },
   { label: 'Dealers & Retailers', to: '/dealers-retailers' },
-  { label: 'Manufacturing Process', section: 'manufacturing' },
-  { label: 'Contact Us', section: 'contact' },
+  { label: 'Manufacturing Process', to: '/manufacturing-process' },
+  { label: 'Contact Us', to: '/contact-us' },
 ];

@@ -1,12 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
-import { X } from 'lucide-react';
 import Header from '../components/Header';
 import AiChatAssistant from '../components/AiChatAssistant';
 import CartDrawer from '../components/CartDrawer';
 import Footer from '../components/Footer';
-import DigitalCatalog from '../components/DigitalCatalog';
 import HomeHero from '../components/home/HomeHero';
 import UniformSolutions from '../components/home/UniformSolutions';
 import UniformCategories from '../components/home/UniformCategories';
@@ -16,7 +13,7 @@ import AboutUs from '../components/home/AboutUs';
 import DigitalCatalogPreview from '../components/home/DigitalCatalogPreview';
 import ManufacturingProcess from '../components/home/ManufacturingProcess';
 import CtaBanner from '../components/home/CtaBanner';
-import { Product, CartItem } from '../types';
+import { CartItem } from '../types';
 import { HOME_SECTIONS, sectionForPath, sectionPath } from '../data/homeSections';
 
 const SECTIONS = HOME_SECTIONS.map((s) => s.id);
@@ -25,12 +22,10 @@ const SITE_TITLE = 'Ridhvick Uniforms | School & Sports Uniform Manufacturer';
 export default function HomePage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const isFirstRender = useRef(true);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [isAiAssistantOpen, setIsAiAssistantOpen] = useState<boolean>(false);
-  const [isFlipbookOpen, setIsFlipbookOpen] = useState<boolean>(false);
 
   const scrollToSection = (sectionId: string, behavior: ScrollBehavior = 'smooth') => {
     if (sectionId === 'hero') {
@@ -54,15 +49,15 @@ export default function HomePage() {
   useEffect(() => {
     const section = sectionForPath(location.pathname) ?? HOME_SECTIONS[0];
     document.title = section.id === 'hero' ? SITE_TITLE : `${section.title} | Ridhvick Uniforms`;
-    const wasFirstRender = isFirstRender.current;
-    isFirstRender.current = false;
+    // Initial page load has the key 'default' (robust to StrictMode re-running effects)
+    const wasFirstRender = location.key === 'default';
     // A plain visit to "/" stays at the top as the browser loaded it.
     if (section.id === 'hero' && wasFirstRender) return;
-    const firstLoad = window.scrollY === 0;
-    scrollToSection(section.id, firstLoad ? 'auto' : 'smooth');
+    const firstLoad = wasFirstRender;
+    scrollToSection(section.id, firstLoad ? 'instant' : 'smooth');
     // Images above the section can shift layout while loading on a fresh
     // visit, so settle the position once more shortly after.
-    const t = firstLoad && section.id !== 'hero' ? window.setTimeout(() => scrollToSection(section.id, 'auto'), 700) : undefined;
+    const t = firstLoad && section.id !== 'hero' ? window.setTimeout(() => scrollToSection(section.id, 'instant'), 700) : undefined;
     return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
@@ -92,36 +87,6 @@ export default function HomePage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Lock page scroll and allow Escape while the flipbook overlay is open
-  useEffect(() => {
-    if (!isFlipbookOpen) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsFlipbookOpen(false);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [isFlipbookOpen]);
-
-  // Cart operations
-  const handleAddToCart = (product: Product, size: string, quantity: number) => {
-    setCart((prevCart) => {
-      const existingIdx = prevCart.findIndex(
-        (item) => item.product.id === product.id && item.selectedSize === size
-      );
-      if (existingIdx > -1) {
-        const updated = [...prevCart];
-        updated[existingIdx].quantity += quantity;
-        return updated;
-      }
-      return [...prevCart, { product, selectedSize: size, quantity }];
-    });
-    setIsFlipbookOpen(false);
-    setIsCartOpen(true);
-  };
 
   const handleRemoveCartItem = (productId: string, size: string) => {
     setCart((prevCart) =>
@@ -162,40 +127,10 @@ export default function HomePage() {
         <UniformCategories />
         <AboutUs />
         <FeaturedCollections />
-        <DigitalCatalogPreview onViewCatalog={() => setIsFlipbookOpen(true)} />
+        <DigitalCatalogPreview onViewCatalog={() => navigate('/digital-catalog')} />
       </main>
 
       <Footer onNavigate={handleNavigate} />
-
-      {/* Interactive flipbook catalogue, opened from "View Catalog" */}
-      <AnimatePresence>
-        {isFlipbookOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-brand-blue/50 backdrop-blur-sm overflow-y-auto"
-            onClick={() => setIsFlipbookOpen(false)}
-          >
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 30, opacity: 0 }}
-              className="relative max-w-7xl mx-auto my-6 sm:my-10 bg-white rounded-2xl shadow-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setIsFlipbookOpen(false)}
-                aria-label="Close catalog"
-                className="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white shadow-md text-brand-blue flex items-center justify-center hover:bg-brand-light cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <DigitalCatalog onAddToCart={handleAddToCart} onOpenCart={() => setIsCartOpen(true)} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AiChatAssistant
         isOpen={isAiAssistantOpen}

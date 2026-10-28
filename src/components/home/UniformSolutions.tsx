@@ -8,31 +8,31 @@ const SOLUTIONS: { title: string; text: string; to: string; image?: string; icon
   {
     title: 'School Uniforms',
     text: 'Premium school uniforms designed for comfort, durability and a smart appearance.',
-    to: '/catalog/uniform-primary-daily',
+    to: '/school-uniforms',
     image: '/images/ridhvick_secondary_girl_dress_sports_one.png',
   },
   {
     title: 'Sports Wear',
     text: 'Comfortable sports uniforms, house T-shirts, tracksuits and activity wear.',
-    to: '/catalog/uniform-primary-sports',
+    to: '/sports-wear-t-shirts',
     image: '/images/ridhvick_primary_dress_sports_one.png',
   },
   {
     title: 'Corporate Uniforms',
     text: 'Professional uniforms that strengthen brand identity.',
-    to: '/corporate-industrial-uniforms',
+    to: '/corporate-industrial-uniforms/corporate-uniforms',
     icon: Briefcase,
   },
   {
     title: 'Industrial Uniforms',
     text: 'Practical workforce uniforms.',
-    to: '/corporate-industrial-uniforms',
+    to: '/corporate-industrial-uniforms/industrial-uniforms',
     icon: HardHat,
   },
   {
     title: 'T-Shirts & Polo Shirts',
     text: 'Customized apparel for schools, companies, events and teams.',
-    to: '/catalog/occasions',
+    to: '/sports-wear-t-shirts/our-range',
     image: '/images/ridhvick_occassions_two.png',
   },
   {

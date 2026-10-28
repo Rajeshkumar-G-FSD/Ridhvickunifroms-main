@@ -4,7 +4,15 @@ import HomePage from './pages/HomePage';
 import CatalogCategoryPage from './pages/CatalogCategoryPage';
 import ShowcasePage from './pages/ShowcasePage';
 import ShowcaseCategoryPage from './pages/ShowcaseCategoryPage';
-import InfoPage from './pages/InfoPage';
+import BrandedFabricsPage from './pages/BrandedFabricsPage';
+import CorporateIndustrialPage from './pages/CorporateIndustrialPage';
+import SportsWearPage from './pages/SportsWearPage';
+import DealersPage from './pages/DealersPage';
+import ContactPage from './pages/ContactPage';
+import ManufacturingPage from './pages/ManufacturingPage';
+import CatalogPage from './pages/CatalogPage';
+import AboutPage from './pages/AboutPage';
+import SchoolUniformsPage from './pages/SchoolUniformsPage';
 import { HOME_SECTION_PATHS } from './data/homeSections';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminLayout from './layouts/AdminLayout';
@@ -25,12 +33,27 @@ export default function App() {
             <Route path={`/${path}`} element={<HomePage />} />
           </Fragment>
         ))}
+        <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/about-us/:section" element={<AboutPage />} />
+        <Route path="/school-uniforms" element={<SchoolUniformsPage />} />
+        <Route path="/school-uniforms/:section" element={<SchoolUniformsPage />} />
+        <Route path="/branded-uniform-fabrics" element={<BrandedFabricsPage />} />
+        <Route path="/branded-uniform-fabrics/:section" element={<BrandedFabricsPage />} />
+        <Route path="/corporate-industrial-uniforms" element={<CorporateIndustrialPage />} />
+        <Route path="/corporate-industrial-uniforms/:section" element={<CorporateIndustrialPage />} />
+        <Route path="/sports-wear-t-shirts" element={<SportsWearPage />} />
+        <Route path="/sports-wear-t-shirts/:section" element={<SportsWearPage />} />
+        <Route path="/dealers-retailers" element={<DealersPage />} />
+        <Route path="/dealers-retailers/:section" element={<DealersPage />} />
+        <Route path="/contact-us" element={<ContactPage />} />
+        <Route path="/contact-us/:section" element={<ContactPage />} />
+        <Route path="/manufacturing-process" element={<ManufacturingPage />} />
+        <Route path="/manufacturing-process/:section" element={<ManufacturingPage />} />
+        <Route path="/digital-catalog" element={<CatalogPage />} />
+        <Route path="/digital-catalog/:section" element={<CatalogPage />} />
         <Route path="/catalog/:slug" element={<CatalogCategoryPage />} />
         <Route path="/showcase" element={<ShowcasePage />} />
         <Route path="/showcase/:category" element={<ShowcaseCategoryPage />} />
-        <Route path="/branded-uniform-fabrics" element={<InfoPage />} />
-        <Route path="/corporate-industrial-uniforms" element={<InfoPage />} />
-        <Route path="/dealers-retailers" element={<InfoPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route
           path="/admin"

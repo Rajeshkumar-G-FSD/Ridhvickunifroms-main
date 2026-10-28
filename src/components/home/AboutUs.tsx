@@ -1,13 +1,16 @@
-import { Shirt, Factory, Award, Truck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Layers, Scissors, Truck, ArrowRight } from 'lucide-react';
 
+// "Our Promise" from the About Us page
 const PILLARS = [
-  { icon: Shirt, label: ['Wide', 'Range'] },
-  { icon: Factory, label: ['In-House', 'Manufacturing'] },
-  { icon: Award, label: ['Quality', 'Assurance'] },
-  { icon: Truck, label: ['Pan India', 'Supply'] },
+  { icon: Layers, label: ['Premium', 'Fabrics'] },
+  { icon: Scissors, label: ['Professional', 'Workmanship'] },
+  { icon: Truck, label: ['Reliable', 'Supply'] },
 ];
 
 export default function AboutUs() {
+  const navigate = useNavigate();
+
   return (
     <section id="about" className="relative overflow-hidden bg-brand-blue scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[420px]">
@@ -36,11 +39,11 @@ export default function AboutUs() {
               Ridhvick Uniforms
             </h2>
             <p className="mt-4 text-sm sm:text-[15px] text-white/85 leading-relaxed max-w-xl">
-              We are a leading school uniform manufacturer committed to quality, comfort and style. With years of
-              experience, we create uniforms that inspire confidence and a sense of belonging in every student.
+              Ridhvick Uniforms is a Tirupur and Chennai-based uniform business providing school uniforms, corporate
+              and industrial uniforms, sportswear, customized T-shirts and branded uniform fabrics.
             </p>
 
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-y-6">
+            <div className="mt-8 grid grid-cols-3 gap-y-6 max-w-lg">
               {PILLARS.map(({ icon: Icon, label }, i) => (
                 <div
                   key={label[0]}
@@ -48,7 +51,7 @@ export default function AboutUs() {
                     i > 0 ? 'sm:border-l sm:border-white/25' : ''
                   }`}
                 >
-                  <Icon className="w-9 h-9" strokeWidth={1.4} />
+                  <Icon className="w-9 h-9 text-brand-green-light" strokeWidth={1.4} />
                   <p className="text-xs sm:text-[13px] font-semibold leading-snug">
                     {label[0]}
                     <br />
@@ -57,6 +60,13 @@ export default function AboutUs() {
                 </div>
               ))}
             </div>
+
+            <button
+              onClick={() => navigate('/about-us')}
+              className="mt-8 self-start inline-flex items-center gap-2 h-11 px-6 rounded-full bg-white text-brand-blue font-headline font-bold text-sm hover:bg-brand-green hover:text-white transition-colors cursor-pointer"
+            >
+              Learn More About Us <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </div>

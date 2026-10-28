@@ -63,7 +63,8 @@ export default function Header({ cart, onOpenCart, activeSection, onNavigate }: 
       if (item.section === 'hero') return !NAV_SECTIONS.includes(activeSection);
       return !!item.section && item.section === activeSection;
     }
-    return item.to === pathname || !!item.children?.some((c) => c.to === pathname);
+    const onPage = (to?: string) => !!to && to !== '/' && (pathname === to || pathname.startsWith(`${to}/`));
+    return onPage(item.to) || !!item.children?.some((c) => c.to === pathname);
   };
 
   const closeMenus = () => {

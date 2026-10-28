@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ClipboardList, Layers, PenLine, Shirt, Factory, ShieldCheck, Truck, ArrowRight } from 'lucide-react';
 
@@ -13,6 +14,7 @@ const STEPS = [
 ];
 
 export default function ManufacturingProcess() {
+  const navigate = useNavigate();
   return (
     <section id="manufacturing" className="bg-gradient-to-b from-white to-[#f3f7fc] py-14 sm:py-16 scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -47,6 +49,15 @@ export default function ManufacturingProcess() {
             </Fragment>
           ))}
         </ol>
+
+        <div className="mt-8 text-center">
+          <button
+            onClick={() => navigate('/manufacturing-process')}
+            className="inline-flex items-center gap-2 h-11 px-6 rounded-full border-2 border-brand-blue text-brand-blue font-headline font-bold text-sm hover:bg-brand-blue hover:text-white transition-colors cursor-pointer"
+          >
+            View Our Full Process <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </section>
   );
