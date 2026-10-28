@@ -17,7 +17,7 @@ export default function UniformCategories() {
   const navigate = useNavigate();
 
   return (
-    <section id="daily-sports" className="bg-white py-12 sm:py-16 md:py-20 scroll-mt-24">
+    <section id="daily-sports" className="bg-white py-12 sm:py-16 md:py-20 scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <SectionEyebrow label="Explore Our Range" />
@@ -40,12 +40,12 @@ export default function UniformCategories() {
               transition={{ duration: 0.45, delay: i * 0.05 }}
               className="group flex flex-col text-left bg-white rounded-2xl border border-brand-border/30 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-all overflow-hidden cursor-pointer"
             >
-              <div className="aspect-square bg-gradient-to-b from-[#eef3fa] to-white overflow-hidden">
+              <div className="aspect-[2/3] bg-gradient-to-b from-[#eef3fa] to-white overflow-hidden">
                 <img
                   src={cat.src}
                   alt={cat.label.join(' ')}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex items-end justify-between gap-2 p-3 sm:p-3.5 min-h-[64px]">

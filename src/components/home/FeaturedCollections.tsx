@@ -53,7 +53,7 @@ export default function FeaturedCollections() {
   };
 
   return (
-    <section id="catalog" className="bg-gradient-to-b from-[#f3f7fc] to-[#eef3fa] py-12 sm:py-16 scroll-mt-24">
+    <section id="catalog" className="bg-gradient-to-b from-[#f3f7fc] to-[#eef3fa] py-12 sm:py-16 scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-10 items-center">
         <div>
           <h2 className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase leading-[1.1] tracking-tight">
@@ -89,14 +89,14 @@ export default function FeaturedCollections() {
               <button
                 key={c.slug}
                 onClick={() => navigate(`/catalog/${c.slug}`)}
-                className="group snap-start shrink-0 basis-[78%] sm:basis-[calc((100%-16px)/2)] lg:basis-[calc((100%-32px)/3)] bg-white rounded-2xl overflow-hidden shadow-[0_6px_20px_rgba(0,52,111,0.08)] text-left cursor-pointer"
+                className="group snap-start shrink-0 basis-[78%] sm:basis-[calc((100%-16px)/2)] md:basis-[calc((100%-32px)/3)] xl:basis-[calc((100%-48px)/4)] bg-white rounded-2xl overflow-hidden shadow-[0_6px_20px_rgba(0,52,111,0.08)] text-left cursor-pointer"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-[#eef3fa]">
+                <div className="aspect-[2/3] overflow-hidden bg-[#eef3fa]">
                   <img
                     src={c.src}
                     alt={c.label}
                     loading="lazy"
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <p className="py-3.5 text-center text-sm font-headline font-bold text-[#0d1b3e]">{c.label}</p>

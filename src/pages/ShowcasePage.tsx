@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { sectionPath } from '../data/homeSections';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { CatalogItem } from '../types';
@@ -24,7 +25,7 @@ export default function ShowcasePage() {
   }, []);
 
   const goToHomeSection = (sectionId: string) => {
-    navigate('/', { state: { scrollTo: sectionId } });
+    navigate(sectionPath(sectionId));
   };
 
   const categories = useMemo(() => {
@@ -55,7 +56,7 @@ export default function ShowcasePage() {
         onNavigate={goToHomeSection}
       />
 
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-8 pt-28 pb-16">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-8 pt-10 pb-16">
         <div className="mb-8 text-center">
           <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow-hover tracking-widest uppercase">
             Live Catalog
@@ -81,7 +82,7 @@ export default function ShowcasePage() {
                   <img
                     src={cat.cover}
                     alt={cat.label}
-                    className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-80 transition-all duration-300"
+                    className="absolute inset-0 w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 ) : null}
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent" />

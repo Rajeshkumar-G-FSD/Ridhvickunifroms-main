@@ -240,7 +240,7 @@ export default function AdminProductFormPage() {
                 <div className="flex flex-wrap gap-2.5 mt-1">
                   {images.map((url) => (
                     <div key={url} className="relative w-16 h-16 rounded-lg overflow-hidden border border-brand-border/20 group bg-brand-light">
-                      <img src={url} alt="" className="w-full h-full object-cover" />
+                      <img src={url} alt="" className="w-full h-full object-contain bg-brand-light" />
                       <button
                         type="button"
                         onClick={() => handleRemoveImage(url)}

@@ -98,7 +98,7 @@ const AngledCard: React.FC<{
             className="relative flex-shrink-0 group overflow-visible cursor-pointer"
             style={{
                 width: cardWidth,
-                height: "100%",
+                aspectRatio: "2 / 3",
                 transformStyle: "preserve-3d",
             }}
             custom={isHovered ? hoverScale : angle}
@@ -109,12 +109,11 @@ const AngledCard: React.FC<{
             onMouseLeave={() => setIsHovered(false)}
         >
             {/* The Image Card */}
-            <div className="relative h-full w-full overflow-hidden border border-white/10 bg-brand-dark/40
-            min-h-[300px] shadow-2xl">
+            <div className="relative h-full w-full overflow-hidden border border-white/10 bg-black/30 shadow-2xl">
                 <img
                     src={item.url}
                     alt={item.alt || "Slider Image"}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-contain"
                     loading="lazy"
                 />
                 {/* Optional Overlay/Title */}

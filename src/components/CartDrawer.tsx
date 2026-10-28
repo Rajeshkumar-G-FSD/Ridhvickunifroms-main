@@ -153,7 +153,7 @@ export default function CartDrawer({
                       <img 
                         src={item.product.image} 
                         alt={item.product.name} 
-                        className="w-12 h-12 rounded object-cover object-top border border-brand-border/10"
+                        className="w-12 h-12 rounded object-contain bg-brand-light border border-brand-border/10"
                         referrerPolicy="no-referrer"
                       />
 

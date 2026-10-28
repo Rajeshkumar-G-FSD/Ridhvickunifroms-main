@@ -16,7 +16,7 @@ export default function DigitalCatalogPreview({ onViewCatalog }: DigitalCatalogP
   const navigate = useNavigate();
 
   return (
-    <section id="digital-catalog" className="bg-white py-12 sm:py-16 scroll-mt-24">
+    <section id="digital-catalog" className="bg-white py-12 sm:py-16 scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 lg:gap-10 items-center">
         <div>
           <h2 className="text-3xl sm:text-4xl md:text-[42px] font-headline font-black text-brand-blue uppercase leading-[1.05] tracking-tight">
@@ -42,12 +42,12 @@ export default function DigitalCatalogPreview({ onViewCatalog }: DigitalCatalogP
               onClick={() => navigate(`/catalog/${c.slug}`)}
               className="group bg-white rounded-2xl overflow-hidden border border-brand-border/30 shadow-[0_6px_20px_rgba(0,52,111,0.08)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.15)] transition-shadow text-left cursor-pointer"
             >
-              <div className="aspect-[4/3] overflow-hidden bg-[#eef3fa]">
+              <div className="aspect-[2/3] overflow-hidden bg-[#eef3fa]">
                 <img
                   src={c.src}
                   alt={`${c.title} ${c.sub}`}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex items-center justify-between gap-2 px-4 py-3.5">

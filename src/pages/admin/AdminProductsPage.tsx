@@ -169,7 +169,7 @@ export default function AdminProductsPage() {
             >
               <div className="h-40 bg-brand-light overflow-hidden">
                 {item.images[0] ? (
-                  <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+                  <img src={item.images[0]} alt={item.name} className="w-full h-full object-contain bg-brand-light" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-brand-muted text-xs font-sans">
                     No image

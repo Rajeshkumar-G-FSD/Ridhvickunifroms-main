@@ -1,40 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, Menu, X, Mail, Phone, ChevronDown, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ShoppingCart, User, Menu, X, Phone, ChevronDown, MapPin, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem } from '../types';
 import WhatsAppIcon from './icons/WhatsAppIcon';
 import AdminLoginModal from './AdminLoginModal';
+import { SITE_NAV, NavLink } from '../data/siteNav';
+import { PHONE_PRIMARY, PHONE_SECONDARY, WHATSAPP_LINK, WHATSAPP_QUOTE_LINK } from '../lib/contact';
 
-const WHATSAPP_LINK = 'https://wa.me/919500111321';
-const CONTACT_EMAIL = 'sales@ridhvickapparels.in';
-const CONTACT_PHONE_DISPLAY = '+91 95001 11321';
-const CONTACT_PHONE_TEL = 'tel:+919500111321';
-
-interface CatalogEntry {
-  id: string;
-  label: string;
-  children?: CatalogEntry[];
-}
-
-const CATALOG_MENU: CatalogEntry[] = [
-  { id: 'accessories', label: 'Accessories' },
-  { id: 'blazers', label: 'Blazers' },
-  { id: 'camendo', label: 'Camendo' },
-  { id: 'hoodies', label: 'Hoodies' },
-  { id: 'occasions', label: 'Occasions' },
-  {
-    id: 'uniform',
-    label: 'Uniform',
-    children: [
-      { id: 'uniform-kindergarten', label: 'Kindergarten' },
-      { id: 'uniform-primary-daily', label: 'Primary DailyWear' },
-      { id: 'uniform-primary-sports', label: 'Primary SportsWear' },
-      { id: 'uniform-secondary-daily', label: 'Secondary DailyWear' },
-      { id: 'uniform-secondary-sports', label: 'Secondary SportsWear' },
-    ],
-  },
-];
+// Homepage sections that have their own menu item; anything else counts as "Home".
+const NAV_SECTIONS = SITE_NAV.map((n) => n.section).filter((s): s is string => !!s && s !== 'hero');
 
 interface HeaderProps {
   cart: CartItem[];
@@ -44,29 +19,16 @@ interface HeaderProps {
   onNavigate: (sectionId: string) => void;
 }
 
-export default function Header({
-  cart,
-  onOpenCart,
-  activeSection,
-  onNavigate
-}: HeaderProps) {
+export default function Header({ cart, onOpenCart, activeSection, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [contactOpen, setContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [catalogOpen, setCatalogOpen] = useState(false);
-  const [uniformOpen, setUniformOpen] = useState(false);
-  const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
-  const [mobileUniformOpen, setMobileUniformOpen] = useState(false);
   const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
-  const catalogRef = useRef<HTMLDivElement | null>(null);
+  const contactRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-
-  const navItems = [
-    { id: 'daily-sports', label: 'Daily & Sports' },
-    { id: 'digital-catalog', label: 'Digital Spread' },
-    { id: 'catalog', label: 'Catalog' },
-    { id: 'manufacturing', label: 'Manufacturing' },
-    { id: 'contact', label: 'Contact' },
-  ];
+  const { pathname } = useLocation();
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -77,19 +39,15 @@ export default function Header({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close the Catalog dropdown on outside click / Escape (mouse-independent affordance)
+  // Close the call/WhatsApp popover and dropdowns on outside click / Escape
   useEffect(() => {
-    if (!catalogOpen) return;
     const handlePointer = (e: MouseEvent) => {
-      if (catalogRef.current && !catalogRef.current.contains(e.target as Node)) {
-        setCatalogOpen(false);
-        setUniformOpen(false);
-      }
+      if (contactRef.current && !contactRef.current.contains(e.target as Node)) setContactOpen(false);
     };
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setCatalogOpen(false);
-        setUniformOpen(false);
+        setContactOpen(false);
+        setOpenDropdown(null);
       }
     };
     document.addEventListener('mousedown', handlePointer);
@@ -98,449 +56,340 @@ export default function Header({
       document.removeEventListener('mousedown', handlePointer);
       document.removeEventListener('keydown', handleKey);
     };
-  }, [catalogOpen]);
+  }, []);
 
-  const handleNavClick = (id: string) => {
-    setMobileMenuOpen(false);
-    setCatalogOpen(false);
-    setUniformOpen(false);
-    setMobileCatalogOpen(false);
-    setMobileUniformOpen(false);
-    onNavigate(id);
+  const isActive = (item: NavLink) => {
+    if (pathname === '/') {
+      if (item.section === 'hero') return !NAV_SECTIONS.includes(activeSection);
+      return !!item.section && item.section === activeSection;
+    }
+    return item.to === pathname || !!item.children?.some((c) => c.to === pathname);
   };
 
-  // Catalog dropdown leaves open their own dedicated hero + gallery page
-  const goToCategory = (slug: string) => {
+  const closeMenus = () => {
     setMobileMenuOpen(false);
-    setCatalogOpen(false);
-    setUniformOpen(false);
-    setMobileCatalogOpen(false);
-    setMobileUniformOpen(false);
-    navigate(`/catalog/${slug}`);
+    setMobileExpanded(null);
+    setOpenDropdown(null);
+  };
+
+  const go = (item: { section?: string; to?: string }) => {
+    closeMenus();
+    if (item.section) onNavigate(item.section);
+    else if (item.to) navigate(item.to);
   };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_rgba(0,52,111,0.08)] border-b border-brand-border/10'
-            : 'bg-white/70 backdrop-blur-sm border-b border-transparent'
+        className={`fixed top-0 left-0 w-full z-50 bg-white transition-shadow duration-300 ${
+          scrolled ? 'shadow-[0_4px_24px_rgba(0,52,111,0.10)]' : ''
         }`}
       >
-        {/* Utility Topbar: social/contact icons (desktop & tablet only) */}
-        <div className="hidden sm:block bg-brand-blue" id="header-topbar">
-          <div className="flex items-center justify-between max-w-7xl mx-auto px-6 md:px-8 h-8">
-            {/* Social / quick-contact icons — left side */}
-            <div className="flex items-center gap-1.5">
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Chat with us on WhatsApp"
-                title="Chat on WhatsApp"
-                className="group flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-white/85 hover:bg-brand-yellow hover:text-brand-blue hover:scale-110 transition-all duration-200"
-              >
-                <WhatsAppIcon className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                aria-label="Email Ridhvick Uniforms"
-                title="Email us"
-                className="group flex items-center justify-center w-6 h-6 rounded-full bg-white/10 text-white/85 hover:bg-brand-yellow hover:text-brand-blue hover:scale-110 transition-all duration-200"
-              >
-                <Mail className="w-3.5 h-3.5" />
-              </a>
-            </div>
-
-            {/* Quick phone reference — right side */}
-            <a
-              href={CONTACT_PHONE_TEL}
-              className="flex items-center gap-1.5 text-[11px] font-sans font-medium text-white/80 hover:text-brand-yellow transition-colors duration-200"
-            >
-              <Phone className="w-3 h-3" />
-              {CONTACT_PHONE_DISPLAY}
-            </a>
+        {/* Utility bar — collapses once the page is scrolled */}
+        <div
+          className={`hidden sm:block bg-[#00285a] text-white/85 overflow-hidden transition-[max-height] duration-300 ${
+            scrolled ? 'max-h-0' : 'max-h-9'
+          }`}
+        >
+          <div className="flex items-center justify-between max-w-7xl mx-auto px-6 md:px-8 h-9 text-[12px]">
+            <span className="flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-brand-green-light" />
+              Tirupur | Chennai
+            </span>
+            <span className="flex items-center gap-3">
+              <Phone className="w-3.5 h-3.5 text-brand-green-light" />
+              <a href={PHONE_PRIMARY.tel} className="hover:text-white transition-colors">{PHONE_PRIMARY.display}</a>
+              <span className="text-white/30">|</span>
+              <a href={PHONE_SECONDARY.tel} className="hover:text-white transition-colors">{PHONE_SECONDARY.display}</a>
+            </span>
           </div>
         </div>
 
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-3.5 sm:px-6 md:px-8 h-14 sm:h-16 md:h-[72px] gap-2">
-
-          {/* Brand Logo */}
+        {/* Brand row */}
+        <div className="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8 h-16 sm:h-[72px] gap-3">
           <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}
-            className="flex items-center gap-2 shrink-0 group"
-            id="brand-logo"
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              go(SITE_NAV[0]);
+            }}
+            className="flex items-center gap-2.5 shrink-0"
           >
-            <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden bg-black shadow-sm group-hover:scale-105 transition-transform shrink-0">
+            <span className="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden bg-black shrink-0">
               <img src="/images/ridhvick_logo.jpeg" alt="Ridhvick Uniforms" className="w-full h-full object-cover" />
             </span>
             <span className="flex flex-col leading-none">
-              <span className="text-sm sm:text-base md:text-lg font-headline font-extrabold tracking-tight text-brand-blue">
+              <span className="text-base sm:text-lg md:text-xl font-headline font-extrabold tracking-tight text-brand-blue">
                 RIDHVICK
               </span>
-              <span className="hidden sm:block text-[9px] md:text-[10px] font-headline font-bold tracking-[0.2em] text-brand-muted uppercase">
+              <span className="text-[9px] sm:text-[10px] font-headline font-bold tracking-[0.3em] text-brand-muted uppercase mt-0.5">
                 Uniforms
               </span>
             </span>
           </a>
 
-          {/* Navigation Links (Desktop) */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 bg-brand-light/70 rounded-full p-1 border border-brand-border/10" id="desktop-nav">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-
-              if (item.id === 'catalog') {
-                return (
-                  <div
-                    key={item.id}
-                    ref={catalogRef}
-                    className="relative"
-                    onMouseEnter={() => setCatalogOpen(true)}
-                    onMouseLeave={() => { setCatalogOpen(false); setUniformOpen(false); }}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Call / WhatsApp popover */}
+            <div ref={contactRef} className="relative hidden md:block">
+              <button
+                onClick={() => setContactOpen((o) => !o)}
+                aria-expanded={contactOpen}
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-md border-2 border-brand-blue text-brand-blue font-headline font-bold text-xs tracking-wide hover:bg-brand-blue hover:text-white transition-colors cursor-pointer"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                CALL / WHATSAPP US
+              </button>
+              <AnimatePresence>
+                {contactOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 top-full mt-2 w-60 bg-white rounded-lg shadow-xl border border-brand-border/30 p-1.5 z-50"
                   >
-                    <button
-                      onClick={() => setCatalogOpen((o) => !o)}
-                      aria-haspopup="true"
-                      aria-expanded={catalogOpen}
-                      className={`relative flex items-center gap-1 text-[11px] xl:text-xs font-headline font-bold uppercase tracking-wide px-3 xl:px-3.5 py-2 rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap ${
-                        isActive || catalogOpen ? 'text-white' : 'text-brand-muted hover:text-brand-blue'
-                      }`}
-                      id={`nav-item-${item.id}`}
+                    <a href={PHONE_PRIMARY.tel} className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm text-brand-blue hover:bg-brand-light">
+                      <Phone className="w-4 h-4" /> {PHONE_PRIMARY.display}
+                    </a>
+                    <a href={PHONE_SECONDARY.tel} className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm text-brand-blue hover:bg-brand-light">
+                      <Phone className="w-4 h-4" /> {PHONE_SECONDARY.display}
+                    </a>
+                    <a
+                      href={WHATSAPP_LINK}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm text-brand-green hover:bg-brand-light"
                     >
-                      {isActive && (
-                        <motion.span
-                          layoutId="activeNavPill"
-                          className="absolute inset-0 bg-brand-blue rounded-full -z-10"
-                          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                        />
-                      )}
-                      {!isActive && catalogOpen && (
-                        <span className="absolute inset-0 bg-brand-blue rounded-full -z-10" />
-                      )}
-                      {item.label}
-                      <ChevronDown
-                        className={`w-3 h-3 transition-transform duration-200 ${catalogOpen ? 'rotate-180' : ''}`}
-                      />
-                    </button>
+                      <WhatsAppIcon className="w-4 h-4" /> Chat on WhatsApp
+                    </a>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
-                    {/* Invisible hover-bridge keeps the panel "connected" to the trigger */}
-                    <AnimatePresence>
-                      {catalogOpen && (
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
-                          <motion.div
-                            initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                            transition={{ duration: 0.18, ease: 'easeOut' }}
-                            className="w-64 bg-white rounded-xl shadow-xl border border-brand-border/10 p-2 origin-top"
-                            id="catalog-dropdown-panel"
-                          >
-                            {CATALOG_MENU.map((entry) =>
-                              entry.children ? (
-                                <div
-                                  key={entry.id}
-                                  className="relative"
-                                  onMouseEnter={() => setUniformOpen(true)}
-                                  onMouseLeave={() => setUniformOpen(false)}
-                                >
-                                  <button
-                                    onClick={() => setUniformOpen((o) => !o)}
-                                    className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-headline font-semibold text-brand-blue hover:bg-brand-light transition-colors cursor-pointer"
-                                  >
-                                    {entry.label}
-                                    <ChevronRight className={`w-3.5 h-3.5 text-brand-muted transition-transform duration-200 ${uniformOpen ? 'rotate-90' : ''}`} />
-                                  </button>
+            <a
+              href={WHATSAPP_QUOTE_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 h-10 px-4 rounded-md bg-brand-green text-white font-headline font-bold text-xs tracking-wide hover:bg-brand-green-dark transition-colors"
+            >
+              GET A QUOTE <ArrowRight className="w-3.5 h-3.5" />
+            </a>
 
-                                  <AnimatePresence>
-                                    {uniformOpen && (
-                                      <div className="absolute left-full top-0 pl-1 z-50">
-                                        <motion.div
-                                          initial={{ opacity: 0, x: -6 }}
-                                          animate={{ opacity: 1, x: 0 }}
-                                          exit={{ opacity: 0, x: -6 }}
-                                          transition={{ duration: 0.16, ease: 'easeOut' }}
-                                          className="w-60 bg-white rounded-xl shadow-xl border border-brand-border/10 p-2 origin-left"
-                                          id="uniform-submenu-panel"
-                                        >
-                                          {entry.children.map((child) => (
-                                            <button
-                                              key={child.id}
-                                              onClick={() => goToCategory(child.id)}
-                                              className="w-full text-left px-3 py-2.5 rounded-lg text-xs font-headline font-semibold text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors cursor-pointer whitespace-nowrap"
-                                            >
-                                              {child.label}
-                                            </button>
-                                          ))}
-                                        </motion.div>
-                                      </div>
-                                    )}
-                                  </AnimatePresence>
-                                </div>
-                              ) : (
-                                <button
-                                  key={entry.id}
-                                  onClick={() => goToCategory(entry.id)}
-                                  className="w-full text-left px-3 py-2.5 rounded-lg text-xs font-headline font-semibold text-brand-blue hover:bg-brand-light transition-colors cursor-pointer"
-                                >
-                                  {entry.label}
-                                </button>
-                              )
-                            )}
-                          </motion.div>
-                        </div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              }
-
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`relative text-[11px] xl:text-xs font-headline font-bold uppercase tracking-wide px-3 xl:px-3.5 py-2 rounded-full transition-colors duration-200 cursor-pointer whitespace-nowrap ${
-                    isActive
-                      ? 'text-white'
-                      : 'text-brand-muted hover:text-brand-blue'
-                  }`}
-                  id={`nav-item-${item.id}`}
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeNavPill"
-                      className="absolute inset-0 bg-brand-blue rounded-full -z-10"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                  {item.label}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Action Icons / Tools */}
-          <div className="flex items-center gap-0.5 sm:gap-1.5 text-brand-blue shrink-0" id="header-actions">
-
-            {/* Shopping Cart Trigger */}
             <button
               onClick={onOpenCart}
-              className="relative p-2 sm:p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 active:scale-95 cursor-pointer"
-              aria-label="View shopping cart"
-              id="cart-trigger-btn"
+              className="relative p-2 sm:p-2.5 rounded-full hover:bg-brand-light transition-colors cursor-pointer"
+              aria-label="View quote list"
             >
-              <ShoppingCart className="w-[18px] h-[18px] sm:w-5 sm:h-5 text-brand-blue" />
+              <ShoppingCart className="w-5 h-5 text-brand-blue" />
               {cartCount > 0 && (
-                <motion.span
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-brand-yellow text-brand-blue text-[9px] sm:text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white shadow-sm"
-                  id="cart-count-badge"
-                >
+                <span className="absolute top-0.5 right-0.5 bg-brand-green text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {cartCount}
-                </motion.span>
+                </span>
               )}
             </button>
 
-            {/* Admin Login Trigger */}
             <button
               onClick={() => setIsAdminLoginOpen(true)}
-              className="p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 hover:scale-105 hidden sm:inline-block cursor-pointer"
+              className="hidden sm:inline-flex p-2.5 rounded-full hover:bg-brand-light transition-colors cursor-pointer"
               aria-label="Admin Login"
-              id="profile-trigger-btn"
             >
               <User className="w-5 h-5 text-brand-blue" />
             </button>
 
-            {/* Mobile Hamburger menu toggle */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 sm:p-2.5 rounded-full hover:bg-brand-light transition-all duration-300 cursor-pointer"
-              aria-label="Toggle navigation menu"
-              id="mobile-menu-toggle"
+              onClick={() => setMobileMenuOpen(true)}
+              className="xl:hidden p-2 sm:p-2.5 rounded-full hover:bg-brand-light transition-colors cursor-pointer"
+              aria-label="Open navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-[18px] h-[18px] sm:w-5 sm:h-5" /> : <Menu className="w-[18px] h-[18px] sm:w-5 sm:h-5" />}
+              <Menu className="w-5 h-5 text-brand-blue" />
             </button>
-
           </div>
         </div>
+
+        {/* Main menu (wide screens) */}
+        <nav className="hidden xl:block bg-brand-blue">
+          <ul className="flex items-stretch justify-between max-w-7xl mx-auto px-8 h-12">
+            {SITE_NAV.map((item) => {
+              const active = isActive(item);
+              return (
+                <li
+                  key={item.label}
+                  className="relative flex"
+                  onMouseEnter={() => item.children && setOpenDropdown(item.label)}
+                  onMouseLeave={() => item.children && setOpenDropdown(null)}
+                >
+                  <button
+                    onClick={() => go(item)}
+                    onFocus={() => item.children && setOpenDropdown(item.label)}
+                    aria-haspopup={item.children ? 'true' : undefined}
+                    aria-expanded={item.children ? openDropdown === item.label : undefined}
+                    className={`relative flex items-center gap-1 px-1 text-[12.5px] font-headline font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+                      active ? 'text-white' : 'text-white/75 hover:text-white'
+                    }`}
+                  >
+                    {item.label}
+                    {item.children && <ChevronDown className="w-3 h-3 opacity-70" />}
+                    <span
+                      className={`absolute left-0 right-0 bottom-0 h-[3px] rounded-t bg-brand-green-light transition-transform origin-center ${
+                        active ? 'scale-x-100' : 'scale-x-0'
+                      }`}
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {item.children && openDropdown === item.label && (
+                      <motion.ul
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 top-full w-60 bg-white rounded-b-lg shadow-xl border border-brand-border/30 border-t-[3px] border-t-brand-green p-1.5 z-50"
+                      >
+                        {item.children.map((child) => (
+                          <li key={child.to}>
+                            <button
+                              onClick={() => go(child)}
+                              className={`w-full text-left px-3 py-2.5 rounded-md text-[13px] font-medium transition-colors cursor-pointer ${
+                                pathname === child.to
+                                  ? 'bg-brand-light text-brand-green'
+                                  : 'text-brand-blue hover:bg-brand-light hover:text-brand-green'
+                              }`}
+                            >
+                              {child.label}
+                            </button>
+                          </li>
+                        ))}
+                      </motion.ul>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </header>
 
-      {/* Mobile Sidebar Slide-out Navigation */}
+      {/* Reserves the fixed header's height so page content starts below it */}
+      <div aria-hidden className="h-16 sm:h-[108px] xl:h-[156px] shrink-0" />
+
+      {/* Slide-out menu (below xl) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-brand-blue/40 backdrop-blur-[2px] z-40 lg:hidden"
+              className="fixed inset-0 bg-brand-blue/40 backdrop-blur-[2px] z-50 xl:hidden"
             />
-
-            {/* Menu container */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 26, stiffness: 220 }}
-              className="fixed right-0 top-0 bottom-0 w-[82%] max-w-xs bg-white z-50 p-5 flex flex-col shadow-2xl lg:hidden"
-              id="mobile-nav-panel"
+              className="fixed right-0 top-0 bottom-0 w-[86%] max-w-sm bg-white z-50 flex flex-col shadow-2xl xl:hidden"
             >
-              <div className="flex items-center justify-between mb-6">
-                <span className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-full overflow-hidden bg-black shrink-0">
-                  <img src="/images/ridhvick_logo.jpeg" alt="Ridhvick Uniforms" className="w-full h-full object-cover" />
-                </span>
-                  <span className="font-headline font-black text-brand-blue text-sm tracking-tight">RIDHVICK</span>
-                </span>
+              <div className="flex items-center justify-between px-5 h-16 border-b border-brand-border/30">
+                <span className="font-headline font-extrabold text-brand-blue tracking-tight">RIDHVICK UNIFORMS</span>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 rounded-full hover:bg-brand-light cursor-pointer"
                   aria-label="Close menu"
                 >
-                  <X className="w-[18px] h-[18px] text-brand-blue" />
+                  <X className="w-5 h-5 text-brand-blue" />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-1 flex-grow overflow-y-auto">
-                {navItems.map((item) => {
-                  const isActive = activeSection === item.id;
-
-                  if (item.id === 'catalog') {
-                    return (
-                      <div key={item.id} className="flex flex-col">
+              <ul className="flex-grow overflow-y-auto px-3 py-3">
+                {SITE_NAV.map((item) => {
+                  const active = isActive(item);
+                  const expanded = mobileExpanded === item.label;
+                  return (
+                    <li key={item.label} className="border-b border-brand-border/20 last:border-0">
+                      <div className="flex items-center">
                         <button
-                          onClick={() => setMobileCatalogOpen((o) => !o)}
-                          aria-expanded={mobileCatalogOpen}
-                          className={`flex items-center justify-between text-left py-3 px-3.5 rounded-lg font-headline font-semibold transition-all duration-200 text-sm cursor-pointer ${
-                            isActive || mobileCatalogOpen
-                              ? 'bg-brand-blue text-white shadow-sm'
-                              : 'text-brand-muted hover:bg-brand-light hover:text-brand-blue'
+                          onClick={() => go(item)}
+                          className={`flex-grow text-left py-3 px-2 text-sm font-headline font-semibold cursor-pointer ${
+                            active ? 'text-brand-green' : 'text-brand-blue'
                           }`}
                         >
                           {item.label}
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileCatalogOpen ? 'rotate-180' : ''}`} />
                         </button>
-
-                        <AnimatePresence initial={false}>
-                          {mobileCatalogOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.22, ease: 'easeInOut' }}
-                              className="overflow-hidden"
-                            >
-                              <div className="flex flex-col gap-0.5 pl-3 py-1">
-                                {CATALOG_MENU.map((entry) =>
-                                  entry.children ? (
-                                    <div key={entry.id} className="flex flex-col">
-                                      <button
-                                        onClick={() => setMobileUniformOpen((o) => !o)}
-                                        aria-expanded={mobileUniformOpen}
-                                        className="flex items-center justify-between text-left py-2.5 px-3 rounded-lg font-headline font-medium text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors text-[13px] cursor-pointer"
-                                      >
-                                        {entry.label}
-                                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${mobileUniformOpen ? 'rotate-180' : ''}`} />
-                                      </button>
-                                      <AnimatePresence initial={false}>
-                                        {mobileUniformOpen && (
-                                          <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: 'auto', opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.2, ease: 'easeInOut' }}
-                                            className="overflow-hidden"
-                                          >
-                                            <div className="flex flex-col gap-0.5 pl-3 py-1">
-                                              {entry.children.map((child) => (
-                                                <button
-                                                  key={child.id}
-                                                  onClick={() => goToCategory(child.id)}
-                                                  className="text-left py-2 px-3 rounded-lg font-sans text-[12.5px] text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors cursor-pointer"
-                                                >
-                                                  {child.label}
-                                                </button>
-                                              ))}
-                                            </div>
-                                          </motion.div>
-                                        )}
-                                      </AnimatePresence>
-                                    </div>
-                                  ) : (
-                                    <button
-                                      key={entry.id}
-                                      onClick={() => goToCategory(entry.id)}
-                                      className="text-left py-2.5 px-3 rounded-lg font-headline font-medium text-brand-muted hover:bg-brand-light hover:text-brand-blue transition-colors text-[13px] cursor-pointer"
-                                    >
-                                      {entry.label}
-                                    </button>
-                                  )
-                                )}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                        {item.children && (
+                          <button
+                            onClick={() => setMobileExpanded(expanded ? null : item.label)}
+                            aria-label={`Show ${item.label} categories`}
+                            aria-expanded={expanded}
+                            className="p-3 text-brand-blue cursor-pointer"
+                          >
+                            <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+                          </button>
+                        )}
                       </div>
-                    );
-                  }
-
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => handleNavClick(item.id)}
-                      className={`text-left py-3 px-3.5 rounded-lg font-headline font-semibold transition-all duration-200 text-sm ${
-                        isActive
-                          ? 'bg-brand-blue text-white shadow-sm'
-                          : 'text-brand-muted hover:bg-brand-light hover:text-brand-blue'
-                      }`}
-                    >
-                      {item.label}
-                    </button>
+                      <AnimatePresence initial={false}>
+                        {item.children && expanded && (
+                          <motion.ul
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden pl-3 pb-2"
+                          >
+                            {item.children.map((child) => (
+                              <li key={child.to}>
+                                <button
+                                  onClick={() => go(child)}
+                                  className={`w-full text-left py-2 px-2 text-[13px] cursor-pointer ${
+                                    pathname === child.to ? 'text-brand-green font-semibold' : 'text-brand-muted'
+                                  }`}
+                                >
+                                  {child.label}
+                                </button>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
 
-              <div className="border-t border-brand-border/10 pt-4 mt-3 flex flex-col gap-3">
-                {/* Quick-contact icons (topbar is hidden on mobile, so surface them here) */}
-                <div className="flex items-center justify-center gap-3">
+              <div className="border-t border-brand-border/30 p-4 flex flex-col gap-2.5">
+                <a
+                  href={WHATSAPP_QUOTE_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-12 rounded-md bg-brand-green text-white font-headline font-bold text-sm flex items-center justify-center gap-2"
+                >
+                  GET A QUOTE <ArrowRight className="w-4 h-4" />
+                </a>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <a
+                    href={PHONE_PRIMARY.tel}
+                    className="h-11 rounded-md border-2 border-brand-blue text-brand-blue font-headline font-bold text-xs flex items-center justify-center gap-1.5"
+                  >
+                    <Phone className="w-4 h-4" /> CALL US
+                  </a>
                   <a
                     href={WHATSAPP_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Chat with us on WhatsApp"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-light text-brand-blue hover:bg-brand-yellow hover:scale-110 transition-all duration-200"
+                    className="h-11 rounded-md border-2 border-brand-blue text-brand-blue font-headline font-bold text-xs flex items-center justify-center gap-1.5"
                   >
-                    <WhatsAppIcon className="w-5 h-5" />
-                  </a>
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    aria-label="Email Ridhvick Uniforms"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-light text-brand-blue hover:bg-brand-yellow hover:scale-110 transition-all duration-200"
-                  >
-                    <Mail className="w-[18px] h-[18px]" />
-                  </a>
-                  <a
-                    href={CONTACT_PHONE_TEL}
-                    aria-label="Call Ridhvick Uniforms"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-light text-brand-blue hover:bg-brand-yellow hover:scale-110 transition-all duration-200"
-                  >
-                    <Phone className="w-[18px] h-[18px]" />
+                    <WhatsAppIcon className="w-4 h-4" /> WHATSAPP
                   </a>
                 </div>
-
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    onOpenCart();
+                    setIsAdminLoginOpen(true);
                   }}
-                  className="w-full h-12 bg-brand-blue text-white font-headline font-bold rounded-lg flex items-center justify-center gap-2 cursor-pointer text-sm active:scale-[0.98] transition-transform"
+                  className="sm:hidden text-xs text-brand-muted py-1 cursor-pointer"
                 >
-                  <ShoppingCart className="w-4 h-4" />
-                  View Cart ({cartCount})
+                  Admin Login
                 </button>
               </div>
             </motion.div>

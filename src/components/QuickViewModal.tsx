@@ -122,7 +122,7 @@ export default function QuickViewModal({
             <img 
               src={product.image} 
               alt={product.name} 
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-contain"
               referrerPolicy="no-referrer"
             />
           </div>

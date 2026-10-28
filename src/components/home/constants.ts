@@ -1,6 +1,4 @@
-export const WHATSAPP_QUOTE_LINK =
-  'https://wa.me/919500111321?text=' +
-  encodeURIComponent('Hi Ridhvick Uniforms, I would like a quote for school uniforms.');
+export { WHATSAPP_QUOTE_LINK } from '../../lib/contact';
 
 // The AI-generated showcase shots have spaces/commas in their filenames.
 export const chatGptImage = (time: string) =>

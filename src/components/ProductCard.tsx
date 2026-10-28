@@ -25,7 +25,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
       {/* Top Image Box */}
       <div className="relative h-36 sm:h-52 md:h-64 overflow-hidden bg-brand-light">
         <img
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-contain"
           src={product.image}
           alt={product.name}
           referrerPolicy="no-referrer"

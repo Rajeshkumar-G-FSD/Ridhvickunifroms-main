@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { sectionPath } from '../data/homeSections';
 import { ChevronRight } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -27,7 +28,7 @@ export default function ShowcaseCategoryPage() {
   }, [category]);
 
   const goToHomeSection = (sectionId: string) => {
-    navigate('/', { state: { scrollTo: sectionId } });
+    navigate(sectionPath(sectionId));
   };
 
   return (
@@ -40,7 +41,7 @@ export default function ShowcaseCategoryPage() {
         onNavigate={goToHomeSection}
       />
 
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-8 pt-28 pb-16">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 md:px-8 pt-10 pb-16">
         <div className="flex items-center gap-1.5 text-[11px] font-sans font-medium text-brand-muted mb-4">
           <button onClick={() => navigate('/showcase')} className="hover:text-brand-blue transition-colors cursor-pointer">
             Showcase
@@ -66,13 +67,13 @@ export default function ShowcaseCategoryPage() {
               >
                 <div className="h-52 bg-brand-light overflow-hidden">
                   {item.images[0] && (
-                    <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={item.images[0]} alt={item.name} className="w-full h-full object-contain bg-brand-light" />
                   )}
                 </div>
                 {item.images.length > 1 && (
                   <div className="flex gap-1.5 p-2 overflow-x-auto">
                     {item.images.slice(1).map((url) => (
-                      <img key={url} src={url} alt="" className="w-12 h-12 rounded-md object-cover shrink-0" />
+                      <img key={url} src={url} alt="" className="w-12 h-12 rounded-md object-contain bg-brand-light shrink-0" />
                     ))}
                   </div>
                 )}

@@ -15,6 +15,9 @@
   --color-brand-muted: #424751;
   --color-brand-light: #f8f9fa;
   --color-brand-border: #c2c6d3;
+  --color-brand-green: #1e7b4a;
+  --color-brand-green-dark: #17633b;
+  --color-brand-green-light: #6fcf97;
 }
 
 html {

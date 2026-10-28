@@ -9,15 +9,15 @@ const PILLARS = [
 
 export default function AboutUs() {
   return (
-    <section id="about" className="relative overflow-hidden bg-brand-blue">
+    <section id="about" className="relative overflow-hidden bg-brand-blue scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[420px]">
         {/* Photo — the blue panel's curve overlaps its right edge on desktop */}
-        <div className="relative h-64 sm:h-80 lg:h-auto">
+        <div className="relative bg-white">
           <img
             src="/images/ridhvick_uniforms_hero_kids_uniform.png"
             alt="Students in Ridhvick daily wear uniforms"
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover object-[center_80%]"
+            className="w-full h-full object-contain"
           />
         </div>
 

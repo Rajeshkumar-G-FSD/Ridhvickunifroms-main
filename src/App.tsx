@@ -1,8 +1,11 @@
+import { Fragment } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CatalogCategoryPage from './pages/CatalogCategoryPage';
 import ShowcasePage from './pages/ShowcasePage';
 import ShowcaseCategoryPage from './pages/ShowcaseCategoryPage';
+import InfoPage from './pages/InfoPage';
+import { HOME_SECTION_PATHS } from './data/homeSections';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminLayout from './layouts/AdminLayout';
 import AdminOverviewPage from './pages/admin/AdminOverviewPage';
@@ -17,9 +20,17 @@ export default function App() {
     <AdminAuthProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        {HOME_SECTION_PATHS.map((path) => (
+          <Fragment key={path}>
+            <Route path={`/${path}`} element={<HomePage />} />
+          </Fragment>
+        ))}
         <Route path="/catalog/:slug" element={<CatalogCategoryPage />} />
         <Route path="/showcase" element={<ShowcasePage />} />
         <Route path="/showcase/:category" element={<ShowcaseCategoryPage />} />
+        <Route path="/branded-uniform-fabrics" element={<InfoPage />} />
+        <Route path="/corporate-industrial-uniforms" element={<InfoPage />} />
+        <Route path="/dealers-retailers" element={<InfoPage />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route
           path="/admin"

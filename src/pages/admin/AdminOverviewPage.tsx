@@ -113,7 +113,7 @@ export default function AdminOverviewPage() {
                 >
                   <div className="w-10 h-10 rounded-lg bg-brand-light overflow-hidden shrink-0 flex items-center justify-center">
                     {item.images[0] ? (
-                      <img src={item.images[0]} alt="" className="w-full h-full object-cover" />
+                      <img src={item.images[0]} alt="" className="w-full h-full object-contain bg-brand-light" />
                     ) : (
                       <ImageOff className="w-4 h-4 text-brand-muted" />
                     )}
