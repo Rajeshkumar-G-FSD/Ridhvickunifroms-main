@@ -29,13 +29,7 @@ export default function DealersPage() {
       <PageHero
         crumb="Dealers & Retailers"
         title="Your Reliable Uniform & Fabric Supply Partner"
-        intro={
-          <p>
-            Ridhvick Uniforms works with uniform dealers and retailers looking for dependable fabric and garment supply.
-            Our combination of branded fabric sourcing and uniform manufacturing enables us to support different dealer
-            requirements.
-          </p>
-        }
+        intro="Ridhvick Uniforms works with uniform dealers and retailers looking for dependable fabric and garment supply. Our combination of branded fabric sourcing and uniform manufacturing enables us to support different dealer requirements."
         actions={<CtaButton href={ENQUIRY_LINK}>DEALER / WHOLESALE ENQUIRY</CtaButton>}
         aside={
           <HeroPanel

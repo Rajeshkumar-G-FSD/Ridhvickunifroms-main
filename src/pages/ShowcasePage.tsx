@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import { CatalogItem } from '../types';
 import { subscribeToCatalogItems } from '../lib/catalogService';
 import { getCategoryPage } from '../data/categoryPages';
+import { AnimatedHeading, AnimatedSubtitle } from '../components/AnimatedText';
 
 export default function ShowcasePage() {
   const navigate = useNavigate();
@@ -61,9 +62,7 @@ export default function ShowcasePage() {
           <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow-hover tracking-widest uppercase">
             Live Catalog
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-2">
-            Showcase Collections
-          </h1>
+          <AnimatedHeading as="h1" text="Showcase Collections" align="center" className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mt-2" />
         </div>
 
         {isLoading ? (

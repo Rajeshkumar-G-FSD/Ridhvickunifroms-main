@@ -8,6 +8,8 @@ import { sectionPath } from '../../data/homeSections';
 import { useSectionRouting, PageSection } from '../../lib/useSectionRouting';
 import { WHATSAPP_LINK } from '../../lib/contact';
 import { CartItem } from '../../types';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
+import { slideIn } from '../../lib/motion';
 
 // Shared building blocks for the inner content pages (fabrics, corporate,
 // sports wear, dealers, contact, manufacturing, catalog) so they stay visually
@@ -18,7 +20,7 @@ export const SCROLL_MT = 'scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]'
 export const fadeUp = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
+  viewport: { once: false, amount: 0.2 },
   transition: { duration: 0.45 },
 };
 
@@ -126,13 +128,19 @@ export function PageHero({
             <span className="text-brand-blue font-medium">{crumb}</span>
           </div>
           <GreenBar />
-          <h1 className="text-3xl sm:text-4xl md:text-[46px] font-headline font-black text-brand-blue uppercase tracking-tight leading-[1.1] max-w-4xl">
-            {title}
-          </h1>
+          <AnimatedHeading
+            as="h1"
+            text={title}
+            className="text-3xl sm:text-4xl md:text-[46px] font-headline font-black text-brand-blue uppercase tracking-tight leading-[1.1] max-w-4xl"
+          />
           {tagline && (
-            <p className="mt-4 text-lg sm:text-xl font-headline font-bold text-brand-green">{tagline}</p>
+            <AnimatedSubtitle text={tagline} className="mt-4 text-lg sm:text-xl font-headline font-bold text-brand-green" />
           )}
-          <div className="mt-5 text-[15px] sm:text-lg text-brand-muted leading-relaxed max-w-3xl space-y-4">{intro}</div>
+          {typeof intro === 'string' ? (
+            <AnimatedSubtitle text={intro} className="mt-5 text-[15px] sm:text-lg text-brand-muted leading-relaxed max-w-3xl" />
+          ) : (
+            <div className="mt-5 text-[15px] sm:text-lg text-brand-muted leading-relaxed max-w-3xl space-y-4">{intro}</div>
+          )}
           {actions && <div className="mt-7 flex flex-wrap gap-3">{actions}</div>}
         </motion.div>
         {aside && (
@@ -183,22 +191,31 @@ export function Section({
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className={center ? 'text-center' : ''}>
           <GreenBar center={center} light={tone === 'navy'} />
-          <h2
+          <AnimatedHeading
+            text={title}
+            align={center ? 'center' : 'left'}
             className={`text-2xl sm:text-3xl md:text-[38px] font-headline font-black uppercase tracking-tight ${
               tone === 'navy' ? '' : 'text-brand-blue'
             }`}
-          >
-            {title}
-          </h2>
-          {intro && (
-            <div
-              className={`mt-4 text-[15px] sm:text-lg leading-relaxed max-w-3xl ${center ? 'mx-auto' : ''} ${
-                tone === 'navy' ? 'text-white/85' : 'text-brand-muted'
-              }`}
-            >
-              {intro}
-            </div>
-          )}
+          />
+          {intro &&
+            (typeof intro === 'string' ? (
+              <AnimatedSubtitle
+                text={intro}
+                align={center ? 'center' : 'left'}
+                className={`mt-4 text-[15px] sm:text-lg leading-relaxed max-w-3xl ${center ? 'mx-auto' : ''} ${
+                  tone === 'navy' ? 'text-white/85' : 'text-brand-muted'
+                }`}
+              />
+            ) : (
+              <div
+                className={`mt-4 text-[15px] sm:text-lg leading-relaxed max-w-3xl ${center ? 'mx-auto' : ''} ${
+                  tone === 'navy' ? 'text-white/85' : 'text-brand-muted'
+                }`}
+              >
+                {intro}
+              </div>
+            ))}
         </div>
         {children && <div className="mt-10 sm:mt-12">{children}</div>}
       </div>
@@ -231,7 +248,7 @@ export function ItemGrid({
         const cls =
           'w-full h-full flex items-center gap-3 rounded-xl bg-white border border-brand-border/40 px-4 py-3.5 text-left shadow-[0_4px_14px_rgba(0,52,111,0.04)]';
         return (
-          <motion.li key={item.label} {...fadeUp} transition={{ duration: 0.35, delay: (i % 4) * 0.05 }}>
+          <motion.li key={item.label} {...slideIn(i)}>
             {item.to && onItem ? (
               <button
                 onClick={() => onItem(item.to!)}
@@ -262,9 +279,8 @@ export function FeatureCards({
       {items.map(({ icon: Icon, title, text }, i) => (
         <motion.div
           key={title}
-          {...fadeUp}
-          transition={{ duration: 0.45, delay: (i % 4) * 0.07 }}
-          className="flex flex-col rounded-2xl border border-brand-border/40 bg-white p-6 shadow-[0_6px_20px_rgba(0,52,111,0.05)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.12)] hover:-translate-y-0.5 transition-all"
+          {...slideIn(i)}
+          className="flex flex-col rounded-2xl border border-brand-border/40 bg-white p-6 shadow-[0_6px_20px_rgba(0,52,111,0.05)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.12)] hover:-translate-y-0.5 transition-[translate,box-shadow,border-color]"
         >
           <span className="w-12 h-12 rounded-full bg-[#e8f5ee] flex items-center justify-center">
             <Icon className="w-6 h-6 text-brand-blue" strokeWidth={1.6} />
@@ -315,15 +331,22 @@ export function CtaBand({
       <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
         <GreenBar center />
         {title && (
-          <h2 className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black text-brand-blue uppercase tracking-tight">
-            {title}
-          </h2>
+          <AnimatedHeading
+            text={title}
+            align="center"
+            className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black text-brand-blue uppercase tracking-tight"
+          />
         )}
-        {prompt && (
-          <p className={`${title ? 'mt-4 text-[15px] sm:text-lg text-brand-muted' : 'text-2xl sm:text-3xl font-headline font-black text-brand-blue tracking-tight'} leading-snug`}>
-            {prompt}
-          </p>
-        )}
+        {prompt &&
+          (title ? (
+            <AnimatedSubtitle text={prompt} align="center" className="mt-4 text-[15px] sm:text-lg text-brand-muted leading-snug" />
+          ) : (
+            <AnimatedHeading
+              text={prompt}
+              align="center"
+              className="text-2xl sm:text-3xl font-headline font-black text-brand-blue tracking-tight leading-snug"
+            />
+          ))}
         {chips && (
           <div className="mt-6 flex justify-center">
             <Chips items={chips} />

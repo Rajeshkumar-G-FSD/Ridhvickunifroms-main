@@ -14,6 +14,7 @@ import DigitalCatalogPreview from '../components/home/DigitalCatalogPreview';
 import ManufacturingProcess from '../components/home/ManufacturingProcess';
 import CtaBanner from '../components/home/CtaBanner';
 import { CartItem } from '../types';
+import { smoothScrollToElement, smoothScrollToTop } from '../lib/smoothScroll';
 import { HOME_SECTIONS, sectionForPath, sectionPath } from '../data/homeSections';
 
 const SECTIONS = HOME_SECTIONS.map((s) => s.id);
@@ -28,10 +29,14 @@ export default function HomePage() {
   const [isAiAssistantOpen, setIsAiAssistantOpen] = useState<boolean>(false);
 
   const scrollToSection = (sectionId: string, behavior: ScrollBehavior = 'smooth') => {
-    if (sectionId === 'hero') {
+    const el = document.getElementById(sectionId);
+    if (behavior === 'smooth') {
+      if (sectionId === 'hero' || !el) smoothScrollToTop();
+      else smoothScrollToElement(el);
+    } else if (sectionId === 'hero') {
       window.scrollTo({ top: 0, behavior });
     } else {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior });
+      el?.scrollIntoView({ behavior });
     }
     setActiveSection(sectionId);
   };

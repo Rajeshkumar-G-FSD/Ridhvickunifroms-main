@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Shirt, Printer, PenTool, Upload, ArrowRight } from 'lucide-react';
 import { PageShell, PageHero, Section, ItemGrid, CtaBand, CtaButton, Chips, fadeUp, whatsappEnquiry } from '../components/page/PageKit';
 import { PageSection } from '../lib/useSectionRouting';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/sports-wear-t-shirts';
 
@@ -45,13 +46,7 @@ export default function SportsWearPage() {
       <PageHero
         crumb="Sports Wear & T-Shirts"
         title="Designed for Movement. Made for Performance."
-        intro={
-          <p>
-            Ridhvick Uniforms provides customized sportswear and T-shirts for schools, institutions, organizations and
-            teams. Our solutions can be customized according to your colours, logo, house identity and design
-            requirements.
-          </p>
-        }
+        intro="Ridhvick Uniforms provides customized sportswear and T-shirts for schools, institutions, organizations and teams. Our solutions can be customized according to your colours, logo, house identity and design requirements."
         actions={<CtaButton href={QUOTE_LINK}>GET A SPORTS WEAR QUOTE</CtaButton>}
         aside={
           <img
@@ -65,11 +60,12 @@ export default function SportsWearPage() {
       <Section id="sports-range" title="Our Range" tone="white">
         <ItemGrid items={RANGE} icon={Shirt} onItem={(to) => navigate(to)} />
         <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {PHOTOS.map((p) => (
-            <button
+          {PHOTOS.map((p, i) => (
+            <motion.button
               key={p.src}
+              {...slideIn(i)}
               onClick={() => navigate(p.to)}
-              className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_14px_30px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-all text-left cursor-pointer"
+              className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_14px_30px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-[translate,box-shadow,border-color] text-left cursor-pointer"
             >
               <div className="aspect-[2/3] bg-gradient-to-b from-[#eef3fa] to-white">
                 <img src={p.src} alt={p.label} loading="lazy" className="w-full h-full object-contain" />
@@ -78,7 +74,7 @@ export default function SportsWearPage() {
                 {p.label}
                 <ArrowRight className="w-4 h-4 text-brand-green shrink-0" />
               </span>
-            </button>
+            </motion.button>
           ))}
         </div>
       </Section>
@@ -86,7 +82,7 @@ export default function SportsWearPage() {
       <Section id="sports-customization" title="Customization" tone="tint">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           <motion.div
-            {...fadeUp}
+            {...slideIn(0)}
             className="rounded-2xl border border-brand-border/40 border-t-4 border-t-brand-green bg-white p-7 sm:p-9 shadow-[0_10px_30px_rgba(0,52,111,0.07)]"
           >
             <div className="flex gap-3">
@@ -103,8 +99,7 @@ export default function SportsWearPage() {
             </p>
           </motion.div>
           <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.45, delay: 0.1 }}
+            {...slideIn(1)}
             className="rounded-2xl bg-brand-blue text-white p-7 sm:p-9 shadow-[0_14px_36px_rgba(0,52,111,0.22)]"
           >
             <span className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center">

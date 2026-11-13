@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Layers, Tag, BookOpenCheck, Boxes, Shirt, Award } from 'lucide-react';
 import { PageShell, PageHero, Section, ItemGrid, FeatureCards, CtaBand, CtaButton, fadeUp, whatsappEnquiry } from '../components/page/PageKit';
 import { PageSection } from '../lib/useSectionRouting';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/branded-uniform-fabrics';
 
@@ -52,13 +53,7 @@ export default function BrandedFabricsPage() {
         crumb="Branded Uniform Fabrics"
         title="Premium Fabrics from Trusted Brands"
         tagline="Quality Uniforms Begin with Quality Fabrics."
-        intro={
-          <p>
-            Ridhvick Uniforms supplies branded uniform fabrics for schools, uniform dealers, retailers, institutions and
-            garment manufacturers. Our fabric business enables customers to source multiple established uniform-fabric
-            brands through a single supplier.
-          </p>
-        }
+        intro="Ridhvick Uniforms supplies branded uniform fabrics for schools, uniform dealers, retailers, institutions and garment manufacturers. Our fabric business enables customers to source multiple established uniform-fabric brands through a single supplier."
         actions={<CtaButton href={ENQUIRY_LINK}>ENQUIRE FOR BRANDED FABRICS</CtaButton>}
         aside={
           <div className="rounded-3xl bg-brand-blue text-white p-7 sm:p-9 shadow-[0_18px_44px_rgba(0,52,111,0.25)]">
@@ -76,8 +71,7 @@ export default function BrandedFabricsPage() {
           {BRANDS.map((b, i) => (
             <motion.li
               key={b.name}
-              {...fadeUp}
-              transition={{ duration: 0.4, delay: (i % 3) * 0.07 }}
+              {...slideIn(i)}
               className="flex items-center gap-4 rounded-2xl border border-brand-border/40 bg-white px-5 py-5 shadow-[0_6px_20px_rgba(0,52,111,0.05)]"
             >
               <span className="w-12 h-12 shrink-0 rounded-xl bg-brand-blue text-white flex items-center justify-center">

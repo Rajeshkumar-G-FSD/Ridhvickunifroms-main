@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'motion/react';
+import { slideIn } from '../../lib/motion';
 import { Layers, Scissors, Truck, ArrowRight } from 'lucide-react';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
 
 // "Our Promise" from the About Us page
 const PILLARS = [
@@ -35,18 +38,14 @@ export default function AboutUs() {
             <span className="text-xs font-headline font-semibold tracking-[0.15em] uppercase text-white/80">
               About Us
             </span>
-            <h2 className="mt-2 text-2xl sm:text-3xl md:text-[34px] font-headline font-black uppercase tracking-tight">
-              Ridhvick Uniforms
-            </h2>
-            <p className="mt-4 text-sm sm:text-[15px] text-white/85 leading-relaxed max-w-xl">
-              Ridhvick Uniforms is a Tirupur and Chennai-based uniform business providing school uniforms, corporate
-              and industrial uniforms, sportswear, customized T-shirts and branded uniform fabrics.
-            </p>
+            <AnimatedHeading as="h2" text="Ridhvick Uniforms" className="mt-2 text-2xl sm:text-3xl md:text-[34px] font-headline font-black uppercase tracking-tight" />
+            <AnimatedSubtitle text="Ridhvick Uniforms is a Tirupur and Chennai-based uniform business providing school uniforms, corporate and industrial uniforms, sportswear, customized T-shirts and branded uniform fabrics." className="mt-4 text-sm sm:text-[15px] text-white/85 leading-relaxed max-w-xl" />
 
             <div className="mt-8 grid grid-cols-3 gap-y-6 max-w-lg">
               {PILLARS.map(({ icon: Icon, label }, i) => (
-                <div
+                <motion.div
                   key={label[0]}
+                  {...slideIn(i, 40)}
                   className={`flex flex-col items-center text-center gap-2 px-2 ${
                     i > 0 ? 'sm:border-l sm:border-white/25' : ''
                   }`}
@@ -57,7 +56,7 @@ export default function AboutUs() {
                     <br />
                     {label[1]}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
 

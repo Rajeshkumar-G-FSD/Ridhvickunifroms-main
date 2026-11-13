@@ -23,6 +23,8 @@ import { CATEGORY_PAGES } from '../data/categoryPages';
 import { subscribeToCatalogItems } from '../lib/catalogService';
 import { PageSection } from '../lib/useSectionRouting';
 import { CartItem, CatalogItem, Product } from '../types';
+import { AnimatedHeading, AnimatedSubtitle } from '../components/AnimatedText';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/digital-catalog';
 
@@ -186,13 +188,7 @@ export default function CatalogPage() {
       <PageHero
         crumb="Digital Catalog"
         title="Explore the Ridhvick Uniforms Collection"
-        intro={
-          <p>
-            Discover our range of school uniforms, branded uniform fabrics, corporate and industrial uniforms,
-            sportswear, T-shirts and customized apparel. Our digital catalog helps schools, institutions, dealers and
-            businesses review product categories before sharing their requirements with our team.
-          </p>
-        }
+        intro="Discover our range of school uniforms, branded uniform fabrics, corporate and industrial uniforms, sportswear, T-shirts and customized apparel. Our digital catalog helps schools, institutions, dealers and businesses review product categories before sharing their requirements with our team."
         actions={actionButtons}
       />
 
@@ -202,8 +198,7 @@ export default function CatalogPage() {
           {COLLECTIONS.map(({ slug, title, description, icon: Icon }, i) => (
             <motion.div
               key={slug}
-              {...fadeUp}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
+              {...slideIn(i)}
               className={`flex flex-col rounded-2xl border bg-white p-6 shadow-[0_6px_20px_rgba(0,52,111,0.05)] ${
                 slug === active.slug ? 'border-brand-green' : 'border-brand-border/40'
               }`}
@@ -256,8 +251,8 @@ export default function CatalogPage() {
           <div className="mt-8 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
               <GreenBar />
-              <h2 className="text-2xl sm:text-3xl font-headline font-black text-brand-blue uppercase tracking-tight">{active.title}</h2>
-              <p className="mt-2 text-sm sm:text-base text-brand-muted max-w-2xl">{active.description}</p>
+              <AnimatedHeading as="h2" text={active.title} className="text-2xl sm:text-3xl font-headline font-black text-brand-blue uppercase tracking-tight" />
+              <AnimatedSubtitle text={active.description} className="mt-2 text-sm sm:text-base text-brand-muted max-w-2xl" />
             </div>
             <CtaButton href={enquiryFor(active.title)} className="self-start md:self-auto">
               ENQUIRE ABOUT {active.title.toUpperCase()}
@@ -286,7 +281,7 @@ export default function CatalogPage() {
           {visible.length > 0 ? (
             <ul className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
               {visible.map((item, i) => (
-                <li key={`${item.src}-${i}`} className="flex flex-col bg-white rounded-2xl overflow-hidden border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)]">
+                <motion.li key={`${item.src}-${i}`} {...slideIn(i, 40)} className="flex flex-col bg-white rounded-2xl overflow-hidden border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)]">
                   <button onClick={() => setLightbox(i)} className="aspect-[3/4] bg-gradient-to-b from-[#eef3fa] to-white cursor-zoom-in" aria-label={`View ${item.label} photo larger`}>
                     <img src={item.src} alt={item.label} loading="lazy" className="w-full h-full object-contain" />
                   </button>
@@ -301,7 +296,7 @@ export default function CatalogPage() {
                       Enquire
                     </a>
                   </div>
-                </li>
+                </motion.li>
               ))}
             </ul>
           ) : (
@@ -339,13 +334,8 @@ export default function CatalogPage() {
       <section id="catalog-quote" className={`bg-brand-blue text-white py-14 sm:py-16 ${SCROLL_MT}`}>
         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
           <GreenBar center light />
-          <h2 className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black uppercase tracking-tight">
-            Request a Catalog or Product Quote
-          </h2>
-          <p className="mt-4 text-[15px] sm:text-lg text-white/85 leading-relaxed">
-            Need a catalog for your school, dealership or organization? Contact our team with your product category,
-            approximate quantity, city and requirements. We will help you identify suitable options.
-          </p>
+          <AnimatedHeading as="h2" text="Request a Catalog or Product Quote" align="center" className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black uppercase tracking-tight" />
+          <AnimatedSubtitle text="Need a catalog for your school, dealership or organization? Contact our team with your product category, approximate quantity, city and requirements. We will help you identify suitable options." align="center" className="mt-4 text-[15px] sm:text-lg text-white/85 leading-relaxed" />
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <CtaButton variant="white" onClick={() => setIsFlipbookOpen(true)}>VIEW DIGITAL CATALOG</CtaButton>
             {PDF_CATALOG_URL && <CtaButton variant="white" href={PDF_CATALOG_URL}>DOWNLOAD PDF CATALOG</CtaButton>}

@@ -18,6 +18,8 @@ import Footer from '../components/Footer';
 import { sectionPath } from '../data/homeSections';
 import { useSectionRouting, PageSection } from '../lib/useSectionRouting';
 import { WHATSAPP_QUOTE_LINK } from '../lib/contact';
+import { AnimatedHeading, AnimatedSubtitle } from '../components/AnimatedText';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/about-us';
 const SCROLL_MT = 'scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]';
@@ -52,7 +54,7 @@ const PROMISE = ['Premium Fabrics.', 'Professional Workmanship.', 'Reliable Supp
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-60px' },
+  viewport: { once: false, amount: 0.2 },
   transition: { duration: 0.45 },
 };
 
@@ -80,13 +82,8 @@ export default function AboutPage() {
                 <span className="text-brand-blue font-medium">About Us</span>
               </div>
               <GreenBar />
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-black text-brand-blue uppercase tracking-tight leading-[1.1]">
-                About Ridhvick Uniforms
-              </h1>
-              <p className="mt-5 text-[15px] sm:text-lg text-brand-muted leading-relaxed max-w-2xl">
-                Ridhvick Uniforms is a Tirupur and Chennai-based uniform business providing school uniforms, corporate
-                and industrial uniforms, sportswear, customized T-shirts and branded uniform fabrics.
-              </p>
+              <AnimatedHeading as="h1" text="About Ridhvick Uniforms" className="text-3xl sm:text-4xl md:text-5xl font-headline font-black text-brand-blue uppercase tracking-tight leading-[1.1]" />
+              <AnimatedSubtitle text="Ridhvick Uniforms is a Tirupur and Chennai-based uniform business providing school uniforms, corporate and industrial uniforms, sportswear, customized T-shirts and branded uniform fabrics." className="mt-5 text-[15px] sm:text-lg text-brand-muted leading-relaxed max-w-2xl" />
               <p className="mt-5 inline-flex items-center gap-2 text-sm font-headline font-semibold text-brand-blue">
                 <MapPin className="w-4 h-4 text-brand-green" /> Tirupur | Chennai
               </p>
@@ -107,17 +104,13 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-8 lg:gap-14">
             <motion.div {...fadeUp}>
               <GreenBar />
-              <h2 className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase tracking-tight">
-                Our Approach
-              </h2>
+              <AnimatedHeading as="h2" text="Our Approach" className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase tracking-tight" />
             </motion.div>
             <motion.div {...fadeUp}>
-              <p className="text-[15px] sm:text-lg text-[#333840] leading-relaxed">
-                Our primary focus is to provide schools and institutions with uniforms that combine premium-quality
-                fabrics, comfort, durability and professional workmanship. Our experience in fabric sourcing and uniform
-                manufacturing enables us to provide an end-to-end solution—from selecting suitable fabrics to delivering
-                finished uniforms.
-              </p>
+              <AnimatedSubtitle
+              text="Our primary focus is to provide schools and institutions with uniforms that combine premium-quality fabrics, comfort, durability and professional workmanship. Our experience in fabric sourcing and uniform manufacturing enables us to provide an end-to-end solution—from selecting suitable fabrics to delivering finished uniforms."
+              className="text-[15px] sm:text-lg text-[#333840] leading-relaxed"
+            />
               <ul className="mt-7 flex flex-wrap gap-2.5">
                 {OFFERINGS.map((o) => (
                   <li
@@ -135,29 +128,22 @@ export default function AboutPage() {
         {/* Vision & mission */}
         <section id="about-vision-mission" className={`bg-[#f5f8fc] py-14 sm:py-20 ${SCROLL_MT}`}>
           <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-            <motion.div {...fadeUp} className="rounded-2xl bg-brand-blue text-white p-7 sm:p-10 shadow-[0_14px_36px_rgba(0,52,111,0.22)]">
+            <motion.div {...slideIn(0)} className="rounded-2xl bg-brand-blue text-white p-7 sm:p-10 shadow-[0_14px_36px_rgba(0,52,111,0.22)]">
               <span className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center">
                 <Eye className="w-7 h-7 text-brand-green-light" strokeWidth={1.6} />
               </span>
-              <h2 className="mt-5 text-xl sm:text-2xl font-headline font-black uppercase tracking-tight">Our Vision</h2>
-              <p className="mt-3 text-[15px] sm:text-base text-white/85 leading-relaxed">
-                To become one of the most trusted institutional uniform brands, recognized for quality, consistency,
-                innovation and dependable service.
-              </p>
+              <AnimatedHeading as="h2" text="Our Vision" className="mt-5 text-xl sm:text-2xl font-headline font-black uppercase tracking-tight" />
+              <AnimatedSubtitle text="To become one of the most trusted institutional uniform brands, recognized for quality, consistency, innovation and dependable service." className="mt-3 text-[15px] sm:text-base text-white/85 leading-relaxed" />
             </motion.div>
             <motion.div
-              {...fadeUp}
-              transition={{ duration: 0.45, delay: 0.1 }}
+              {...slideIn(1)}
               className="rounded-2xl bg-white border border-brand-border/40 border-t-4 border-t-brand-green p-7 sm:p-10 shadow-[0_10px_30px_rgba(0,52,111,0.08)]"
             >
               <span className="w-14 h-14 rounded-full bg-[#e8f5ee] flex items-center justify-center">
                 <Target className="w-7 h-7 text-brand-blue" strokeWidth={1.6} />
               </span>
-              <h2 className="mt-5 text-xl sm:text-2xl font-headline font-black text-brand-blue uppercase tracking-tight">Our Mission</h2>
-              <p className="mt-3 text-[15px] sm:text-base text-brand-muted leading-relaxed">
-                To provide schools, institutions and organizations with comfortable, durable and professionally
-                manufactured uniforms using premium-quality fabrics and reliable production standards.
-              </p>
+              <AnimatedHeading as="h2" text="Our Mission" className="mt-5 text-xl sm:text-2xl font-headline font-black text-brand-blue uppercase tracking-tight" />
+              <AnimatedSubtitle text="To provide schools, institutions and organizations with comfortable, durable and professionally manufactured uniforms using premium-quality fabrics and reliable production standards." className="mt-3 text-[15px] sm:text-base text-brand-muted leading-relaxed" />
             </motion.div>
           </div>
         </section>
@@ -167,17 +153,14 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 md:px-8">
             <div className="text-center">
               <GreenBar center />
-              <h2 className="text-2xl sm:text-3xl md:text-[40px] font-headline font-black text-brand-blue uppercase tracking-tight">
-                Our Values
-              </h2>
+              <AnimatedHeading as="h2" text="Our Values" align="center" className="text-2xl sm:text-3xl md:text-[40px] font-headline font-black text-brand-blue uppercase tracking-tight" />
             </div>
             <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
               {VALUES.map(({ icon: Icon, title, text }, i) => (
                 <motion.div
                   key={title}
-                  {...fadeUp}
-                  transition={{ duration: 0.45, delay: i * 0.07 }}
-                  className="flex flex-col rounded-2xl border border-brand-border/40 bg-white p-6 shadow-[0_6px_20px_rgba(0,52,111,0.05)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.12)] hover:-translate-y-0.5 transition-all"
+                  {...slideIn(i)}
+                  className="flex flex-col rounded-2xl border border-brand-border/40 bg-white p-6 shadow-[0_6px_20px_rgba(0,52,111,0.05)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.12)] hover:-translate-y-0.5 transition-[translate,box-shadow,border-color]"
                 >
                   <span className="w-12 h-12 rounded-full bg-[#e8f5ee] flex items-center justify-center">
                     <Icon className="w-6 h-6 text-brand-blue" strokeWidth={1.6} />
@@ -194,13 +177,12 @@ export default function AboutPage() {
         <section id="about-promise" className={`bg-brand-blue text-white py-14 sm:py-16 ${SCROLL_MT}`}>
           <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
             <span className="block h-1 w-12 rounded-full bg-brand-green-light mb-4 mx-auto" />
-            <h2 className="text-xl sm:text-2xl font-headline font-black uppercase tracking-tight">Our Promise</h2>
+            <AnimatedHeading as="h2" text="Our Promise" align="center" className="text-xl sm:text-2xl font-headline font-black uppercase tracking-tight" />
             <ul className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0">
               {PROMISE.map((p, i) => (
                 <motion.li
                   key={p}
-                  {...fadeUp}
-                  transition={{ duration: 0.45, delay: i * 0.1 }}
+                  {...slideIn(i)}
                   className={`flex items-center justify-center gap-3 py-2 md:py-4 ${i > 0 ? 'md:border-l md:border-white/20' : ''}`}
                 >
                   <CheckCircle2 className="w-7 h-7 text-brand-green-light shrink-0" strokeWidth={1.8} />
@@ -214,9 +196,7 @@ export default function AboutPage() {
         {/* CTA */}
         <section id="about-quote" className={`bg-gradient-to-r from-[#eef3fa] to-white py-14 sm:py-16 ${SCROLL_MT}`}>
           <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
-            <h2 className="text-2xl sm:text-3xl font-headline font-black text-brand-blue tracking-tight">
-              Tell us about your uniform requirements.
-            </h2>
+            <AnimatedHeading as="h2" text="Tell us about your uniform requirements." align="center" className="text-2xl sm:text-3xl font-headline font-black text-brand-blue tracking-tight" />
             <a
               href={WHATSAPP_QUOTE_LINK}
               target="_blank"

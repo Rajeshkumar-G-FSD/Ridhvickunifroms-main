@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { chatGptImage } from './constants';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
 
 const COLLECTIONS = [
   { label: 'Primary Uniforms', slug: 'uniform-primary-daily', src: '/images/ridhvick_primary_dress_combo_one.png' },
@@ -56,14 +57,8 @@ export default function FeaturedCollections() {
     <section id="catalog" className="bg-gradient-to-b from-[#f3f7fc] to-[#eef3fa] py-12 sm:py-16 scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 lg:gap-10 items-center">
         <div>
-          <h2 className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase leading-[1.1] tracking-tight">
-            Featured
-            <br />
-            Collections
-          </h2>
-          <p className="mt-4 text-sm text-brand-muted leading-relaxed max-w-xs">
-            Popular uniform sets loved by schools across India. Premium fabric, modern designs and lasting comfort.
-          </p>
+          <AnimatedHeading as="h2" text={"Featured\nCollections"} className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase leading-[1.1] tracking-tight" />
+          <AnimatedSubtitle text="Popular uniform sets loved by schools across India. Premium fabric, modern designs and lasting comfort." className="mt-4 text-sm text-brand-muted leading-relaxed max-w-xs" />
           <button
             onClick={() => navigate('/catalog/uniform-primary-daily')}
             className="mt-6 inline-flex items-center gap-2 h-11 px-6 rounded-full bg-brand-blue text-white font-headline font-bold text-xs sm:text-sm hover:bg-brand-blue-light transition-colors cursor-pointer"

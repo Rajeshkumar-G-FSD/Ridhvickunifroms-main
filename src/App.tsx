@@ -1,4 +1,6 @@
 import { Fragment } from 'react';
+import { MotionConfig } from 'motion/react';
+import SmoothScroll from './components/SmoothScroll';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CatalogCategoryPage from './pages/CatalogCategoryPage';
@@ -26,6 +28,8 @@ import { AdminAuthProvider } from './contexts/AdminAuthContext';
 export default function App() {
   return (
     <AdminAuthProvider>
+      <MotionConfig reducedMotion="user">
+      <SmoothScroll />
       <Routes>
         <Route path="/" element={<HomePage />} />
         {HOME_SECTION_PATHS.map((path) => (
@@ -70,6 +74,7 @@ export default function App() {
           <Route path="settings" element={<AdminSettingsPage />} />
         </Route>
       </Routes>
+      </MotionConfig>
     </AdminAuthProvider>
   );
 }

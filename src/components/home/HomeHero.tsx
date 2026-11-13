@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, ShieldCheck, Shirt, Users, GraduationCap, BookOpen, Send } from 'lucide-react';
 import { WHATSAPP_LINK, WHATSAPP_QUOTE_LINK } from '../../lib/contact';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
 
 // The curved photo collage is a single pre-composed image (transparent to the
 // left of its outer arc) so it matches the approved design exactly. It is
@@ -58,20 +59,22 @@ export default function HomeHero() {
             for Schools &amp; Institutions
           </span>
 
-          <h1 className="mt-4 font-headline font-extrabold uppercase tracking-[-0.01em] leading-[1.1] text-[30px] min-[400px]:text-[34px] sm:text-[44px] lg:text-[clamp(30px,3.3vw,48px)]">
-            <span className="block" style={{ color: HERO_NAVY }}>
-              One Partner.
-            </span>
-            <span className="block text-[#121417]">Every Uniform</span>
-            <span className="block text-[#121417]">Solution.</span>
-          </h1>
+          <AnimatedHeading
+            as="h1"
+            lines={[
+              { text: 'One Partner.', className: 'text-[#153a7c]' },
+              { text: 'Every Uniform', className: 'text-[#121417]' },
+              { text: 'Solution.', className: 'text-[#121417]' },
+            ]}
+            className="mt-4 font-headline font-extrabold uppercase tracking-[-0.01em] leading-[1.1] text-[30px] min-[400px]:text-[34px] sm:text-[44px] lg:text-[clamp(30px,3.3vw,48px)]"
+          />
 
           <span className="block mt-5 h-[4px] w-20 rounded-full bg-brand-green" />
 
-          <p className="mt-5 max-w-[540px] text-[15px] sm:text-[16px] lg:text-[15px] xl:text-[17px] text-[#333840] leading-relaxed">
-            Ridhvick Uniforms provides premium-quality uniforms and branded uniform fabrics for schools, educational
-            institutions, corporate organizations, industries, dealers and retailers.
-          </p>
+          <AnimatedSubtitle
+            text="Ridhvick Uniforms provides premium-quality uniforms and branded uniform fabrics for schools, educational institutions, corporate organizations, industries, dealers and retailers."
+            className="mt-5 max-w-[540px] text-[15px] sm:text-[16px] lg:text-[15px] xl:text-[17px] text-[#333840] leading-relaxed"
+          />
 
           <div className="mt-7 flex flex-wrap gap-3 sm:gap-4">
             <a

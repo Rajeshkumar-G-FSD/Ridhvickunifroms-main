@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { smoothScrollToElement, smoothScrollToTop } from './smoothScroll';
 
 export interface PageSection {
   id: string;
@@ -26,11 +27,16 @@ export function useSectionRouting(basePath: string, sections: PageSection[], pag
     const wasFirstRender = key === 'default';
 
     if (!section) {
-      if (!wasFirstRender) window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (!wasFirstRender) smoothScrollToTop();
       else window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
-    const scroll = (behavior: ScrollBehavior) => document.getElementById(section.id)?.scrollIntoView({ behavior });
+    const scroll = (behavior: ScrollBehavior) => {
+      const el = document.getElementById(section.id);
+      if (!el) return;
+      if (behavior === 'smooth') smoothScrollToElement(el);
+      else el.scrollIntoView({ behavior });
+    };
     // 'instant' (not 'auto'): the global CSS sets scroll-behavior: smooth, which 'auto' would inherit
     scroll(wasFirstRender ? 'instant' : 'smooth');
     if (!wasFirstRender) return;
@@ -56,7 +62,8 @@ export function useSectionRouting(basePath: string, sections: PageSection[], pag
   const goTo = (id: string) => {
     const section = sections.find((s) => s.id === id);
     const path = section ? `${basePath}/${section.slug}` : basePath;
-    if (path === pathname && section) document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' });
+    const target = section && document.getElementById(section.id);
+    if (path === pathname && target) smoothScrollToElement(target);
     else navigate(path);
   };
 

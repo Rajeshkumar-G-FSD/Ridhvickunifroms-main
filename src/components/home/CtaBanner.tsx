@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { chatGptImage } from './constants';
 import { WHATSAPP_LINK } from '../../lib/contact';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
 
 const SCHOOL_QUOTE_LINK =
   `${WHATSAPP_LINK}?text=` + encodeURIComponent('Hi Ridhvick Uniforms, I would like a quote for school uniforms.');
@@ -18,13 +19,8 @@ export default function CtaBanner() {
 
         <div className="order-1 md:order-2 py-10 md:py-14">
           <span className="block h-1 w-12 rounded-full bg-brand-green mb-4" />
-          <h2 className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black text-brand-blue uppercase leading-[1.15] tracking-tight">
-            Planning Uniforms for Your School?
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm sm:text-base text-brand-muted leading-relaxed">
-            Whether you are starting a new school, redesigning your existing uniform or looking for a reliable uniform
-            supplier, our team can help.
-          </p>
+          <AnimatedHeading as="h2" text="Planning Uniforms for Your School?" className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black text-brand-blue uppercase leading-[1.15] tracking-tight" />
+          <AnimatedSubtitle text="Whether you are starting a new school, redesigning your existing uniform or looking for a reliable uniform supplier, our team can help." className="mt-3 max-w-2xl text-sm sm:text-base text-brand-muted leading-relaxed" />
           <a
             href={SCHOOL_QUOTE_LINK}
             target="_blank"

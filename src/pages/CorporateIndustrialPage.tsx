@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { Briefcase, HardHat, Palette, Stamp, Shirt, Printer, PenTool } from 'lucide-react';
 import { PageShell, PageHero, HeroPanel, Section, ItemGrid, CtaBand, CtaButton, fadeUp, whatsappEnquiry } from '../components/page/PageKit';
 import { PageSection } from '../lib/useSectionRouting';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/corporate-industrial-uniforms';
 
@@ -40,13 +41,7 @@ export default function CorporateIndustrialPage() {
       <PageHero
         crumb="Corporate & Industrial Uniforms"
         title="Professional Uniforms for Your Workforce"
-        intro={
-          <p>
-            A professional uniform creates consistency across your workforce while strengthening your organization's
-            brand identity. Ridhvick Uniforms provides customized uniforms for corporate offices, factories, industries,
-            service organizations and other businesses.
-          </p>
-        }
+        intro="A professional uniform creates consistency across your workforce while strengthening your organization's brand identity. Ridhvick Uniforms provides customized uniforms for corporate offices, factories, industries, service organizations and other businesses."
         actions={<CtaButton href={QUOTE_LINK}>REQUEST A CORPORATE / INDUSTRIAL QUOTE</CtaButton>}
         aside={
           <HeroPanel
@@ -77,8 +72,7 @@ export default function CorporateIndustrialPage() {
           {CUSTOM_OPTIONS.map(({ icon: Icon, label }, i) => (
             <motion.li
               key={label}
-              {...fadeUp}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
+              {...slideIn(i)}
               className="flex flex-col items-center text-center gap-3 rounded-2xl bg-white/[0.07] border border-white/15 px-4 py-6"
             >
               <Icon className="w-8 h-8 text-brand-green-light" strokeWidth={1.5} />

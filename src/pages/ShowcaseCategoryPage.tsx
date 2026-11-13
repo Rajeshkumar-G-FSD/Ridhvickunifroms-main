@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import { CatalogItem } from '../types';
 import { subscribeToCatalogItems } from '../lib/catalogService';
 import { getCategoryPage } from '../data/categoryPages';
+import { AnimatedHeading, AnimatedSubtitle } from '../components/AnimatedText';
 
 export default function ShowcaseCategoryPage() {
   const { category } = useParams<{ category: string }>();
@@ -50,9 +51,7 @@ export default function ShowcaseCategoryPage() {
           <span className="text-brand-blue">{categoryLabel}</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mb-8">
-          {categoryLabel}
-        </h1>
+        <AnimatedHeading as="h1" text={categoryLabel} className="text-2xl sm:text-3xl md:text-4xl font-headline font-black text-brand-blue mb-8" />
 
         {isLoading ? (
           <p className="text-sm text-brand-muted font-sans">Loading…</p>

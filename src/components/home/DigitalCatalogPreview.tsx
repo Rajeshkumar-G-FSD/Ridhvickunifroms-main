@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { chatGptImage } from './constants';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
+import { slideIn } from '../../lib/motion';
 
 const CATALOGS = [
   { title: 'School Uniform', sub: 'Collection', slug: 'uniform-secondary-daily', src: chatGptImage('08_21_21') },
@@ -19,14 +22,8 @@ export default function DigitalCatalogPreview({ onViewCatalog }: DigitalCatalogP
     <section id="digital-catalog" className="bg-white py-12 sm:py-16 scroll-mt-16 sm:scroll-mt-[72px] xl:scroll-mt-[120px]">
       <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 lg:gap-10 items-center">
         <div>
-          <h2 className="text-3xl sm:text-4xl md:text-[42px] font-headline font-black text-brand-blue uppercase leading-[1.05] tracking-tight">
-            Digital
-            <br />
-            Catalog
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed max-w-xs">
-            Browse our latest uniform designs, fabrics and collections online.
-          </p>
+          <AnimatedHeading as="h2" text={"Digital\nCatalog"} className="text-3xl sm:text-4xl md:text-[42px] font-headline font-black text-brand-blue uppercase leading-[1.05] tracking-tight" />
+          <AnimatedSubtitle text="Browse our latest uniform designs, fabrics and collections online." className="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed max-w-xs" />
           <button
             onClick={onViewCatalog}
             className="mt-6 inline-flex items-center gap-2 h-11 px-6 rounded-full bg-brand-blue text-white font-headline font-bold text-sm hover:bg-brand-blue-light transition-colors cursor-pointer"
@@ -36,9 +33,10 @@ export default function DigitalCatalogPreview({ onViewCatalog }: DigitalCatalogP
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {CATALOGS.map((c) => (
-            <button
+          {CATALOGS.map((c, i) => (
+            <motion.button
               key={c.slug}
+              {...slideIn(i)}
               onClick={() => navigate(`/catalog/${c.slug}`)}
               className="group bg-white rounded-2xl overflow-hidden border border-brand-border/30 shadow-[0_6px_20px_rgba(0,52,111,0.08)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.15)] transition-shadow text-left cursor-pointer"
             >
@@ -59,7 +57,7 @@ export default function DigitalCatalogPreview({ onViewCatalog }: DigitalCatalogP
                   <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </div>
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>

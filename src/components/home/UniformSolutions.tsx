@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Briefcase, HardHat, Layers, type LucideIcon } from 'lucide-react';
 import SectionEyebrow from './SectionEyebrow';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
+import { slideIn } from '../../lib/motion';
 
 // Cards without an approved product photo yet show an icon panel instead.
 const SOLUTIONS: { title: string; text: string; to: string; image?: string; icon?: LucideIcon }[] = [
@@ -51,14 +53,8 @@ export default function UniformSolutions() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center max-w-3xl mx-auto">
           <SectionEyebrow label="What We Offer" />
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-[40px] font-headline font-black text-brand-blue uppercase tracking-tight">
-            Our Uniform Solutions
-          </h2>
-          <p className="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed">
-            From selecting the right fabric to designing, manufacturing and supplying finished uniforms, we focus on
-            quality, comfort, durability and consistency at every stage. Whether you need a complete uniform solution
-            for your school or branded fabrics for your uniform business, Ridhvick Uniforms is your uniform partner.
-          </p>
+          <AnimatedHeading as="h2" text="Our Uniform Solutions" align="center" className="mt-3 text-2xl sm:text-3xl md:text-[40px] font-headline font-black text-brand-blue uppercase tracking-tight" />
+          <AnimatedSubtitle text="From selecting the right fabric to designing, manufacturing and supplying finished uniforms, we focus on quality, comfort, durability and consistency at every stage. Whether you need a complete uniform solution for your school or branded fabrics for your uniform business, Ridhvick Uniforms is your uniform partner." align="center" className="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed" />
         </div>
 
         <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
@@ -68,11 +64,8 @@ export default function UniformSolutions() {
               <motion.button
                 key={s.title}
                 onClick={() => navigate(s.to)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
-                className="group flex text-left bg-white rounded-2xl border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_14px_32px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-all overflow-hidden cursor-pointer"
+                {...slideIn(i)}
+                className="group flex text-left bg-white rounded-2xl border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_14px_32px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-[translate,box-shadow,border-color] overflow-hidden cursor-pointer"
               >
                 <div className="w-[38%] shrink-0 bg-gradient-to-b from-[#eef3fa] to-[#f7f9fc] flex items-center justify-center">
                   {s.image ? (

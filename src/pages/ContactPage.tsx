@@ -4,6 +4,8 @@ import { MapPin, Phone, Mail, Building2, Send, CheckCircle2 } from 'lucide-react
 import { PageShell, PageHero, SCROLL_MT, GreenBar, fadeUp } from '../components/page/PageKit';
 import { PageSection } from '../lib/useSectionRouting';
 import { PHONE_PRIMARY, PHONE_SECONDARY, CONTACT_EMAIL, WHATSAPP_LINK, REGISTERED_ADDRESS } from '../lib/contact';
+import { AnimatedHeading, AnimatedSubtitle } from '../components/AnimatedText';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/contact-us';
 
@@ -85,12 +87,7 @@ export default function ContactPage() {
       <PageHero
         crumb="Contact Us"
         title="Let's Discuss Your Uniform Requirement"
-        intro={
-          <p>
-            Whether you represent a school, educational institution, company, industry, uniform dealership or retail
-            business, our team would be happy to understand your requirements.
-          </p>
-        }
+        intro="Whether you represent a school, educational institution, company, industry, uniform dealership or retail business, our team would be happy to understand your requirements."
       />
 
       <section className="bg-white py-14 sm:py-20">
@@ -98,12 +95,12 @@ export default function ContactPage() {
           {/* Contact details */}
           <div id="contact-details" className={SCROLL_MT}>
           <motion.aside
-            {...fadeUp}
+            {...slideIn(0)}
             className="rounded-2xl bg-brand-blue text-white p-7 sm:p-8 shadow-[0_18px_44px_rgba(0,52,111,0.22)]"
           >
             <GreenBar light />
-            <h2 className="text-xl sm:text-2xl font-headline font-black uppercase tracking-tight">Ridhvick Uniforms</h2>
-            <p className="mt-1 text-sm font-headline font-semibold text-brand-green-light">One Partner. Every Uniform Solution.</p>
+            <AnimatedHeading as="h2" text="Ridhvick Uniforms" className="text-xl sm:text-2xl font-headline font-black uppercase tracking-tight" />
+            <AnimatedSubtitle text="One Partner. Every Uniform Solution." className="mt-1 text-sm font-headline font-semibold text-brand-green-light" />
 
             <dl className="mt-7 space-y-5 text-sm">
               <div className="flex gap-3">
@@ -147,12 +144,11 @@ export default function ContactPage() {
           {/* Enquiry form */}
           <div id="contact-form" className={SCROLL_MT}>
           <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.45, delay: 0.08 }}
+            {...slideIn(1)}
             className="rounded-2xl border border-brand-border/40 bg-white p-6 sm:p-8 shadow-[0_10px_30px_rgba(0,52,111,0.08)]"
           >
             <GreenBar />
-            <h2 className="text-xl sm:text-2xl font-headline font-black text-brand-blue uppercase tracking-tight">Enquiry Form</h2>
+            <AnimatedHeading as="h2" text="Enquiry Form" className="text-xl sm:text-2xl font-headline font-black text-brand-blue uppercase tracking-tight" />
 
             {submitted ? (
               <div className="mt-6 rounded-xl border border-brand-green/30 bg-[#e8f5ee] p-6 text-center">

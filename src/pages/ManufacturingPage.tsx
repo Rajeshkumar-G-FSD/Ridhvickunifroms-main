@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { ClipboardList, Layers, Shirt, BadgeCheck, Factory, ShieldCheck, Truck, ChevronRight } from 'lucide-react';
 import { PageShell, PageHero, Section, CtaBand, CtaButton, SCROLL_MT, whatsappEnquiry } from '../components/page/PageKit';
 import { PageSection } from '../lib/useSectionRouting';
+import { slideIn } from '../lib/motion';
 
 const BASE_PATH = '/manufacturing-process';
 
@@ -58,12 +59,7 @@ export default function ManufacturingPage() {
       <PageHero
         crumb="Manufacturing Process"
         title="From Your Requirement to the Finished Uniform"
-        intro={
-          <p>
-            Ridhvick Uniforms follows a customer-focused process to understand uniform requirements, finalize
-            specifications and coordinate production and delivery.
-          </p>
-        }
+        intro="Ridhvick Uniforms follows a customer-focused process to understand uniform requirements, finalize specifications and coordinate production and delivery."
         actions={<CtaButton href={DISCUSS_LINK}>DISCUSS YOUR REQUIREMENT</CtaButton>}
       />
 
@@ -92,10 +88,7 @@ export default function ManufacturingPage() {
             <motion.li
               key={slug}
               id={`step-${slug}`}
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.45 }}
+              {...slideIn(i)}
               className={`relative flex gap-5 sm:gap-6 pb-6 last:pb-0 ${SCROLL_MT}`}
             >
               <span className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-full bg-brand-blue text-white flex flex-col items-center justify-center shadow-[0_8px_20px_rgba(0,52,111,0.25)]">

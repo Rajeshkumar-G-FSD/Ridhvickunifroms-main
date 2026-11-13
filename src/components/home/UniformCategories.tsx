@@ -2,6 +2,8 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SectionEyebrow from './SectionEyebrow';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
+import { slideIn } from '../../lib/motion';
 
 const CATEGORIES = [
   { label: ['Daily Wear', 'Uniforms'], slug: 'uniform-primary-daily', src: '/images/ridhvick_secondary_girl_dress_sports_one.png' },
@@ -21,12 +23,8 @@ export default function UniformCategories() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <SectionEyebrow label="Explore Our Range" />
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-[40px] font-headline font-black text-brand-blue uppercase tracking-tight">
-            Uniform Categories
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-brand-muted">
-            Find the perfect uniform for every need. Explore our wide range divided by category.
-          </p>
+          <AnimatedHeading as="h2" text="Uniform Categories" align="center" className="mt-3 text-2xl sm:text-3xl md:text-[40px] font-headline font-black text-brand-blue uppercase tracking-tight" />
+          <AnimatedSubtitle text="Find the perfect uniform for every need. Explore our wide range divided by category." align="center" className="mt-3 text-sm sm:text-base text-brand-muted" />
         </div>
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
@@ -34,11 +32,8 @@ export default function UniformCategories() {
             <motion.button
               key={cat.slug + cat.label[0]}
               onClick={() => navigate(`/catalog/${cat.slug}`)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.45, delay: i * 0.05 }}
-              className="group flex flex-col text-left bg-white rounded-2xl border border-brand-border/30 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-all overflow-hidden cursor-pointer"
+              {...slideIn(i)}
+              className="group flex flex-col text-left bg-white rounded-2xl border border-brand-border/30 shadow-[0_6px_20px_rgba(0,52,111,0.06)] hover:shadow-[0_12px_28px_rgba(0,52,111,0.14)] hover:-translate-y-1 transition-[translate,box-shadow,border-color] overflow-hidden cursor-pointer"
             >
               <div className="aspect-[2/3] bg-gradient-to-b from-[#eef3fa] to-white overflow-hidden">
                 <img

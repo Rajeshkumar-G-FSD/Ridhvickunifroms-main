@@ -10,6 +10,7 @@ import { AngledSlider } from '../components/lightswind/angled-slider';
 import { getCategoryPage } from '../data/categoryPages';
 import { CatalogItem } from '../types';
 import { subscribeToCatalogItems } from '../lib/catalogService';
+import { AnimatedHeading, AnimatedSubtitle } from '../components/AnimatedText';
 
 export default function CatalogCategoryPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -50,10 +51,8 @@ export default function CatalogCategoryPage() {
           onNavigate={goToHomeSection}
         />
         <main className="flex-grow flex flex-col items-center justify-center text-center px-4 pt-16 pb-20">
-          <h1 className="text-2xl font-headline font-black text-brand-blue">Collection not found</h1>
-          <p className="text-sm text-brand-muted mt-2 max-w-sm">
-            We couldn't find that catalog category. Head back to explore the full range.
-          </p>
+          <AnimatedHeading as="h1" text="Collection not found" align="center" className="text-2xl font-headline font-black text-brand-blue" />
+          <AnimatedSubtitle text="We couldn't find that catalog category. Head back to explore the full range." align="center" className="text-sm text-brand-muted mt-2 max-w-sm" />
           <button
             onClick={() => navigate('/')}
             className="mt-6 h-11 px-6 bg-brand-blue text-white font-headline font-bold rounded-lg cursor-pointer"
@@ -99,12 +98,8 @@ export default function CatalogCategoryPage() {
               <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-green-light tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full inline-block">
                 Ridhvick Collection
               </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-headline font-black text-white mt-3 leading-tight">
-                {config.heroTitle}
-              </h1>
-              <p className="text-xs sm:text-sm md:text-base text-white/70 mt-2.5 max-w-xl font-sans leading-relaxed">
-                {config.heroSubtitle}
-              </p>
+              <AnimatedHeading as="h1" text={config.heroTitle} className="text-3xl sm:text-4xl md:text-5xl font-headline font-black text-white mt-3 leading-tight" />
+              <AnimatedSubtitle text={config.heroSubtitle} className="text-xs sm:text-sm md:text-base text-white/70 mt-2.5 max-w-xl font-sans leading-relaxed" />
             </div>
             <img
               src={config.heroImage}
@@ -121,9 +116,7 @@ export default function CatalogCategoryPage() {
             <span className="text-[10px] sm:text-xs font-headline font-bold text-brand-yellow tracking-widest uppercase">
               Style Gallery
             </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-headline font-black text-white mt-2">
-              Explore the {config.label} Collection
-            </h2>
+            <AnimatedHeading as="h2" text={`Explore the ${config.label} Collection`} align="center" className="text-xl sm:text-2xl md:text-3xl font-headline font-black text-white mt-2" />
           </div>
           <AngledSlider items={sliderItems} speed={32} cardWidth="280px" containerHeight="520px" />
         </section>

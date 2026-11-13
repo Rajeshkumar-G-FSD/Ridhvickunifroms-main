@@ -2,6 +2,8 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ClipboardList, Layers, PenLine, Shirt, Factory, ShieldCheck, Truck, ArrowRight } from 'lucide-react';
+import { AnimatedHeading, AnimatedSubtitle } from '../AnimatedText';
+import { slideIn } from '../../lib/motion';
 
 const STEPS = [
   { icon: ClipboardList, label: 'Requirement' },
@@ -20,9 +22,7 @@ export default function ManufacturingProcess() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center">
           <span className="inline-block h-1 w-12 rounded-full bg-brand-green mb-4" />
-          <h2 className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black text-brand-blue uppercase tracking-tight">
-            From Fabric to Finished Uniform
-          </h2>
+          <AnimatedHeading as="h2" text="From Fabric to Finished Uniform" align="center" className="text-2xl sm:text-3xl md:text-[34px] font-headline font-black text-brand-blue uppercase tracking-tight" />
         </div>
 
         <ol className="mt-10 grid grid-cols-2 sm:grid-cols-4 xl:flex xl:items-center gap-3">
@@ -32,10 +32,7 @@ export default function ManufacturingProcess() {
                 <ArrowRight aria-hidden className="hidden xl:block w-4 h-4 shrink-0 text-brand-green" />
               )}
               <motion.li
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                {...slideIn(i)}
                 className={`xl:flex-1 relative flex flex-col items-center text-center gap-3 rounded-2xl bg-white border border-brand-border/40 shadow-[0_6px_20px_rgba(0,52,111,0.06)] px-3 pt-7 pb-5 ${
                   i === STEPS.length - 1 ? 'col-span-2 sm:col-span-1' : ''
                 }`}
