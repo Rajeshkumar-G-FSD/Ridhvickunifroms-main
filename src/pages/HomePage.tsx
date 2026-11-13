@@ -4,7 +4,8 @@ import Header from '../components/Header';
 import AiChatAssistant from '../components/AiChatAssistant';
 import CartDrawer from '../components/CartDrawer';
 import Footer from '../components/Footer';
-import HomeHero from '../components/home/HomeHero';
+// Previous hero (curved collage) kept in components/home/HomeHero.tsx — swap back here if needed
+import HeroCarousel from '../components/home/HeroCarousel';
 import UniformSolutions from '../components/home/UniformSolutions';
 import UniformCategories from '../components/home/UniformCategories';
 import FeaturedCollections from '../components/home/FeaturedCollections';
@@ -122,7 +123,7 @@ export default function HomePage() {
       />
 
       <main className="flex-grow flex flex-col">
-        <HomeHero />
+        <HeroCarousel />
         {/* Brief-specified home sections, directly below the hero */}
         <UniformSolutions />
         <WhyChoose />
