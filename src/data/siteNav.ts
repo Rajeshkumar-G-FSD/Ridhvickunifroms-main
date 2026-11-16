@@ -25,7 +25,15 @@ export const SITE_NAV: NavLink[] = [
     ],
   },
   { label: 'Branded Uniform Fabrics', to: '/branded-uniform-fabrics' },
-  { label: 'Corporate & Industrial Uniforms', to: '/corporate-industrial-uniforms' },
+  {
+    label: 'Corporate & Industrial Uniforms',
+    to: '/corporate-industrial-uniforms',
+    children: [
+      { label: 'Corporate Uniforms', to: '/corporate-industrial-uniforms/corporate-uniforms' },
+      { label: 'Industrial Uniforms', to: '/corporate-industrial-uniforms/industrial-uniforms' },
+      { label: 'Branded Uniforms', to: '/branded-uniforms' },
+    ],
+  },
   {
     label: 'Sports Wear & T-Shirts',
     to: '/sports-wear-t-shirts',

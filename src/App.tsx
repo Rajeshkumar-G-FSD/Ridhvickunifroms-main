@@ -13,6 +13,7 @@ import DealersPage from './pages/DealersPage';
 import ContactPage from './pages/ContactPage';
 import ManufacturingPage from './pages/ManufacturingPage';
 import CatalogPage from './pages/CatalogPage';
+import BrandedUniformsPage from './pages/BrandedUniformsPage';
 import AboutPage from './pages/AboutPage';
 import SchoolUniformsPage from './pages/SchoolUniformsPage';
 import { HOME_SECTION_PATHS } from './data/homeSections';
@@ -55,6 +56,8 @@ export default function App() {
         <Route path="/manufacturing-process/:section" element={<ManufacturingPage />} />
         <Route path="/digital-catalog" element={<CatalogPage />} />
         <Route path="/digital-catalog/:section" element={<CatalogPage />} />
+        <Route path="/branded-uniforms" element={<BrandedUniformsPage />} />
+        <Route path="/branded-uniforms/:section" element={<BrandedUniformsPage />} />
         <Route path="/catalog/:slug" element={<CatalogCategoryPage />} />
         <Route path="/showcase" element={<ShowcasePage />} />
         <Route path="/showcase/:category" element={<ShowcaseCategoryPage />} />
