@@ -47,15 +47,24 @@ export const BRANDED_SECTIONS: PageSection[] = [
 ];
 
 // Rows alternate image/text sides; lists use the brief's corporate & industrial ranges.
-const ROWS = [
+// A row without an image shows its text on the left and its list on the right.
+const ROWS: {
+  id: string;
+  icon: typeof Briefcase;
+  title: string;
+  text: string;
+  items: string[];
+  image?: string;
+  alt?: string;
+  to: string;
+}[] = [
   {
     id: 'branded-corporate',
     icon: Briefcase,
     title: 'Corporate Uniforms',
     text: 'Professional uniforms that strengthen brand identity — tailored for corporate offices, service organizations and customer-facing teams.',
     items: ['Formal Shirts', 'Trousers', 'Polo T-Shirts', 'Jackets', 'Staff Uniforms', 'Customized Corporate Apparel'],
-    image: IMG.team,
-    alt: 'Team wearing Ridhvick branded navy, white and grey polo uniforms',
+    // No image: the team photo is shown once, in the hero
     to: '/corporate-industrial-uniforms/corporate-uniforms',
   },
   {
@@ -126,6 +135,55 @@ export default function BrandedUniformsPage() {
       {ROWS.map((row, r) => {
         const Icon = row.icon;
         const imageFirst = r % 2 === 0;
+        const list = (
+          <ul className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-2.5">
+            {row.items.map((item, i) => (
+              <motion.li
+                key={item}
+                {...slideIn(i, 36)}
+                className="flex items-center gap-2.5 rounded-xl bg-white border border-brand-border/40 px-3.5 py-3 text-sm font-headline font-bold text-brand-blue shadow-[0_4px_14px_rgba(0,52,111,0.04)]"
+              >
+                <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0" /> {item}
+              </motion.li>
+            ))}
+          </ul>
+        );
+        const intro = (
+          <>
+            <span className="mb-5 w-14 h-14 rounded-full bg-[#e8f5ee] flex items-center justify-center">
+              <Icon className="w-7 h-7 text-brand-blue" strokeWidth={1.6} />
+            </span>
+            <GreenBar />
+            <AnimatedHeading
+              text={row.title}
+              className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase tracking-tight"
+            />
+            <AnimatedSubtitle text={row.text} className="mt-4 text-[15px] sm:text-lg text-brand-muted leading-relaxed" />
+          </>
+        );
+        const exploreButton = (
+          <button
+            onClick={() => navigate(row.to)}
+            className="mt-7 inline-flex items-center gap-2 h-11 px-6 rounded-full border-2 border-brand-blue text-brand-blue font-headline font-bold text-sm hover:bg-brand-blue hover:text-white transition-colors cursor-pointer"
+          >
+            Explore {row.title} <ArrowRight className="w-4 h-4" />
+          </button>
+        );
+
+        if (!row.image) {
+          return (
+            <section key={row.id} id={row.id} className={`${r % 2 ? 'bg-[#f5f8fc]' : 'bg-white'} py-14 sm:py-20 ${SCROLL_MT}`}>
+              <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+                <motion.div {...slideIn(0, 80)}>
+                  {intro}
+                  {exploreButton}
+                </motion.div>
+                <motion.div {...slideIn(1, 80)}>{list}</motion.div>
+              </div>
+            </section>
+          );
+        }
+
         return (
           <section key={row.id} id={row.id} className={`${r % 2 ? 'bg-[#f5f8fc]' : 'bg-white'} py-14 sm:py-20 ${SCROLL_MT}`}>
             <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
@@ -133,32 +191,9 @@ export default function BrandedUniformsPage() {
                 <img src={row.image} alt={row.alt} loading="lazy" className="w-full h-auto rounded-2xl shadow-[0_16px_40px_rgba(0,52,111,0.16)]" />
               </motion.div>
               <motion.div {...slideIn(imageFirst ? 1 : 0, 80)} className={imageFirst ? 'lg:order-2' : 'lg:order-1'}>
-                <span className="mb-5 w-14 h-14 rounded-full bg-[#e8f5ee] flex items-center justify-center">
-                  <Icon className="w-7 h-7 text-brand-blue" strokeWidth={1.6} />
-                </span>
-                <GreenBar />
-                <AnimatedHeading
-                  text={row.title}
-                  className="text-2xl sm:text-3xl md:text-[36px] font-headline font-black text-brand-blue uppercase tracking-tight"
-                />
-                <AnimatedSubtitle text={row.text} className="mt-4 text-[15px] sm:text-lg text-brand-muted leading-relaxed" />
-                <ul className="mt-6 grid grid-cols-1 min-[420px]:grid-cols-2 gap-2.5">
-                  {row.items.map((item, i) => (
-                    <motion.li
-                      key={item}
-                      {...slideIn(i, 36)}
-                      className="flex items-center gap-2.5 rounded-xl bg-white border border-brand-border/40 px-3.5 py-3 text-sm font-headline font-bold text-brand-blue shadow-[0_4px_14px_rgba(0,52,111,0.04)]"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-brand-green shrink-0" /> {item}
-                    </motion.li>
-                  ))}
-                </ul>
-                <button
-                  onClick={() => navigate(row.to)}
-                  className="mt-7 inline-flex items-center gap-2 h-11 px-6 rounded-full border-2 border-brand-blue text-brand-blue font-headline font-bold text-sm hover:bg-brand-blue hover:text-white transition-colors cursor-pointer"
-                >
-                  Explore {row.title} <ArrowRight className="w-4 h-4" />
-                </button>
+                {intro}
+                <div className="mt-6">{list}</div>
+                {exploreButton}
               </motion.div>
             </div>
           </section>
